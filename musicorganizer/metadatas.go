@@ -96,4 +96,5 @@ func (m *metadata) Composer() string {
 }
 
 func (m *metadata) Genre() string {
-	return sanitize(m.Metadata.G
+	return sanitize(m.Metadata.Genre())
+}
