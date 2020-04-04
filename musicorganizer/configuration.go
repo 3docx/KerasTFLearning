@@ -86,3 +86,44 @@ func PrintDefaultConfiguration() {
 	fmt.Println(`{
 	musicIn: .
 	musicOut: organizedMusicLibrary
+	unorganizedFiles: unorganizedFiles,
+	preview: false
+	move: false
+	deleteMusicIn: false
+	replacement: "_"
+	treeTemplate:
+		'''
+		{{if .Genre}}
+			{{.Genre}}
+		{{else}}
+			Unknonw genre
+		{{end}}
+		/
+		{{if .AlbumArtist}}
+			{{.AlbumArtist}}
+		{{else if .Artist}}
+			{{.Artist}}
+		{{else}}
+			Unknonw artist
+		{{end}}
+		/
+		{{if .Album}}
+			{{.Album}}
+		{{else}}
+			Unknonw album
+		{{end}}
+		/
+		{{if gt .DiscTotal 1}}
+			{{.Disc | printf "%02d"}}-
+		{{end}}
+		{{if .Track}}
+			{{.Track | printf "%02d"}} {{/**/}}
+		{{end}}
+		{{if .Title}}
+			{{.Title}}{{.Ext}}
+		{{else}}
+			{{.OriginalFilename}}
+		{{end}}
+		'''
+}`)
+}
