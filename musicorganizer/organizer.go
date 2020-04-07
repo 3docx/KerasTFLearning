@@ -89,4 +89,75 @@ func reorganizeFiles(exploredPathes *[]fs.FilePathInfos) error {
 	nonMusicFile := make([]string, 0)
 	lastDestinationDir := config.MusicOut
 	musicFoundInDir := false
-	log.StartOperation(
+	log.StartOperation(len(*exploredPathes))
+
+	for i, filePathInfo := range *exploredPathes {
+		log.ProgressOperation()
+		if filePathInfo.FileInfo.IsDir() {
+			musicFoundInDir = false
+			log.EnteringFolder(filePathInfo.FullPath)
+			continue
+		}
+
+		newPath, err := computeNewFilePath(filePathInfo.FullPath)
+		if _, ok := err.(readTagsError); ok {
+			if IsFileOpenable(filePathInfo.FullPath) {
+				log.ErrorTag(err)
+			}
+			nonMusicFile = append(nonMusicFile, filePathInfo.FullPath)
+		} else if err != nil {
+			return fmt.Errorf("computing new path: %v", err)
+		} else {
+			musicFoundInDir = true
+			lastDestinationDir = path.Dir(newPath)
+
+			log.MoveFile(path.Base(filePathInfo.FullPath), newPath, true)
+
+			if !config.Preview {
+				if err = reorganizeFile(filePathInfo.FullPath, newPath); err != nil {
+					return err
+				}
+			}
+		}
+
+		if len(nonMusicFile) != 0 &&
+			(i+1 < len(*exploredPathes) && (*exploredPathes)[i+1].FileInfo.IsDir()) ||
+			i+1 == len(*exploredPathes) {
+			if !musicFoundInDir {
+				log.WarnWrongMove()
+			}
+			for _, srcPath := range nonMusicFile {
+				if musicFoundInDir {
+					newPath = lastDestinationDir + "/" + path.Base(srcPath)
+				} else {
+					newPath = config.UnorganizedFiles + "/" + strings.Join(strings.Split(srcPath, "/")[1:], "/")
+				}
+				log.MoveFile(path.Base(srcPath), newPath, false)
+				if !config.Preview {
+					if err = reorganizeFile(srcPath, newPath); err != nil {
+						return err
+					}
+				}
+			}
+			nonMusicFile = nil
+		}
+	}
+
+	return nil
+}
+
+func reorganizeFile(oldPath, newPath string) error {
+	if err := os.MkdirAll(path.Dir(newPath), os.ModePerm); err != nil {
+		return fmt.Errorf("creating folder: %v", err)
+	}
+	if config.Move {
+		if err := os.Rename(oldPath, newPath); err != nil {
+			return fmt.Errorf("moving file: %v", err)
+		}
+	} else {
+		if err := cp.Copy(oldPath, newPath); err != nil {
+			return fmt.Errorf("copy file: %v", err)
+		}
+	}
+	return nil
+}
