@@ -42,4 +42,40 @@ func Identify(r io.ReadSeeker) (format Format, fileType FileType, err error) {
 
 	case string(b[0:3]) == "ID3":
 		b := b[3:]
-		switch ui
+		switch uint(b[0]) {
+		case 2:
+			format = ID3v2_2
+		case 3:
+			format = ID3v2_3
+		case 4:
+			format = ID3v2_4
+		case 0, 1:
+			fallthrough
+		default:
+			err = fmt.Errorf("ID3 version: %v, expected: 2, 3 or 4", uint(b[0]))
+			return
+		}
+		return format, MP3, nil
+	}
+
+	n, err := r.Seek(-128, io.SeekEnd)
+	if err != nil {
+		return
+	}
+
+	tag, err := readString(r, 3)
+	if err != nil {
+		return
+	}
+
+	_, err = r.Seek(-n, io.SeekCurrent)
+	if err != nil {
+		return
+	}
+
+	if tag != "TAG" {
+		err = ErrNoTagsFound
+		return
+	}
+	return ID3v1, MP3, nil
+}
