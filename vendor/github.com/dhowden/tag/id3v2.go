@@ -249,4 +249,94 @@ func readID3v2Frames(r io.Reader, offset int, h *id3v2Header) (map[string]interf
 			headerSize += 2
 		}
 
-		if
+		if err != nil {
+			return nil, err
+		}
+
+		// FIXME: Do we still need this?
+		// if size=0, we certainly are in a padding zone. ignore the rest of
+		// the tags
+		if size == 0 {
+			break
+		}
+
+		offset += headerSize + size
+
+		// Avoid corrupted padding (see http://id3.org/Compliance%20Issues).
+		if !validID3Frame(h.Version, name) && offset > h.Size {
+			break
+		}
+
+		if flags != nil {
+			if flags.Compression {
+				_, err = read7BitChunkedInt(r, 4) // read 4
+				if err != nil {
+					return nil, err
+				}
+				size -= 4
+			}
+
+			if flags.Encryption {
+				_, err = readBytes(r, 1) // read 1 byte of encryption method
+				if err != nil {
+					return nil, err
+				}
+				size -= 1
+			}
+		}
+
+		b, err := readBytes(r, size)
+		if err != nil {
+			return nil, err
+		}
+
+		// There can be multiple tag with the same name. Append a number to the
+		// name if there is more than one.
+		rawName := name
+		if _, ok := result[rawName]; ok {
+			for i := 0; ok; i++ {
+				rawName = name + "_" + strconv.Itoa(i)
+				_, ok = result[rawName]
+			}
+		}
+
+		switch {
+		case name == "TXXX" || name == "TXX":
+			t, err := readTextWithDescrFrame(b, false, true) // no lang, but enc
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = t
+
+		case name[0] == 'T':
+			txt, err := readTFrame(b)
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = txt
+
+		case name == "UFID" || name == "UFI":
+			t, err := readUFID(b)
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = t
+
+		case name == "WXXX" || name == "WXX":
+			t, err := readTextWithDescrFrame(b, false, false) // no lang, no enc
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = t
+
+		case name[0] == 'W':
+			txt, err := readWFrame(b)
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = txt
+
+		case name == "COMM" || name == "COM" || name == "USLT" || name == "ULT":
+			t, err := readTextWithDescrFrame(b, true, true) // both lang and enc
+			if err != nil {
+			
