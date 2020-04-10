@@ -339,4 +339,96 @@ func readID3v2Frames(r io.Reader, offset int, h *id3v2Header) (map[string]interf
 		case name == "COMM" || name == "COM" || name == "USLT" || name == "ULT":
 			t, err := readTextWithDescrFrame(b, true, true) // both lang and enc
 			if err != nil {
-			
+				return nil, err
+			}
+			result[rawName] = t
+
+		case name == "APIC":
+			p, err := readAPICFrame(b)
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = p
+
+		case name == "PIC":
+			p, err := readPICFrame(b)
+			if err != nil {
+				return nil, err
+			}
+			result[rawName] = p
+
+		default:
+			result[rawName] = b
+		}
+	}
+	return result, nil
+}
+
+type unsynchroniser struct {
+	io.Reader
+	ff bool
+}
+
+// filter io.Reader which skip the Unsynchronisation bytes
+func (r *unsynchroniser) Read(p []byte) (int, error) {
+	b := make([]byte, 1)
+	i := 0
+	for i < len(p) {
+		if n, err := r.Reader.Read(b); err != nil || n == 0 {
+			return i, err
+		}
+		if r.ff && b[0] == 0x00 {
+			r.ff = false
+			continue
+		}
+		p[i] = b[0]
+		i++
+		r.ff = (b[0] == 0xFF)
+	}
+	return i, nil
+}
+
+// ReadID3v2Tags parses ID3v2.{2,3,4} tags from the io.ReadSeeker into a Metadata, returning
+// non-nil error on failure.
+func ReadID3v2Tags(r io.ReadSeeker) (Metadata, error) {
+	h, offset, err := readID3v2Header(r)
+	if err != nil {
+		return nil, err
+	}
+
+	var ur io.Reader = r
+	if h.Unsynchronisation {
+		ur = &unsynchroniser{Reader: r}
+	}
+
+	f, err := readID3v2Frames(ur, offset, h)
+	if err != nil {
+		return nil, err
+	}
+	return metadataID3v2{header: h, frames: f}, nil
+}
+
+var id3v2genreRe = regexp.MustCompile(`(.*[^(]|.* |^)\(([0-9]+)\) *(.*)$`)
+
+//  id3v2genre parse a id3v2 genre tag and expand the numeric genres
+func id3v2genre(genre string) string {
+	c := true
+	for c {
+		orig := genre
+		if match := id3v2genreRe.FindStringSubmatch(genre); len(match) > 0 {
+			if genreID, err := strconv.Atoi(match[2]); err == nil {
+				if genreID < len(id3v2Genres) {
+					genre = id3v2Genres[genreID]
+					if match[1] != "" {
+						genre = strings.TrimSpace(match[1]) + " " + genre
+					}
+					if match[3] != "" {
+						genre = genre + " " + match[3]
+					}
+				}
+			}
+		}
+		c = (orig != genre)
+	}
+	return strings.Replace(genre, "((", "(", -1)
+}
