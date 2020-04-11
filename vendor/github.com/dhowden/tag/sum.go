@@ -133,4 +133,87 @@ func SumID3v1(r io.ReadSeeker) (string, error) {
 	return hashSum(h), nil
 }
 
-// SumID3v2 constructs a checksum of MP3 audio file data (assumed to have ID3v2
+// SumID3v2 constructs a checksum of MP3 audio file data (assumed to have ID3v2 tags) provided by the
+// io.ReadSeeker which is metadata invariant.
+func SumID3v2(r io.ReadSeeker) (string, error) {
+	header, _, err := readID3v2Header(r)
+	if err != nil {
+		return "", fmt.Errorf("error reading ID3v2 header: %v", err)
+	}
+
+	_, err = r.Seek(int64(header.Size), io.SeekCurrent)
+	if err != nil {
+		return "", fmt.Errorf("error seeking to end of ID3V2 header: %v", err)
+	}
+
+	n, err := sizeToEndOffset(r, 128)
+	if err != nil {
+		return "", fmt.Errorf("error determining read size to ID3v1 header: %v", err)
+	}
+
+	// TODO: remove this check?????
+	if n < 0 {
+		return "", fmt.Errorf("file size must be greater than 128 bytes for MP3: %v bytes", n)
+	}
+
+	h := sha1.New()
+	_, err = io.CopyN(h, r, n)
+	if err != nil {
+		return "", fmt.Errorf("error reading %v bytes: %v", n, err)
+	}
+	return hashSum(h), nil
+}
+
+// SumFLAC costructs a checksum of the FLAC audio file data provided by the io.ReadSeeker (ignores
+// metadata fields).
+func SumFLAC(r io.ReadSeeker) (string, error) {
+	flac, err := readString(r, 4)
+	if err != nil {
+		return "", err
+	}
+	if flac != "fLaC" {
+		return "", errors.New("expected 'fLaC'")
+	}
+
+	for {
+		last, err := skipFLACMetadataBlock(r)
+		if err != nil {
+			return "", err
+		}
+
+		if last {
+			break
+		}
+	}
+
+	h := sha1.New()
+	_, err = io.Copy(h, r)
+	if err != nil {
+		return "", fmt.Errorf("error reading data bytes from FLAC: %v", err)
+	}
+	return hashSum(h), nil
+}
+
+func skipFLACMetadataBlock(r io.ReadSeeker) (last bool, err error) {
+	blockHeader, err := readBytes(r, 1)
+	if err != nil {
+		return
+	}
+
+	if getBit(blockHeader[0], 7) {
+		blockHeader[0] ^= (1 << 7)
+		last = true
+	}
+
+	blockLen, err := readInt(r, 3)
+	if err != nil {
+		return
+	}
+
+	_, err = r.Seek(int64(blockLen), io.SeekCurrent)
+	return
+}
+
+func hashSum(h hash.Hash) string {
+	return fmt.Sprintf("%x", h.Sum([]byte{}))
+}
