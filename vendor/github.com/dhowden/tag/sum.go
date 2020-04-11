@@ -53,4 +53,84 @@ func SumAll(r io.ReadSeeker) (string, error) {
 	return hashSum(h), nil
 }
 
-// SumAtoms constructs a checksum of MP4 
+// SumAtoms constructs a checksum of MP4 audio file data provided by the io.ReadSeeker which is
+// metadata invariant.
+func SumAtoms(r io.ReadSeeker) (string, error) {
+	for {
+		var size uint32
+		err := binary.Read(r, binary.BigEndian, &size)
+		if err != nil {
+			if err == io.EOF {
+				return "", fmt.Errorf("reached EOF before audio data")
+			}
+			return "", err
+		}
+
+		name, err := readString(r, 4)
+		if err != nil {
+			return "", err
+		}
+
+		switch name {
+		case "meta":
+			// next_item_id (int32)
+			_, err := r.Seek(4, io.SeekCurrent)
+			if err != nil {
+				return "", err
+			}
+			fallthrough
+
+		case "moov", "udta", "ilst":
+			continue
+
+		case "mdat": // stop when we get to the data
+			h := sha1.New()
+			_, err := io.CopyN(h, r, int64(size-8))
+			if err != nil {
+				return "", fmt.Errorf("error reading audio data: %v", err)
+			}
+			return hashSum(h), nil
+		}
+
+		_, err = r.Seek(int64(size-8), io.SeekCurrent)
+		if err != nil {
+			return "", fmt.Errorf("error reading '%v' tag: %v", name, err)
+		}
+	}
+}
+
+func sizeToEndOffset(r io.ReadSeeker, offset int64) (int64, error) {
+	n, err := r.Seek(-128, io.SeekEnd)
+	if err != nil {
+		return 0, fmt.Errorf("error seeking end offset (%d bytes): %v", offset, err)
+	}
+
+	_, err = r.Seek(-n, io.SeekCurrent)
+	if err != nil {
+		return 0, fmt.Errorf("error seeking back to original position: %v", err)
+	}
+	return n, nil
+}
+
+// SumID3v1 constructs a checksum of MP3 audio file data (assumed to have ID3v1 tags) provided
+// by the io.ReadSeeker which is metadata invariant.
+func SumID3v1(r io.ReadSeeker) (string, error) {
+	n, err := sizeToEndOffset(r, 128)
+	if err != nil {
+		return "", fmt.Errorf("error determining read size to ID3v1 header: %v", err)
+	}
+
+	// TODO: improve this check???
+	if n <= 0 {
+		return "", fmt.Errorf("file size must be greater than 128 bytes (ID3v1 header size) for MP3")
+	}
+
+	h := sha1.New()
+	_, err = io.CopyN(h, r, n)
+	if err != nil {
+		return "", fmt.Errorf("error reading %v bytes: %v", n, err)
+	}
+	return hashSum(h), nil
+}
+
+// SumID3v2 constructs a checksum of MP3 audio file data (assumed to have ID3v2
