@@ -111,4 +111,97 @@ func (m *metadataVorbis) readPictureBlock(r io.Reader) error {
 	_, err = readInt(r, 4) // color depth
 	if err != nil {
 		return err
-	
+	}
+	_, err = readInt(r, 4) // colors used
+	if err != nil {
+		return err
+	}
+
+	dataLen, err := readInt(r, 4)
+	if err != nil {
+		return err
+	}
+	data := make([]byte, dataLen)
+	_, err = io.ReadFull(r, data)
+	if err != nil {
+		return err
+	}
+
+	m.p = &Picture{
+		Ext:         ext,
+		MIMEType:    mime,
+		Type:        pictureType,
+		Description: desc,
+		Data:        data,
+	}
+	return nil
+}
+
+func parseComment(c string) (k, v string, err error) {
+	kv := strings.SplitN(c, "=", 2)
+	if len(kv) != 2 {
+		err = errors.New("vorbis comment must contain '='")
+		return
+	}
+	k = kv[0]
+	v = kv[1]
+	return
+}
+
+func (m *metadataVorbis) Format() Format {
+	return VORBIS
+}
+
+func (m *metadataVorbis) Raw() map[string]interface{} {
+	raw := make(map[string]interface{}, len(m.c))
+	for k, v := range m.c {
+		raw[k] = v
+	}
+	return raw
+}
+
+func (m *metadataVorbis) Title() string {
+	return m.c["title"]
+}
+
+func (m *metadataVorbis) Artist() string {
+	// PERFORMER
+	// The artist(s) who performed the work. In classical music this would be the
+	// conductor, orchestra, soloists. In an audio book it would be the actor who
+	// did the reading. In popular music this is typically the same as the ARTIST
+	// and is omitted.
+	if m.c["performer"] != "" {
+		return m.c["performer"]
+	}
+	return m.c["artist"]
+}
+
+func (m *metadataVorbis) Album() string {
+	return m.c["album"]
+}
+
+func (m *metadataVorbis) AlbumArtist() string {
+	// This field isn't actually included in the standard, though
+	// it is commonly assigned to albumartist.
+	return m.c["albumartist"]
+}
+
+func (m *metadataVorbis) Composer() string {
+	// ARTIST
+	// The artist generally considered responsible for the work. In popular music
+	// this is usually the performing band or singer. For classical music it would
+	// be the composer. For an audio book it would be the author of the original text.
+	if m.c["composer"] != "" {
+		return m.c["composer"]
+	}
+	if m.c["performer"] == "" {
+		return ""
+	}
+	return m.c["artist"]
+}
+
+func (m *metadataVorbis) Genre() string {
+	return m.c["genre"]
+}
+
+func (m *metadataVorbis) Year() in
