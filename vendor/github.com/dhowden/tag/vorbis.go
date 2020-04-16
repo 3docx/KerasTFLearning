@@ -204,4 +204,29 @@ func (m *metadataVorbis) Genre() string {
 	return m.c["genre"]
 }
 
-func (m *metadataVorbis) Year() in
+func (m *metadataVorbis) Year() int {
+	// FIXME: try to parse the date in m.c["date"] to extract this
+	return 0
+}
+
+func (m *metadataVorbis) Track() (int, int) {
+	x, _ := strconv.Atoi(m.c["tracknumber"])
+	// https://wiki.xiph.org/Field_names
+	n, _ := strconv.Atoi(m.c["tracktotal"])
+	return x, n
+}
+
+func (m *metadataVorbis) Disc() (int, int) {
+	// https://wiki.xiph.org/Field_names
+	x, _ := strconv.Atoi(m.c["discnumber"])
+	n, _ := strconv.Atoi(m.c["disctotal"])
+	return x, n
+}
+
+func (m *metadataVorbis) Lyrics() string {
+	return m.c["lyrics"]
+}
+
+func (m *metadataVorbis) Picture() *Picture {
+	return m.p
+}
