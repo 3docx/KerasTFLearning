@@ -197,4 +197,63 @@ func (c *Color) Fprint(w io.Writer, a ...interface{}) (n int, err error) {
 
 // Print formats using the default formats for its operands and writes to
 // standard output. Spaces are added between operands when neither is a
-// string. It retur
+// string. It returns the number of bytes written and any write error
+// encountered. This is the standard fmt.Print() method wrapped with the given
+// color.
+func (c *Color) Print(a ...interface{}) (n int, err error) {
+	c.Set()
+	defer c.unset()
+
+	return fmt.Fprint(Output, a...)
+}
+
+// Fprintf formats according to a format specifier and writes to w.
+// It returns the number of bytes written and any write error encountered.
+// On Windows, users should wrap w with colorable.NewColorable() if w is of
+// type *os.File.
+func (c *Color) Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error) {
+	c.setWriter(w)
+	defer c.unsetWriter(w)
+
+	return fmt.Fprintf(w, format, a...)
+}
+
+// Printf formats according to a format specifier and writes to standard output.
+// It returns the number of bytes written and any write error encountered.
+// This is the standard fmt.Printf() method wrapped with the given color.
+func (c *Color) Printf(format string, a ...interface{}) (n int, err error) {
+	c.Set()
+	defer c.unset()
+
+	return fmt.Fprintf(Output, format, a...)
+}
+
+// Fprintln formats using the default formats for its operands and writes to w.
+// Spaces are always added between operands and a newline is appended.
+// On Windows, users should wrap w with colorable.NewColorable() if w is of
+// type *os.File.
+func (c *Color) Fprintln(w io.Writer, a ...interface{}) (n int, err error) {
+	c.setWriter(w)
+	defer c.unsetWriter(w)
+
+	return fmt.Fprintln(w, a...)
+}
+
+// Println formats using the default formats for its operands and writes to
+// standard output. Spaces are always added between operands and a newline is
+// appended. It returns the number of bytes written and any write error
+// encountered. This is the standard fmt.Print() method wrapped with the given
+// color.
+func (c *Color) Println(a ...interface{}) (n int, err error) {
+	c.Set()
+	defer c.unset()
+
+	return fmt.Fprintln(Output, a...)
+}
+
+// Sprint is just like Print, but returns a string instead of printing it.
+func (c *Color) Sprint(a ...interface{}) string {
+	return c.wrap(fmt.Sprint(a...))
+}
+
+// Sprint
