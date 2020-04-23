@@ -256,4 +256,64 @@ func (c *Color) Sprint(a ...interface{}) string {
 	return c.wrap(fmt.Sprint(a...))
 }
 
-// Sprint
+// Sprintln is just like Println, but returns a string instead of printing it.
+func (c *Color) Sprintln(a ...interface{}) string {
+	return c.wrap(fmt.Sprintln(a...))
+}
+
+// Sprintf is just like Printf, but returns a string instead of printing it.
+func (c *Color) Sprintf(format string, a ...interface{}) string {
+	return c.wrap(fmt.Sprintf(format, a...))
+}
+
+// FprintFunc returns a new function that prints the passed arguments as
+// colorized with color.Fprint().
+func (c *Color) FprintFunc() func(w io.Writer, a ...interface{}) {
+	return func(w io.Writer, a ...interface{}) {
+		c.Fprint(w, a...)
+	}
+}
+
+// PrintFunc returns a new function that prints the passed arguments as
+// colorized with color.Print().
+func (c *Color) PrintFunc() func(a ...interface{}) {
+	return func(a ...interface{}) {
+		c.Print(a...)
+	}
+}
+
+// FprintfFunc returns a new function that prints the passed arguments as
+// colorized with color.Fprintf().
+func (c *Color) FprintfFunc() func(w io.Writer, format string, a ...interface{}) {
+	return func(w io.Writer, format string, a ...interface{}) {
+		c.Fprintf(w, format, a...)
+	}
+}
+
+// PrintfFunc returns a new function that prints the passed arguments as
+// colorized with color.Printf().
+func (c *Color) PrintfFunc() func(format string, a ...interface{}) {
+	return func(format string, a ...interface{}) {
+		c.Printf(format, a...)
+	}
+}
+
+// FprintlnFunc returns a new function that prints the passed arguments as
+// colorized with color.Fprintln().
+func (c *Color) FprintlnFunc() func(w io.Writer, a ...interface{}) {
+	return func(w io.Writer, a ...interface{}) {
+		c.Fprintln(w, a...)
+	}
+}
+
+// PrintlnFunc returns a new function that prints the passed arguments as
+// colorized with color.Println().
+func (c *Color) PrintlnFunc() func(a ...interface{}) {
+	return func(a ...interface{}) {
+		c.Println(a...)
+	}
+}
+
+// SprintFunc returns a new function that returns colorized strings for the
+// given arguments with fmt.Sprint(). Useful to put into or mix into other
+// strin
