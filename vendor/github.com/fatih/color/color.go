@@ -316,4 +316,65 @@ func (c *Color) PrintlnFunc() func(a ...interface{}) {
 
 // SprintFunc returns a new function that returns colorized strings for the
 // given arguments with fmt.Sprint(). Useful to put into or mix into other
-// strin
+// string. Windows users should use this in conjunction with color.Output, example:
+//
+//	put := New(FgYellow).SprintFunc()
+//	fmt.Fprintf(color.Output, "This is a %s", put("warning"))
+func (c *Color) SprintFunc() func(a ...interface{}) string {
+	return func(a ...interface{}) string {
+		return c.wrap(fmt.Sprint(a...))
+	}
+}
+
+// SprintfFunc returns a new function that returns colorized strings for the
+// given arguments with fmt.Sprintf(). Useful to put into or mix into other
+// string. Windows users should use this in conjunction with color.Output.
+func (c *Color) SprintfFunc() func(format string, a ...interface{}) string {
+	return func(format string, a ...interface{}) string {
+		return c.wrap(fmt.Sprintf(format, a...))
+	}
+}
+
+// SprintlnFunc returns a new function that returns colorized strings for the
+// given arguments with fmt.Sprintln(). Useful to put into or mix into other
+// string. Windows users should use this in conjunction with color.Output.
+func (c *Color) SprintlnFunc() func(a ...interface{}) string {
+	return func(a ...interface{}) string {
+		return c.wrap(fmt.Sprintln(a...))
+	}
+}
+
+// sequence returns a formatted SGR sequence to be plugged into a "\x1b[...m"
+// an example output might be: "1;36" -> bold cyan
+func (c *Color) sequence() string {
+	format := make([]string, len(c.params))
+	for i, v := range c.params {
+		format[i] = strconv.Itoa(int(v))
+	}
+
+	return strings.Join(format, ";")
+}
+
+// wrap wraps the s string with the colors attributes. The string is ready to
+// be printed.
+func (c *Color) wrap(s string) string {
+	if c.isNoColorSet() {
+		return s
+	}
+
+	return c.format() + s + c.unformat()
+}
+
+func (c *Color) format() string {
+	return fmt.Sprintf("%s[%sm", escape, c.sequence())
+}
+
+func (c *Color) unformat() string {
+	return fmt.Sprintf("%s[%dm", escape, Reset)
+}
+
+// DisableColor disables the color output. Useful to not change any existing
+// code and still being able to output. Can be used for flags like
+// "--no-color". To enable back use EnableColor() method.
+func (c *Color) DisableColor() {
+	c.noColor = boolPtr(tr
