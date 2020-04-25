@@ -471,4 +471,45 @@ func Black(format string, a ...interface{}) { colorPrint(format, FgBlack, a...) 
 func Red(format string, a ...interface{}) { colorPrint(format, FgRed, a...) }
 
 // Green is a convenient helper function to print with green foreground. A
-// newli
+// newline is appended to format by default.
+func Green(format string, a ...interface{}) { colorPrint(format, FgGreen, a...) }
+
+// Yellow is a convenient helper function to print with yellow foreground.
+// A newline is appended to format by default.
+func Yellow(format string, a ...interface{}) { colorPrint(format, FgYellow, a...) }
+
+// Blue is a convenient helper function to print with blue foreground. A
+// newline is appended to format by default.
+func Blue(format string, a ...interface{}) { colorPrint(format, FgBlue, a...) }
+
+// Magenta is a convenient helper function to print with magenta foreground.
+// A newline is appended to format by default.
+func Magenta(format string, a ...interface{}) { colorPrint(format, FgMagenta, a...) }
+
+// Cyan is a convenient helper function to print with cyan foreground. A
+// newline is appended to format by default.
+func Cyan(format string, a ...interface{}) { colorPrint(format, FgCyan, a...) }
+
+// White is a convenient helper function to print with white foreground. A
+// newline is appended to format by default.
+func White(format string, a ...interface{}) { colorPrint(format, FgWhite, a...) }
+
+// BlackString is a convenient helper function to return a string with black
+// foreground.
+func BlackString(format string, a ...interface{}) string { return colorString(format, FgBlack, a...) }
+
+// RedString is a convenient helper function to return a string with red
+// foreground.
+func RedString(format string, a ...interface{}) string { return colorString(format, FgRed, a...) }
+
+// GreenString is a convenient helper function to return a string with green
+// foreground.
+func GreenString(format string, a ...interface{}) string { return colorString(format, FgGreen, a...) }
+
+// YellowString is a convenient helper function to return a string with yellow
+// foreground.
+func YellowString(format string, a ...interface{}) string { return colorString(format, FgYellow, a...) }
+
+// BlueString is a convenient helper function to return a string with blue
+// foreground.
+func 
