@@ -377,4 +377,98 @@ func (c *Color) unformat() string {
 // code and still being able to output. Can be used for flags like
 // "--no-color". To enable back use EnableColor() method.
 func (c *Color) DisableColor() {
-	c.noColor = boolPtr(tr
+	c.noColor = boolPtr(true)
+}
+
+// EnableColor enables the color output. Use it in conjunction with
+// DisableColor(). Otherwise this method has no side effects.
+func (c *Color) EnableColor() {
+	c.noColor = boolPtr(false)
+}
+
+func (c *Color) isNoColorSet() bool {
+	// check first if we have user setted action
+	if c.noColor != nil {
+		return *c.noColor
+	}
+
+	// if not return the global option, which is disabled by default
+	return NoColor
+}
+
+// Equals returns a boolean value indicating whether two colors are equal.
+func (c *Color) Equals(c2 *Color) bool {
+	if len(c.params) != len(c2.params) {
+		return false
+	}
+
+	for _, attr := range c.params {
+		if !c2.attrExists(attr) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (c *Color) attrExists(a Attribute) bool {
+	for _, attr := range c.params {
+		if attr == a {
+			return true
+		}
+	}
+
+	return false
+}
+
+func boolPtr(v bool) *bool {
+	return &v
+}
+
+func getCachedColor(p Attribute) *Color {
+	colorsCacheMu.Lock()
+	defer colorsCacheMu.Unlock()
+
+	c, ok := colorsCache[p]
+	if !ok {
+		c = New(p)
+		colorsCache[p] = c
+	}
+
+	return c
+}
+
+func colorPrint(format string, p Attribute, a ...interface{}) {
+	c := getCachedColor(p)
+
+	if !strings.HasSuffix(format, "\n") {
+		format += "\n"
+	}
+
+	if len(a) == 0 {
+		c.Print(format)
+	} else {
+		c.Printf(format, a...)
+	}
+}
+
+func colorString(format string, p Attribute, a ...interface{}) string {
+	c := getCachedColor(p)
+
+	if len(a) == 0 {
+		return c.SprintFunc()(format)
+	}
+
+	return c.SprintfFunc()(format, a...)
+}
+
+// Black is a convenient helper function to print with black foreground. A
+// newline is appended to format by default.
+func Black(format string, a ...interface{}) { colorPrint(format, FgBlack, a...) }
+
+// Red is a convenient helper function to print with red foreground. A
+// newline is appended to format by default.
+func Red(format string, a ...interface{}) { colorPrint(format, FgRed, a...) }
+
+// Green is a convenient helper function to print with green foreground. A
+// newli
