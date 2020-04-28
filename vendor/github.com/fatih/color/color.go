@@ -552,4 +552,48 @@ func HiBlue(format string, a ...interface{}) { colorPrint(format, FgHiBlue, a...
 // A newline is appended to format by default.
 func HiMagenta(format string, a ...interface{}) { colorPrint(format, FgHiMagenta, a...) }
 
-// HiCyan 
+// HiCyan is a convenient helper function to print with hi-intensity cyan foreground. A
+// newline is appended to format by default.
+func HiCyan(format string, a ...interface{}) { colorPrint(format, FgHiCyan, a...) }
+
+// HiWhite is a convenient helper function to print with hi-intensity white foreground. A
+// newline is appended to format by default.
+func HiWhite(format string, a ...interface{}) { colorPrint(format, FgHiWhite, a...) }
+
+// HiBlackString is a convenient helper function to return a string with hi-intensity black
+// foreground.
+func HiBlackString(format string, a ...interface{}) string {
+	return colorString(format, FgHiBlack, a...)
+}
+
+// HiRedString is a convenient helper function to return a string with hi-intensity red
+// foreground.
+func HiRedString(format string, a ...interface{}) string { return colorString(format, FgHiRed, a...) }
+
+// HiGreenString is a convenient helper function to return a string with hi-intensity green
+// foreground.
+func HiGreenString(format string, a ...interface{}) string {
+	return colorString(format, FgHiGreen, a...)
+}
+
+// HiYellowString is a convenient helper function to return a string with hi-intensity yellow
+// foreground.
+func HiYellowString(format string, a ...interface{}) string {
+	return colorString(format, FgHiYellow, a...)
+}
+
+// HiBlueString is a convenient helper function to return a string with hi-intensity blue
+// foreground.
+func HiBlueString(format string, a ...interface{}) string { return colorString(format, FgHiBlue, a...) }
+
+// HiMagentaString is a convenient helper function to return a string with hi-intensity magenta
+// foreground.
+func HiMagentaString(format string, a ...interface{}) string {
+	return colorString(format, FgHiMagenta, a...)
+}
+
+// HiCyanString is a convenient helper function to return a string with hi-intensity cyan
+// foreground.
+func HiCyanString(format string, a ...interface{}) string { return colorString(format, FgHiCyan, a...) }
+
+// HiWhiteString is a convenient helper function to return a string with
