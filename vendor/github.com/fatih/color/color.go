@@ -512,4 +512,44 @@ func YellowString(format string, a ...interface{}) string { return colorString(f
 
 // BlueString is a convenient helper function to return a string with blue
 // foreground.
-func 
+func BlueString(format string, a ...interface{}) string { return colorString(format, FgBlue, a...) }
+
+// MagentaString is a convenient helper function to return a string with magenta
+// foreground.
+func MagentaString(format string, a ...interface{}) string {
+	return colorString(format, FgMagenta, a...)
+}
+
+// CyanString is a convenient helper function to return a string with cyan
+// foreground.
+func CyanString(format string, a ...interface{}) string { return colorString(format, FgCyan, a...) }
+
+// WhiteString is a convenient helper function to return a string with white
+// foreground.
+func WhiteString(format string, a ...interface{}) string { return colorString(format, FgWhite, a...) }
+
+// HiBlack is a convenient helper function to print with hi-intensity black foreground. A
+// newline is appended to format by default.
+func HiBlack(format string, a ...interface{}) { colorPrint(format, FgHiBlack, a...) }
+
+// HiRed is a convenient helper function to print with hi-intensity red foreground. A
+// newline is appended to format by default.
+func HiRed(format string, a ...interface{}) { colorPrint(format, FgHiRed, a...) }
+
+// HiGreen is a convenient helper function to print with hi-intensity green foreground. A
+// newline is appended to format by default.
+func HiGreen(format string, a ...interface{}) { colorPrint(format, FgHiGreen, a...) }
+
+// HiYellow is a convenient helper function to print with hi-intensity yellow foreground.
+// A newline is appended to format by default.
+func HiYellow(format string, a ...interface{}) { colorPrint(format, FgHiYellow, a...) }
+
+// HiBlue is a convenient helper function to print with hi-intensity blue foreground. A
+// newline is appended to format by default.
+func HiBlue(format string, a ...interface{}) { colorPrint(format, FgHiBlue, a...) }
+
+// HiMagenta is a convenient helper function to print with hi-intensity magenta foreground.
+// A newline is appended to format by default.
+func HiMagenta(format string, a ...interface{}) { colorPrint(format, FgHiMagenta, a...) }
+
+// HiCyan 
