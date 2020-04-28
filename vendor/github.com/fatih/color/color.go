@@ -596,4 +596,8 @@ func HiMagentaString(format string, a ...interface{}) string {
 // foreground.
 func HiCyanString(format string, a ...interface{}) string { return colorString(format, FgHiCyan, a...) }
 
-// HiWhiteString is a convenient helper function to return a string with
+// HiWhiteString is a convenient helper function to return a string with hi-intensity white
+// foreground.
+func HiWhiteString(format string, a ...interface{}) string {
+	return colorString(format, FgHiWhite, a...)
+}
