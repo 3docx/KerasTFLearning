@@ -94,4 +94,80 @@ func (e *hjsonEncoder) quote(value string, separator string, isRootObject bool) 
 	if len(value) == 0 {
 		e.WriteString(separator + `""`)
 	} else if e.QuoteAlways ||
-		nee
+		needsQuotes.MatchString(value) ||
+		startsWithNumber([]byte(value)) ||
+		startsWithKeyword.MatchString(value) {
+
+		// If the string contains no control characters, no quote characters, and no
+		// backslash characters, then we can safely slap some quotes around it.
+		// Otherwise we first check if the string can be expressed in multiline
+		// format or we must replace the offending characters with safe escape
+		// sequences.
+
+		if !needsEscape.MatchString(value) {
+			e.WriteString(separator + `"` + value + `"`)
+		} else if !needsEscapeML.MatchString(value) && !isRootObject {
+			e.mlString(value, separator)
+		} else {
+			e.WriteString(separator + `"` + e.quoteReplace(value) + `"`)
+		}
+	} else {
+		// return without quotes
+		e.WriteString(separator + value)
+	}
+}
+
+func (e *hjsonEncoder) mlString(value string, separator string) {
+	// wrap the string into the ''' (multiline) format
+
+	a := strings.Split(strings.Replace(value, "\r", "", -1), "\n")
+
+	if len(a) == 1 {
+		// The string contains only a single line. We still use the multiline
+		// format as it avoids escaping the \ character (e.g. when used in a
+		// regex).
+		e.WriteString(separator + "'''")
+		e.WriteString(a[0])
+	} else {
+		e.writeIndent(e.indent + 1)
+		e.WriteString("'''")
+		for _, v := range a {
+			indent := e.indent + 1
+			if len(v) == 0 {
+				indent = 0
+			}
+			e.writeIndent(indent)
+			e.WriteString(v)
+		}
+		e.writeIndent(e.indent + 1)
+	}
+	e.WriteString("'''")
+}
+
+func (e *hjsonEncoder) quoteName(name string) string {
+	if len(name) == 0 {
+		return `""`
+	}
+
+	// Check if we can insert this name without quotes
+
+	if needsEscapeName.MatchString(name) {
+		if needsEscape.MatchString(name) {
+			name = e.quoteReplace(name)
+		}
+		return `"` + name + `"`
+	}
+	// without quotes
+	return name
+}
+
+type sortAlpha []reflect.Value
+
+func (s sortAlpha) Len() int {
+	return len(s)
+}
+func (s sortAlpha) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+func (s sortAlpha) Less(i, j int) bool {
+	return s[i].String() 
