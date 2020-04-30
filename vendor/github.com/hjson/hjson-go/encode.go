@@ -170,4 +170,86 @@ func (s sortAlpha) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
 }
 func (s sortAlpha) Less(i, j int) bool {
-	return s[i].String() 
+	return s[i].String() < s[j].String()
+}
+
+func (e *hjsonEncoder) writeIndent(indent int) {
+	e.WriteString(e.Eol)
+	for i := 0; i < indent; i++ {
+		e.WriteString(e.IndentBy)
+	}
+}
+
+func (e *hjsonEncoder) str(value reflect.Value, noIndent bool, separator string, isRootObject bool) error {
+
+	// Produce a string from value.
+
+	kind := value.Kind()
+
+	if kind == reflect.Interface || kind == reflect.Ptr {
+		if value.IsNil() {
+			e.WriteString(separator)
+			e.WriteString("null")
+			return nil
+		}
+		value = value.Elem()
+		kind = value.Kind()
+	}
+
+	switch kind {
+	case reflect.String:
+		e.quote(value.String(), separator, isRootObject)
+
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
+		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64,
+		reflect.Uintptr:
+		e.WriteString(separator)
+		e.WriteString(strconv.FormatInt(value.Int(), 10))
+
+	case reflect.Float32, reflect.Float64:
+		// JSON numbers must be finite. Encode non-finite numbers as null.
+		e.WriteString(separator)
+		number := value.Float()
+		if math.IsInf(number, 0) || math.IsNaN(number) {
+			e.WriteString("null")
+		} else if !e.AllowMinusZero && number == -0 {
+			e.WriteString("0")
+		} else {
+			// find shortest representation ('G' does not work)
+			val := strconv.FormatFloat(number, 'f', -1, 64)
+			exp := strconv.FormatFloat(number, 'E', -1, 64)
+			if len(exp) < len(val) {
+				val = strings.ToLower(exp)
+			}
+			e.WriteString(val)
+		}
+
+	case reflect.Bool:
+		e.WriteString(separator)
+		if value.Bool() {
+			e.WriteString("true")
+		} else {
+			e.WriteString("false")
+		}
+
+	case reflect.Slice, reflect.Array:
+
+		len := value.Len()
+		if len == 0 {
+			e.WriteString(separator)
+			e.WriteString("[]")
+			break
+		}
+
+		indent1 := e.indent
+		e.indent++
+
+		if !noIndent && !e.BracesSameLine {
+			e.writeIndent(indent1)
+		} else {
+			e.WriteString(separator)
+		}
+		e.WriteString("[")
+
+		// Join all of the element texts together, separated with newlines
+		for i := 0
