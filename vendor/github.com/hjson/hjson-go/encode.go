@@ -252,4 +252,93 @@ func (e *hjsonEncoder) str(value reflect.Value, noIndent bool, separator string,
 		e.WriteString("[")
 
 		// Join all of the element texts together, separated with newlines
-		for i := 0
+		for i := 0; i < len; i++ {
+			e.writeIndent(e.indent)
+			if err := e.str(value.Index(i), true, "", false); err != nil {
+				return err
+			}
+		}
+
+		e.writeIndent(indent1)
+		e.WriteString("]")
+
+		e.indent = indent1
+
+	case reflect.Map:
+
+		len := value.Len()
+		if len == 0 {
+			e.WriteString(separator)
+			e.WriteString("{}")
+			break
+		}
+
+		indent1 := e.indent
+		e.indent++
+		if !noIndent && !e.BracesSameLine {
+			e.writeIndent(indent1)
+		} else {
+			e.WriteString(separator)
+		}
+		e.WriteString("{")
+
+		keys := value.MapKeys()
+		sort.Sort(sortAlpha(keys))
+
+		// Join all of the member texts together, separated with newlines
+		for i := 0; i < len; i++ {
+			e.writeIndent(e.indent)
+			e.WriteString(e.quoteName(keys[i].String()))
+			e.WriteString(":")
+			if err := e.str(value.MapIndex(keys[i]), false, " ", false); err != nil {
+				return err
+			}
+		}
+
+		e.writeIndent(indent1)
+		e.WriteString("}")
+		e.indent = indent1
+
+	default:
+		if e.UnknownAsNull {
+			// Use null as a placeholder for non-JSON values.
+			e.WriteString("null")
+		} else {
+			return errors.New("Unsupported type " + value.Type().String())
+		}
+	}
+	return nil
+}
+
+// Marshal returns the Hjson encoding of v using
+// default options.
+//
+// See MarshalWithOptions.
+//
+func Marshal(v interface{}) ([]byte, error) {
+	return MarshalWithOptions(v, DefaultOptions())
+}
+
+// MarshalWithOptions returns the Hjson encoding of v.
+//
+// Marshal traverses the value v recursively.
+//
+// Boolean values encode as JSON booleans.
+//
+// Floating point, integer, and Number values encode as JSON numbers.
+//
+// String values encode as Hjson strings (quoteless, multiline or
+// JSON).
+//
+// Array and slice values encode as JSON arrays.
+//
+// Map values encode as JSON objects. The map's key type must be a
+// string. The map keys are sorted and used as JSON object keys.
+//
+// Pointer values encode as the value pointed to.
+// A nil pointer encodes as the null JSON value.
+//
+// Interface values encode as the value contained in the interface.
+// A nil interface value encodes as the null JSON value.
+//
+// JSON cannot repres
