@@ -341,4 +341,21 @@ func Marshal(v interface{}) ([]byte, error) {
 // Interface values encode as the value contained in the interface.
 // A nil interface value encodes as the null JSON value.
 //
-// JSON cannot repres
+// JSON cannot represent cyclic data structures and Marshal does not
+// handle them. Passing cyclic structures to Marshal will result in
+// an infinite recursion.
+//
+func MarshalWithOptions(v interface{}, options EncoderOptions) ([]byte, error) {
+	e := &hjsonEncoder{}
+	e.indent = 0
+	e.Eol = options.Eol
+	e.BracesSameLine = options.BracesSameLine
+	e.QuoteAlways = options.QuoteAlways
+	e.IndentBy = options.IndentBy
+
+	err := e.str(reflect.ValueOf(v), true, "", true)
+	if err != nil {
+		return nil, err
+	}
+	return e.Bytes(), nil
+}
