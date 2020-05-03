@@ -81,4 +81,20 @@ func tryParseNumber(text []byte, stopAtNext bool) (float64, error) {
 	if stopAtNext {
 		// end scan if we find a punctuator character like ,}] or a comment
 		if p.ch == ',' || p.ch == '}' || p.ch == ']' ||
-			p.ch == '#' || p.ch == '/' && (p.data[p.at] == '/' || p.data[
+			p.ch == '#' || p.ch == '/' && (p.data[p.at] == '/' || p.data[p.at] == '*') {
+			p.ch = 0
+		}
+	}
+
+	if p.ch > 0 || leadingZeros != 0 {
+		return 0, errors.New("Invalid number")
+	}
+	number, err := strconv.ParseFloat(string(p.data[0:end-1]), 64)
+	if err != nil {
+		return 0, err
+	}
+	if math.IsInf(number, 0) || math.IsNaN(number) {
+		return 0, errors.New("Invalid number")
+	}
+	return number, nil
+}
