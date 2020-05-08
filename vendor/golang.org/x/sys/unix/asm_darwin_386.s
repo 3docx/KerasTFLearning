@@ -1,0 +1,14 @@
+// Copyright 2009 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build !gccgo
+
+#include "textflag.h"
+
+//
+// System call support for 386, Darwin
+//
+
+// Just jump to package syscall's implementation for all these functions.
+// The runtime may kno
