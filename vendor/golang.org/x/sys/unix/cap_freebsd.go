@@ -125,4 +125,71 @@ func CapRightsClear(rights *CapRights, clearrights []uint64) error {
 func CapRightsIsSet(rights *CapRights, setrights []uint64) (bool, error) {
 	// This is essentially a copy of cap_rights_is_vset()
 	if capver(rights) != CAP_RIGHTS_VERSION_00 {
-		return false, fmt.Errorf("bad rights version %
+		return false, fmt.Errorf("bad rights version %d", capver(rights))
+	}
+
+	n := caparsize(rights)
+	if n < capArSizeMin || n > capArSizeMax {
+		return false, errors.New("bad rights size")
+	}
+
+	for _, right := range setrights {
+		if caprver(right) != CAP_RIGHTS_VERSION_00 {
+			return false, errors.New("bad right version")
+		}
+		i, err := rightToIndex(right)
+		if err != nil {
+			return false, err
+		}
+		if i >= n {
+			return false, errors.New("index overflow")
+		}
+		if capidxbit(rights.Rights[i]) != capidxbit(right) {
+			return false, errors.New("index mismatch")
+		}
+		if (rights.Rights[i] & right) != right {
+			return false, nil
+		}
+	}
+
+	return true, nil
+}
+
+func capright(idx uint64, bit uint64) uint64 {
+	return ((1 << (57 + idx)) | bit)
+}
+
+// CapRightsInit returns a pointer to an initialised CapRights structure filled with rights.
+// See man cap_rights_init(3) and rights(4).
+func CapRightsInit(rights []uint64) (*CapRights, error) {
+	var r CapRights
+	r.Rights[0] = (capRightsGoVersion << 62) | capright(0, 0)
+	r.Rights[1] = capright(1, 0)
+
+	err := CapRightsSet(&r, rights)
+	if err != nil {
+		return nil, err
+	}
+	return &r, nil
+}
+
+// CapRightsLimit reduces the operations permitted on fd to at most those contained in rights.
+// The capability rights on fd can never be increased by CapRightsLimit.
+// See man cap_rights_limit(2) and rights(4).
+func CapRightsLimit(fd uintptr, rights *CapRights) error {
+	return capRightsLimit(int(fd), rights)
+}
+
+// CapRightsGet returns a CapRights structure containing the operations permitted on fd.
+// See man cap_rights_get(3) and rights(4).
+func CapRightsGet(fd uintptr) (*CapRights, error) {
+	r, err := CapRightsInit(nil)
+	if err != nil {
+		return nil, err
+	}
+	err = capRightsGet(capRightsGoVersion, int(fd), r)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
