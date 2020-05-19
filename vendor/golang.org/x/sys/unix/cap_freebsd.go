@@ -54,4 +54,75 @@ func caparsize(rights *CapRights) int {
 // CapRightsSet sets the permissions in setrights in rights.
 func CapRightsSet(rights *CapRights, setrights []uint64) error {
 	// This is essentially a copy of cap_rights_vset()
-	
+	if capver(rights) != CAP_RIGHTS_VERSION_00 {
+		return fmt.Errorf("bad rights version %d", capver(rights))
+	}
+
+	n := caparsize(rights)
+	if n < capArSizeMin || n > capArSizeMax {
+		return errors.New("bad rights size")
+	}
+
+	for _, right := range setrights {
+		if caprver(right) != CAP_RIGHTS_VERSION_00 {
+			return errors.New("bad right version")
+		}
+		i, err := rightToIndex(right)
+		if err != nil {
+			return err
+		}
+		if i >= n {
+			return errors.New("index overflow")
+		}
+		if capidxbit(rights.Rights[i]) != capidxbit(right) {
+			return errors.New("index mismatch")
+		}
+		rights.Rights[i] |= right
+		if capidxbit(rights.Rights[i]) != capidxbit(right) {
+			return errors.New("index mismatch (after assign)")
+		}
+	}
+
+	return nil
+}
+
+// CapRightsClear clears the permissions in clearrights from rights.
+func CapRightsClear(rights *CapRights, clearrights []uint64) error {
+	// This is essentially a copy of cap_rights_vclear()
+	if capver(rights) != CAP_RIGHTS_VERSION_00 {
+		return fmt.Errorf("bad rights version %d", capver(rights))
+	}
+
+	n := caparsize(rights)
+	if n < capArSizeMin || n > capArSizeMax {
+		return errors.New("bad rights size")
+	}
+
+	for _, right := range clearrights {
+		if caprver(right) != CAP_RIGHTS_VERSION_00 {
+			return errors.New("bad right version")
+		}
+		i, err := rightToIndex(right)
+		if err != nil {
+			return err
+		}
+		if i >= n {
+			return errors.New("index overflow")
+		}
+		if capidxbit(rights.Rights[i]) != capidxbit(right) {
+			return errors.New("index mismatch")
+		}
+		rights.Rights[i] &= ^(right & 0x01FFFFFFFFFFFFFF)
+		if capidxbit(rights.Rights[i]) != capidxbit(right) {
+			return errors.New("index mismatch (after assign)")
+		}
+	}
+
+	return nil
+}
+
+// CapRightsIsSet checks whether all the permissions in setrights are present in rights.
+func CapRightsIsSet(rights *CapRights, setrights []uint64) (bool, error) {
+	// This is essentially a copy of cap_rights_is_vset()
+	if capver(rights) != CAP_RIGHTS_VERSION_00 {
+		return false, fmt.Errorf("bad rights version %
