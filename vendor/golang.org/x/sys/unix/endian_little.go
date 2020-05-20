@@ -6,4 +6,4 @@
 
 package unix
 
-con
+const isBigEndian = false
