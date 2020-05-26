@@ -176,4 +176,89 @@ while(<>) {
 			if($_32bit eq "big-endian") {
 				push @args, "uintptr($name>>32)", "uintptr($name)";
 			} elsif($_32bit eq "little-endian") {
-				push @ar
+				push @args, "uintptr($name)", "uintptr($name>>32)";
+			} else {
+				push @args, "uintptr($name)";
+			}
+		} elsif($type eq "int64" && $dragonfly) {
+			if ($func !~ /^extp(read|write)/i) {
+				push @args, "0";
+			}
+			if($_32bit eq "big-endian") {
+				push @args, "uintptr($name>>32)", "uintptr($name)";
+			} elsif($_32bit eq "little-endian") {
+				push @args, "uintptr($name)", "uintptr($name>>32)";
+			} else {
+				push @args, "uintptr($name)";
+			}
+		} elsif($type eq "int64" && $_32bit ne "") {
+			if(@args % 2 && $arm) {
+				# arm abi specifies 64-bit argument uses
+				# (even, odd) pair
+				push @args, "0"
+			}
+			if($_32bit eq "big-endian") {
+				push @args, "uintptr($name>>32)", "uintptr($name)";
+			} else {
+				push @args, "uintptr($name)", "uintptr($name>>32)";
+			}
+		} else {
+			push @args, "uintptr($name)";
+		}
+	}
+
+	# Determine which form to use; pad args with zeros.
+	my $asm = "Syscall";
+	if ($nonblock) {
+		if ($errvar eq "" && $ENV{'GOOS'} eq "linux") {
+			$asm = "RawSyscallNoError";
+		} else {
+			$asm = "RawSyscall";
+		}
+	} else {
+		if ($errvar eq "" && $ENV{'GOOS'} eq "linux") {
+			$asm = "SyscallNoError";
+		}
+	}
+	if(@args <= 3) {
+		while(@args < 3) {
+			push @args, "0";
+		}
+	} elsif(@args <= 6) {
+		$asm .= "6";
+		while(@args < 6) {
+			push @args, "0";
+		}
+	} elsif(@args <= 9) {
+		$asm .= "9";
+		while(@args < 9) {
+			push @args, "0";
+		}
+	} else {
+		print STDERR "$ARGV:$.: too many arguments to system call\n";
+	}
+
+	# System call number.
+	if($sysname eq "") {
+		$sysname = "SYS_$func";
+		$sysname =~ s/([a-z])([A-Z])/${1}_$2/g;	# turn FooBar into Foo_Bar
+		$sysname =~ y/a-z/A-Z/;
+	}
+
+	# Actual call.
+	my $args = join(', ', @args);
+	my $call = "$asm($sysname, $args)";
+
+	# Assign return values.
+	my $body = "";
+	my @ret = ("_", "_", "_");
+	my $do_errno = 0;
+	for(my $i=0; $i<@out; $i++) {
+		my $p = $out[$i];
+		my ($name, $type) = parseparam($p);
+		my $reg = "";
+		if($name eq "err" && !$plan9) {
+			$reg = "e1";
+			$ret[2] = $reg;
+			$do_errno = 1;
+		} el
