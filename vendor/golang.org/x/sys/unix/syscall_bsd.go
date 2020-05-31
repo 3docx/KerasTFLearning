@@ -140,4 +140,76 @@ func Wait4(pid int, wstatus *WaitStatus, options int, rusage *Rusage) (wpid int,
 //sysnb	socket(domain int, typ int, proto int) (fd int, err error)
 //sys	getsockopt(s int, level int, name int, val unsafe.Pointer, vallen *_Socklen) (err error)
 //sys	setsockopt(s int, level int, name int, val unsafe.Pointer, vallen uintptr) (err error)
-//sysnb	getpeername(fd int, rsa *RawSockaddrAny, addr
+//sysnb	getpeername(fd int, rsa *RawSockaddrAny, addrlen *_Socklen) (err error)
+//sysnb	getsockname(fd int, rsa *RawSockaddrAny, addrlen *_Socklen) (err error)
+//sys	Shutdown(s int, how int) (err error)
+
+func (sa *SockaddrInet4) sockaddr() (unsafe.Pointer, _Socklen, error) {
+	if sa.Port < 0 || sa.Port > 0xFFFF {
+		return nil, 0, EINVAL
+	}
+	sa.raw.Len = SizeofSockaddrInet4
+	sa.raw.Family = AF_INET
+	p := (*[2]byte)(unsafe.Pointer(&sa.raw.Port))
+	p[0] = byte(sa.Port >> 8)
+	p[1] = byte(sa.Port)
+	for i := 0; i < len(sa.Addr); i++ {
+		sa.raw.Addr[i] = sa.Addr[i]
+	}
+	return unsafe.Pointer(&sa.raw), _Socklen(sa.raw.Len), nil
+}
+
+func (sa *SockaddrInet6) sockaddr() (unsafe.Pointer, _Socklen, error) {
+	if sa.Port < 0 || sa.Port > 0xFFFF {
+		return nil, 0, EINVAL
+	}
+	sa.raw.Len = SizeofSockaddrInet6
+	sa.raw.Family = AF_INET6
+	p := (*[2]byte)(unsafe.Pointer(&sa.raw.Port))
+	p[0] = byte(sa.Port >> 8)
+	p[1] = byte(sa.Port)
+	sa.raw.Scope_id = sa.ZoneId
+	for i := 0; i < len(sa.Addr); i++ {
+		sa.raw.Addr[i] = sa.Addr[i]
+	}
+	return unsafe.Pointer(&sa.raw), _Socklen(sa.raw.Len), nil
+}
+
+func (sa *SockaddrUnix) sockaddr() (unsafe.Pointer, _Socklen, error) {
+	name := sa.Name
+	n := len(name)
+	if n >= len(sa.raw.Path) || n == 0 {
+		return nil, 0, EINVAL
+	}
+	sa.raw.Len = byte(3 + n) // 2 for Family, Len; 1 for NUL
+	sa.raw.Family = AF_UNIX
+	for i := 0; i < n; i++ {
+		sa.raw.Path[i] = int8(name[i])
+	}
+	return unsafe.Pointer(&sa.raw), _Socklen(sa.raw.Len), nil
+}
+
+func (sa *SockaddrDatalink) sockaddr() (unsafe.Pointer, _Socklen, error) {
+	if sa.Index == 0 {
+		return nil, 0, EINVAL
+	}
+	sa.raw.Len = sa.Len
+	sa.raw.Family = AF_LINK
+	sa.raw.Index = sa.Index
+	sa.raw.Type = sa.Type
+	sa.raw.Nlen = sa.Nlen
+	sa.raw.Alen = sa.Alen
+	sa.raw.Slen = sa.Slen
+	for i := 0; i < len(sa.raw.Data); i++ {
+		sa.raw.Data[i] = sa.Data[i]
+	}
+	return unsafe.Pointer(&sa.raw), SizeofSockaddrDatalink, nil
+}
+
+func anyToSockaddr(rsa *RawSockaddrAny) (Sockaddr, error) {
+	switch rsa.Addr.Family {
+	case AF_LINK:
+		pp := (*RawSockaddrDatalink)(unsafe.Pointer(rsa))
+		sa := new(SockaddrDatalink)
+		sa.Len = pp.Len
+		sa.Family = 
