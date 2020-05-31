@@ -73,4 +73,71 @@ func ReadDirent(fd int, buf []byte) (n int, err error) {
 }
 
 // Wait status is 7 bits at bottom, either 0 (exited),
-// 0x7F (stopped), or a signal numb
+// 0x7F (stopped), or a signal number that caused an exit.
+// The 0x80 bit is whether there was a core dump.
+// An extra number (exit code, signal causing a stop)
+// is in the high bits.
+
+type WaitStatus uint32
+
+const (
+	mask  = 0x7F
+	core  = 0x80
+	shift = 8
+
+	exited  = 0
+	stopped = 0x7F
+)
+
+func (w WaitStatus) Exited() bool { return w&mask == exited }
+
+func (w WaitStatus) ExitStatus() int {
+	if w&mask != exited {
+		return -1
+	}
+	return int(w >> shift)
+}
+
+func (w WaitStatus) Signaled() bool { return w&mask != stopped && w&mask != 0 }
+
+func (w WaitStatus) Signal() syscall.Signal {
+	sig := syscall.Signal(w & mask)
+	if sig == stopped || sig == 0 {
+		return -1
+	}
+	return sig
+}
+
+func (w WaitStatus) CoreDump() bool { return w.Signaled() && w&core != 0 }
+
+func (w WaitStatus) Stopped() bool { return w&mask == stopped && syscall.Signal(w>>shift) != SIGSTOP }
+
+func (w WaitStatus) Continued() bool { return w&mask == stopped && syscall.Signal(w>>shift) == SIGSTOP }
+
+func (w WaitStatus) StopSignal() syscall.Signal {
+	if !w.Stopped() {
+		return -1
+	}
+	return syscall.Signal(w>>shift) & 0xFF
+}
+
+func (w WaitStatus) TrapCause() int { return -1 }
+
+//sys	wait4(pid int, wstatus *_C_int, options int, rusage *Rusage) (wpid int, err error)
+
+func Wait4(pid int, wstatus *WaitStatus, options int, rusage *Rusage) (wpid int, err error) {
+	var status _C_int
+	wpid, err = wait4(pid, &status, options, rusage)
+	if wstatus != nil {
+		*wstatus = WaitStatus(status)
+	}
+	return
+}
+
+//sys	accept(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (fd int, err error)
+//sys	bind(s int, addr unsafe.Pointer, addrlen _Socklen) (err error)
+//sys	connect(s int, addr unsafe.Pointer, addrlen _Socklen) (err error)
+//sysnb	socket(domain int, typ int, proto int) (fd int, err error)
+//sys	getsockopt(s int, level int, name int, val unsafe.Pointer, vallen *_Socklen) (err error)
+//sys	setsockopt(s int, level int, name int, val unsafe.Pointer, vallen uintptr) (err error)
+//sysnb	getpeername(fd int, rsa *RawSockaddrAny, addr
