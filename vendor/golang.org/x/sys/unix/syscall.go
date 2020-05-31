@@ -43,4 +43,12 @@ func ByteSliceFromString(s string) ([]byte, error) {
 // location, it returns (nil, EINVAL).
 func BytePtrFromString(s string) (*byte, error) {
 	a, err := ByteSliceFromString(s)
-	if err != nil
+	if err != nil {
+		return nil, err
+	}
+	return &a[0], nil
+}
+
+// Single-word zero for use when we need a valid pointer to 0 bytes.
+// See mkunix.pl.
+var _zero uintptr
