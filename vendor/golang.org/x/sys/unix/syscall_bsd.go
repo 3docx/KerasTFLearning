@@ -291,4 +291,74 @@ func Accept(fd int) (nfd int, sa Sockaddr, err error) {
 		Close(nfd)
 		nfd = 0
 	}
-	re
+	return
+}
+
+func Getsockname(fd int) (sa Sockaddr, err error) {
+	var rsa RawSockaddrAny
+	var len _Socklen = SizeofSockaddrAny
+	if err = getsockname(fd, &rsa, &len); err != nil {
+		return
+	}
+	// TODO(jsing): DragonFly has a "bug" (see issue 3349), which should be
+	// reported upstream.
+	if runtime.GOOS == "dragonfly" && rsa.Addr.Family == AF_UNSPEC && rsa.Addr.Len == 0 {
+		rsa.Addr.Family = AF_UNIX
+		rsa.Addr.Len = SizeofSockaddrUnix
+	}
+	return anyToSockaddr(&rsa)
+}
+
+//sysnb socketpair(domain int, typ int, proto int, fd *[2]int32) (err error)
+
+// GetsockoptString returns the string value of the socket option opt for the
+// socket associated with fd at the given socket level.
+func GetsockoptString(fd, level, opt int) (string, error) {
+	buf := make([]byte, 256)
+	vallen := _Socklen(len(buf))
+	err := getsockopt(fd, level, opt, unsafe.Pointer(&buf[0]), &vallen)
+	if err != nil {
+		return "", err
+	}
+	return string(buf[:vallen-1]), nil
+}
+
+//sys   recvfrom(fd int, p []byte, flags int, from *RawSockaddrAny, fromlen *_Socklen) (n int, err error)
+//sys   sendto(s int, buf []byte, flags int, to unsafe.Pointer, addrlen _Socklen) (err error)
+//sys	recvmsg(s int, msg *Msghdr, flags int) (n int, err error)
+
+func Recvmsg(fd int, p, oob []byte, flags int) (n, oobn int, recvflags int, from Sockaddr, err error) {
+	var msg Msghdr
+	var rsa RawSockaddrAny
+	msg.Name = (*byte)(unsafe.Pointer(&rsa))
+	msg.Namelen = uint32(SizeofSockaddrAny)
+	var iov Iovec
+	if len(p) > 0 {
+		iov.Base = (*byte)(unsafe.Pointer(&p[0]))
+		iov.SetLen(len(p))
+	}
+	var dummy byte
+	if len(oob) > 0 {
+		// receive at least one normal byte
+		if len(p) == 0 {
+			iov.Base = &dummy
+			iov.SetLen(1)
+		}
+		msg.Control = (*byte)(unsafe.Pointer(&oob[0]))
+		msg.SetControllen(len(oob))
+	}
+	msg.Iov = &iov
+	msg.Iovlen = 1
+	if n, err = recvmsg(fd, &msg, flags); err != nil {
+		return
+	}
+	oobn = int(msg.Controllen)
+	recvflags = int(msg.Flags)
+	// source address is only specified if the socket is unconnected
+	if rsa.Addr.Family != AF_UNSPEC {
+		from, err = anyToSockaddr(&rsa)
+	}
+	return
+}
+
+//sys	sendmsg(s 
