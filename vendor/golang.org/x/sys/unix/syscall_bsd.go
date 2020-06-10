@@ -361,4 +361,90 @@ func Recvmsg(fd int, p, oob []byte, flags int) (n, oobn int, recvflags int, from
 	return
 }
 
-//sys	sendmsg(s 
+//sys	sendmsg(s int, msg *Msghdr, flags int) (n int, err error)
+
+func Sendmsg(fd int, p, oob []byte, to Sockaddr, flags int) (err error) {
+	_, err = SendmsgN(fd, p, oob, to, flags)
+	return
+}
+
+func SendmsgN(fd int, p, oob []byte, to Sockaddr, flags int) (n int, err error) {
+	var ptr unsafe.Pointer
+	var salen _Socklen
+	if to != nil {
+		ptr, salen, err = to.sockaddr()
+		if err != nil {
+			return 0, err
+		}
+	}
+	var msg Msghdr
+	msg.Name = (*byte)(unsafe.Pointer(ptr))
+	msg.Namelen = uint32(salen)
+	var iov Iovec
+	if len(p) > 0 {
+		iov.Base = (*byte)(unsafe.Pointer(&p[0]))
+		iov.SetLen(len(p))
+	}
+	var dummy byte
+	if len(oob) > 0 {
+		// send at least one normal byte
+		if len(p) == 0 {
+			iov.Base = &dummy
+			iov.SetLen(1)
+		}
+		msg.Control = (*byte)(unsafe.Pointer(&oob[0]))
+		msg.SetControllen(len(oob))
+	}
+	msg.Iov = &iov
+	msg.Iovlen = 1
+	if n, err = sendmsg(fd, &msg, flags); err != nil {
+		return 0, err
+	}
+	if len(oob) > 0 && len(p) == 0 {
+		n = 0
+	}
+	return n, nil
+}
+
+//sys	kevent(kq int, change unsafe.Pointer, nchange int, event unsafe.Pointer, nevent int, timeout *Timespec) (n int, err error)
+
+func Kevent(kq int, changes, events []Kevent_t, timeout *Timespec) (n int, err error) {
+	var change, event unsafe.Pointer
+	if len(changes) > 0 {
+		change = unsafe.Pointer(&changes[0])
+	}
+	if len(events) > 0 {
+		event = unsafe.Pointer(&events[0])
+	}
+	return kevent(kq, change, len(changes), event, len(events), timeout)
+}
+
+//sys	sysctl(mib []_C_int, old *byte, oldlen *uintptr, new *byte, newlen uintptr) (err error) = SYS___SYSCTL
+
+// sysctlmib translates name to mib number and appends any additional args.
+func sysctlmib(name string, args ...int) ([]_C_int, error) {
+	// Translate name to mib number.
+	mib, err := nametomib(name)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, a := range args {
+		mib = append(mib, _C_int(a))
+	}
+
+	return mib, nil
+}
+
+func Sysctl(name string) (string, error) {
+	return SysctlArgs(name)
+}
+
+func SysctlArgs(name string, args ...int) (string, error) {
+	buf, err := SysctlRaw(name, args...)
+	if err != nil {
+		return "", err
+	}
+	n := len(buf)
+
+	// Throw away term
