@@ -546,4 +546,79 @@ func UtimesNano(path string, ts []Timespec) error {
 	if err != ENOSYS {
 		return err
 	}
-	
+	err = utimensat(AT_FDCWD, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), 0)
+	if err != ENOSYS {
+		return err
+	}
+	// Not as efficient as it could be because Timespec and
+	// Timeval have different types in the different OSes
+	tv := [2]Timeval{
+		NsecToTimeval(TimespecToNsec(ts[0])),
+		NsecToTimeval(TimespecToNsec(ts[1])),
+	}
+	return utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))
+}
+
+func UtimesNanoAt(dirfd int, path string, ts []Timespec, flags int) error {
+	if ts == nil {
+		return utimensat(dirfd, path, nil, flags)
+	}
+	if len(ts) != 2 {
+		return EINVAL
+	}
+	err := setattrlistTimes(path, ts, flags)
+	if err != ENOSYS {
+		return err
+	}
+	return utimensat(dirfd, path, (*[2]Timespec)(unsafe.Pointer(&ts[0])), flags)
+}
+
+//sys	futimes(fd int, timeval *[2]Timeval) (err error)
+
+func Futimes(fd int, tv []Timeval) error {
+	if tv == nil {
+		return futimes(fd, nil)
+	}
+	if len(tv) != 2 {
+		return EINVAL
+	}
+	return futimes(fd, (*[2]Timeval)(unsafe.Pointer(&tv[0])))
+}
+
+//sys	fcntl(fd int, cmd int, arg int) (val int, err error)
+
+//sys   poll(fds *PollFd, nfds int, timeout int) (n int, err error)
+
+func Poll(fds []PollFd, timeout int) (n int, err error) {
+	if len(fds) == 0 {
+		return poll(nil, 0, timeout)
+	}
+	return poll(&fds[0], len(fds), timeout)
+}
+
+// TODO: wrap
+//	Acct(name nil-string) (err error)
+//	Gethostuuid(uuid *byte, timeout *Timespec) (err error)
+//	Ptrace(req int, pid int, addr uintptr, data int) (ret uintptr, err error)
+
+var mapper = &mmapper{
+	active: make(map[*byte][]byte),
+	mmap:   mmap,
+	munmap: munmap,
+}
+
+func Mmap(fd int, offset int64, length int, prot int, flags int) (data []byte, err error) {
+	return mapper.Mmap(fd, offset, length, prot, flags)
+}
+
+func Munmap(b []byte) (err error) {
+	return mapper.Munmap(b)
+}
+
+//sys	Madvise(b []byte, behav int) (err error)
+//sys	Mlock(b []byte) (err error)
+//sys	Mlockall(flags int) (err error)
+//sys	Mprotect(b []byte, prot int) (err error)
+//sys	Msync(b []byte, flags int) (err error)
+//sys	Munlock(b []byte) (err error)
+//sys	Munlockall() (err error)
