@@ -447,4 +447,103 @@ func SysctlArgs(name string, args ...int) (string, error) {
 	}
 	n := len(buf)
 
-	// Throw away term
+	// Throw away terminating NUL.
+	if n > 0 && buf[n-1] == '\x00' {
+		n--
+	}
+	return string(buf[0:n]), nil
+}
+
+func SysctlUint32(name string) (uint32, error) {
+	return SysctlUint32Args(name)
+}
+
+func SysctlUint32Args(name string, args ...int) (uint32, error) {
+	mib, err := sysctlmib(name, args...)
+	if err != nil {
+		return 0, err
+	}
+
+	n := uintptr(4)
+	buf := make([]byte, 4)
+	if err := sysctl(mib, &buf[0], &n, nil, 0); err != nil {
+		return 0, err
+	}
+	if n != 4 {
+		return 0, EIO
+	}
+	return *(*uint32)(unsafe.Pointer(&buf[0])), nil
+}
+
+func SysctlUint64(name string, args ...int) (uint64, error) {
+	mib, err := sysctlmib(name, args...)
+	if err != nil {
+		return 0, err
+	}
+
+	n := uintptr(8)
+	buf := make([]byte, 8)
+	if err := sysctl(mib, &buf[0], &n, nil, 0); err != nil {
+		return 0, err
+	}
+	if n != 8 {
+		return 0, EIO
+	}
+	return *(*uint64)(unsafe.Pointer(&buf[0])), nil
+}
+
+func SysctlRaw(name string, args ...int) ([]byte, error) {
+	mib, err := sysctlmib(name, args...)
+	if err != nil {
+		return nil, err
+	}
+
+	// Find size.
+	n := uintptr(0)
+	if err := sysctl(mib, nil, &n, nil, 0); err != nil {
+		return nil, err
+	}
+	if n == 0 {
+		return nil, nil
+	}
+
+	// Read into buffer of that size.
+	buf := make([]byte, n)
+	if err := sysctl(mib, &buf[0], &n, nil, 0); err != nil {
+		return nil, err
+	}
+
+	// The actual call may return less than the original reported required
+	// size so ensure we deal with that.
+	return buf[:n], nil
+}
+
+//sys	utimes(path string, timeval *[2]Timeval) (err error)
+
+func Utimes(path string, tv []Timeval) error {
+	if tv == nil {
+		return utimes(path, nil)
+	}
+	if len(tv) != 2 {
+		return EINVAL
+	}
+	return utimes(path, (*[2]Timeval)(unsafe.Pointer(&tv[0])))
+}
+
+func UtimesNano(path string, ts []Timespec) error {
+	if ts == nil {
+		err := utimensat(AT_FDCWD, path, nil, 0)
+		if err != ENOSYS {
+			return err
+		}
+		return utimes(path, nil)
+	}
+	if len(ts) != 2 {
+		return EINVAL
+	}
+	// Darwin setattrlist can set nanosecond timestamps
+	err := setattrlistTimes(path, ts, 0)
+	if err != ENOSYS {
+		return err
+	}
+	
