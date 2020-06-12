@@ -1,8 +1,8 @@
-// Copyright 2009 The Go Authors. All rights reserved.
+// Copyright 2015 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build amd64,darwin
+// +build arm64,darwin
 
 package unix
 
@@ -61,8 +61,8 @@ func sendfile(outfd int, infd int, offset *int64, count int) (written int, err e
 	return
 }
 
-func Syscall9(num, a1, a2, a3, a4, a5, a6, a7, a8, a9 uintptr) (r1, r2 uintptr, err syscall.Errno)
+func Syscall9(num, a1, a2, a3, a4, a5, a6, a7, a8, a9 uintptr) (r1, r2 uintptr, err syscall.Errno) // sic
 
 // SYS___SYSCTL is used by syscall_bsd.go for all BSDs, but in modern versions
-// of darwin/amd64 the syscall is called sysctl instead of __sysctl.
+// of darwin/arm64 the syscall is called sysctl instead of __sysctl.
 const SYS___SYSCTL = SYS_SYSCTL
