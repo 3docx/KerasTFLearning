@@ -78,4 +78,91 @@ func Pwrite(fd int, p []byte, offset int64) (n int, err error) {
 }
 
 func Accept4(fd, flags int) (nfd int, sa Sockaddr, err error) {
-	var rsa RawSockad
+	var rsa RawSockaddrAny
+	var len _Socklen = SizeofSockaddrAny
+	nfd, err = accept4(fd, &rsa, &len, flags)
+	if err != nil {
+		return
+	}
+	if len > SizeofSockaddrAny {
+		panic("RawSockaddrAny too small")
+	}
+	sa, err = anyToSockaddr(&rsa)
+	if err != nil {
+		Close(nfd)
+		nfd = 0
+	}
+	return
+}
+
+const ImplementsGetwd = true
+
+//sys	Getcwd(buf []byte) (n int, err error) = SYS___GETCWD
+
+func Getwd() (string, error) {
+	var buf [PathMax]byte
+	_, err := Getcwd(buf[0:])
+	if err != nil {
+		return "", err
+	}
+	n := clen(buf[:])
+	if n < 1 {
+		return "", EINVAL
+	}
+	return string(buf[:n]), nil
+}
+
+func Getfsstat(buf []Statfs_t, flags int) (n int, err error) {
+	var _p0 unsafe.Pointer
+	var bufsize uintptr
+	if len(buf) > 0 {
+		_p0 = unsafe.Pointer(&buf[0])
+		bufsize = unsafe.Sizeof(Statfs_t{}) * uintptr(len(buf))
+	}
+	r0, _, e1 := Syscall(SYS_GETFSSTAT, uintptr(_p0), bufsize, uintptr(flags))
+	n = int(r0)
+	if e1 != 0 {
+		err = e1
+	}
+	return
+}
+
+func setattrlistTimes(path string, times []Timespec, flags int) error {
+	// used on Darwin for UtimesNano
+	return ENOSYS
+}
+
+//sys	ioctl(fd int, req uint, arg uintptr) (err error)
+
+// ioctl itself should not be exposed directly, but additional get/set
+// functions for specific types are permissible.
+
+// IoctlSetInt performs an ioctl operation which sets an integer value
+// on fd, using the specified request number.
+func IoctlSetInt(fd int, req uint, value int) error {
+	return ioctl(fd, req, uintptr(value))
+}
+
+func IoctlSetWinsize(fd int, req uint, value *Winsize) error {
+	return ioctl(fd, req, uintptr(unsafe.Pointer(value)))
+}
+
+func IoctlSetTermios(fd int, req uint, value *Termios) error {
+	return ioctl(fd, req, uintptr(unsafe.Pointer(value)))
+}
+
+// IoctlGetInt performs an ioctl operation which gets an integer value
+// from fd, using the specified request number.
+func IoctlGetInt(fd int, req uint) (int, error) {
+	var value int
+	err := ioctl(fd, req, uintptr(unsafe.Pointer(&value)))
+	return value, err
+}
+
+func IoctlGetWinsize(fd int, req uint) (*Winsize, error) {
+	var value Winsize
+	err := ioctl(fd, req, uintptr(unsafe.Pointer(&value)))
+	return &value, err
+}
+
+func IoctlGetTermios(fd int, req uint) 
