@@ -161,4 +161,76 @@ func Setrlimit(resource int, rlim *Rlimit) (err error) {
 // Implemented in assembly to avoid allocation.
 func seek(fd int, offset int64, whence int) (newoffset int64, err syscall.Errno)
 
-func Seek(fd int, offset int64, whence int) (newoffset int64, err error)
+func Seek(fd int, offset int64, whence int) (newoffset int64, err error) {
+	newoffset, errno := seek(fd, offset, whence)
+	if errno != 0 {
+		return 0, errno
+	}
+	return newoffset, nil
+}
+
+// Vsyscalls on amd64.
+//sysnb	Gettimeofday(tv *Timeval) (err error)
+//sysnb	Time(t *Time_t) (tt Time_t, err error)
+
+//sys	Utime(path string, buf *Utimbuf) (err error)
+
+// On x86 Linux, all the socket calls go through an extra indirection,
+// I think because the 5-register system call interface can't handle
+// the 6-argument calls like sendto and recvfrom. Instead the
+// arguments to the underlying system call are the number below
+// and a pointer to an array of uintptr. We hide the pointer in the
+// socketcall assembly to avoid allocation on every system call.
+
+const (
+	// see linux/net.h
+	_SOCKET      = 1
+	_BIND        = 2
+	_CONNECT     = 3
+	_LISTEN      = 4
+	_ACCEPT      = 5
+	_GETSOCKNAME = 6
+	_GETPEERNAME = 7
+	_SOCKETPAIR  = 8
+	_SEND        = 9
+	_RECV        = 10
+	_SENDTO      = 11
+	_RECVFROM    = 12
+	_SHUTDOWN    = 13
+	_SETSOCKOPT  = 14
+	_GETSOCKOPT  = 15
+	_SENDMSG     = 16
+	_RECVMSG     = 17
+	_ACCEPT4     = 18
+	_RECVMMSG    = 19
+	_SENDMMSG    = 20
+)
+
+func socketcall(call int, a0, a1, a2, a3, a4, a5 uintptr) (n int, err syscall.Errno)
+func rawsocketcall(call int, a0, a1, a2, a3, a4, a5 uintptr) (n int, err syscall.Errno)
+
+func accept(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (fd int, err error) {
+	fd, e := socketcall(_ACCEPT, uintptr(s), uintptr(unsafe.Pointer(rsa)), uintptr(unsafe.Pointer(addrlen)), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func accept4(s int, rsa *RawSockaddrAny, addrlen *_Socklen, flags int) (fd int, err error) {
+	fd, e := socketcall(_ACCEPT4, uintptr(s), uintptr(unsafe.Pointer(rsa)), uintptr(unsafe.Pointer(addrlen)), uintptr(flags), 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func getsockname(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (err error) {
+	_, e := rawsocketcall(_GETSOCKNAME, uintptr(s), uintptr(unsafe.Pointer(rsa)), uintptr(unsafe.Pointer(addrlen)), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func getpeername(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (err
