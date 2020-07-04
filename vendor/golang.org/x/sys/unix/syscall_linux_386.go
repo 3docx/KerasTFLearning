@@ -306,4 +306,86 @@ func sendto(s int, p []byte, flags int, to unsafe.Pointer, addrlen _Socklen) (er
 	if len(p) > 0 {
 		base = uintptr(unsafe.Pointer(&p[0]))
 	}
-	_, e := socketcall(_SENDTO, uintptr(s), base, uintptr(len(p)),
+	_, e := socketcall(_SENDTO, uintptr(s), base, uintptr(len(p)), uintptr(flags), uintptr(to), uintptr(addrlen))
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func recvmsg(s int, msg *Msghdr, flags int) (n int, err error) {
+	n, e := socketcall(_RECVMSG, uintptr(s), uintptr(unsafe.Pointer(msg)), uintptr(flags), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func sendmsg(s int, msg *Msghdr, flags int) (n int, err error) {
+	n, e := socketcall(_SENDMSG, uintptr(s), uintptr(unsafe.Pointer(msg)), uintptr(flags), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func Listen(s int, n int) (err error) {
+	_, e := socketcall(_LISTEN, uintptr(s), uintptr(n), 0, 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func Shutdown(s, how int) (err error) {
+	_, e := socketcall(_SHUTDOWN, uintptr(s), uintptr(how), 0, 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func Fstatfs(fd int, buf *Statfs_t) (err error) {
+	_, _, e := Syscall(SYS_FSTATFS64, uintptr(fd), unsafe.Sizeof(*buf), uintptr(unsafe.Pointer(buf)))
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func Statfs(path string, buf *Statfs_t) (err error) {
+	pathp, err := BytePtrFromString(path)
+	if err != nil {
+		return err
+	}
+	_, _, e := Syscall(SYS_STATFS64, uintptr(unsafe.Pointer(pathp)), unsafe.Sizeof(*buf), uintptr(unsafe.Pointer(buf)))
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func (r *PtraceRegs) PC() uint64 { return uint64(uint32(r.Eip)) }
+
+func (r *PtraceRegs) SetPC(pc uint64) { r.Eip = int32(pc) }
+
+func (iov *Iovec) SetLen(length int) {
+	iov.Len = uint32(length)
+}
+
+func (msghdr *Msghdr) SetControllen(length int) {
+	msghdr.Controllen = uint32(length)
+}
+
+func (cmsg *Cmsghdr) SetLen(length int) {
+	cmsg.Len = uint32(length)
+}
+
+//sys	poll(fds *PollFd, nfds int, timeout int) (n int, err error)
+
+func Poll(fds []PollFd, timeout int) (n int, err error) {
+	if len(fds) == 0 {
+		return poll(nil, 0, timeout)
+	}
+	return poll(&fds[0], len(fds), timeout)
+}
