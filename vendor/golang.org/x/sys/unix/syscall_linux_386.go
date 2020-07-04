@@ -233,4 +233,77 @@ func getsockname(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (err error) {
 	return
 }
 
-func getpeername(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (err
+func getpeername(s int, rsa *RawSockaddrAny, addrlen *_Socklen) (err error) {
+	_, e := rawsocketcall(_GETPEERNAME, uintptr(s), uintptr(unsafe.Pointer(rsa)), uintptr(unsafe.Pointer(addrlen)), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func socketpair(domain int, typ int, flags int, fd *[2]int32) (err error) {
+	_, e := rawsocketcall(_SOCKETPAIR, uintptr(domain), uintptr(typ), uintptr(flags), uintptr(unsafe.Pointer(fd)), 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func bind(s int, addr unsafe.Pointer, addrlen _Socklen) (err error) {
+	_, e := socketcall(_BIND, uintptr(s), uintptr(addr), uintptr(addrlen), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func connect(s int, addr unsafe.Pointer, addrlen _Socklen) (err error) {
+	_, e := socketcall(_CONNECT, uintptr(s), uintptr(addr), uintptr(addrlen), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func socket(domain int, typ int, proto int) (fd int, err error) {
+	fd, e := rawsocketcall(_SOCKET, uintptr(domain), uintptr(typ), uintptr(proto), 0, 0, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func getsockopt(s int, level int, name int, val unsafe.Pointer, vallen *_Socklen) (err error) {
+	_, e := socketcall(_GETSOCKOPT, uintptr(s), uintptr(level), uintptr(name), uintptr(val), uintptr(unsafe.Pointer(vallen)), 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func setsockopt(s int, level int, name int, val unsafe.Pointer, vallen uintptr) (err error) {
+	_, e := socketcall(_SETSOCKOPT, uintptr(s), uintptr(level), uintptr(name), uintptr(val), vallen, 0)
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func recvfrom(s int, p []byte, flags int, from *RawSockaddrAny, fromlen *_Socklen) (n int, err error) {
+	var base uintptr
+	if len(p) > 0 {
+		base = uintptr(unsafe.Pointer(&p[0]))
+	}
+	n, e := socketcall(_RECVFROM, uintptr(s), base, uintptr(len(p)), uintptr(flags), uintptr(unsafe.Pointer(from)), uintptr(unsafe.Pointer(fromlen)))
+	if e != 0 {
+		err = e
+	}
+	return
+}
+
+func sendto(s int, p []byte, flags int, to unsafe.Pointer, addrlen _Socklen) (err error) {
+	var base uintptr
+	if len(p) > 0 {
+		base = uintptr(unsafe.Pointer(&p[0]))
+	}
+	_, e := socketcall(_SENDTO, uintptr(s), base, uintptr(len(p)),
