@@ -194,4 +194,65 @@ func Uname(uname *Utsname) error {
 
 	mib = []_C_int{CTL_KERN, KERN_VERSION}
 	n = unsafe.Sizeof(uname.Version)
-	if err := sysctl(mib, &uname.Ver
+	if err := sysctl(mib, &uname.Version[0], &n, nil, 0); err != nil {
+		return err
+	}
+
+	// The version might have newlines or tabs in it, convert them to
+	// spaces.
+	for i, b := range uname.Version {
+		if b == '\n' || b == '\t' {
+			if i == len(uname.Version)-1 {
+				uname.Version[i] = 0
+			} else {
+				uname.Version[i] = ' '
+			}
+		}
+	}
+
+	mib = []_C_int{CTL_HW, HW_MACHINE}
+	n = unsafe.Sizeof(uname.Machine)
+	if err := sysctl(mib, &uname.Machine[0], &n, nil, 0); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+/*
+ * Exposed directly
+ */
+//sys	Access(path string, mode uint32) (err error)
+//sys	Adjtime(delta *Timeval, olddelta *Timeval) (err error)
+//sys	Chdir(path string) (err error)
+//sys	Chflags(path string, flags int) (err error)
+//sys	Chmod(path string, mode uint32) (err error)
+//sys	Chown(path string, uid int, gid int) (err error)
+//sys	Chroot(path string) (err error)
+//sys	Close(fd int) (err error)
+//sys	Dup(fd int) (nfd int, err error)
+//sys	Dup2(from int, to int) (err error)
+//sys	Exit(code int)
+//sys	Fadvise(fd int, offset int64, length int64, advice int) (err error) = SYS_POSIX_FADVISE
+//sys	Fchdir(fd int) (err error)
+//sys	Fchflags(fd int, flags int) (err error)
+//sys	Fchmod(fd int, mode uint32) (err error)
+//sys	Fchmodat(dirfd int, path string, mode uint32, flags int) (err error)
+//sys	Fchown(fd int, uid int, gid int) (err error)
+//sys	Flock(fd int, how int) (err error)
+//sys	Fpathconf(fd int, name int) (val int, err error)
+//sys	Fstat(fd int, stat *Stat_t) (err error)
+//sys	Fstatat(fd int, path string, stat *Stat_t, flags int) (err error)
+//sys	Fsync(fd int) (err error)
+//sys	Ftruncate(fd int, length int64) (err error)
+//sysnb	Getegid() (egid int)
+//sysnb	Geteuid() (uid int)
+//sysnb	Getgid() (gid int)
+//sysnb	Getpgid(pid int) (pgid int, err error)
+//sysnb	Getpgrp() (pgrp int)
+//sysnb	Getpid() (pid int)
+//sysnb	Getppid() (ppid int)
+//sys	Getpriority(which int, who int) (prio int, err error)
+//sysnb	Getrlimit(which int, lim *Rlimit) (err error)
+//sysnb	Getrusage(who int, rusage *Rusage) (err error)
+//sysnb	Getsid(pid 
