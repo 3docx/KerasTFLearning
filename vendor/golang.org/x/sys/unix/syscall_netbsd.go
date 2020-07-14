@@ -297,4 +297,106 @@ func Uname(uname *Utsname) error {
 //sys	Truncate(path string, length int64) (err error)
 //sys	Umask(newmask int) (oldmask int)
 //sys	Unlink(path string) (err error)
-//sys
+//sys	Unmount(path string, flags int) (err error)
+//sys	write(fd int, p []byte) (n int, err error)
+//sys	mmap(addr uintptr, length uintptr, prot int, flag int, fd int, pos int64) (ret uintptr, err error)
+//sys	munmap(addr uintptr, length uintptr) (err error)
+//sys	readlen(fd int, buf *byte, nbuf int) (n int, err error) = SYS_READ
+//sys	writelen(fd int, buf *byte, nbuf int) (n int, err error) = SYS_WRITE
+//sys	utimensat(dirfd int, path string, times *[2]Timespec, flags int) (err error)
+
+/*
+ * Unimplemented
+ */
+// ____semctl13
+// __clone
+// __fhopen40
+// __fhstat40
+// __fhstatvfs140
+// __fstat30
+// __getcwd
+// __getfh30
+// __getlogin
+// __lstat30
+// __mount50
+// __msgctl13
+// __msync13
+// __ntp_gettime30
+// __posix_chown
+// __posix_fchown
+// __posix_lchown
+// __posix_rename
+// __setlogin
+// __shmctl13
+// __sigaction_sigtramp
+// __sigaltstack14
+// __sigpending14
+// __sigprocmask14
+// __sigsuspend14
+// __sigtimedwait
+// __stat30
+// __syscall
+// __vfork14
+// _ksem_close
+// _ksem_destroy
+// _ksem_getvalue
+// _ksem_init
+// _ksem_open
+// _ksem_post
+// _ksem_trywait
+// _ksem_unlink
+// _ksem_wait
+// _lwp_continue
+// _lwp_create
+// _lwp_ctl
+// _lwp_detach
+// _lwp_exit
+// _lwp_getname
+// _lwp_getprivate
+// _lwp_kill
+// _lwp_park
+// _lwp_self
+// _lwp_setname
+// _lwp_setprivate
+// _lwp_suspend
+// _lwp_unpark
+// _lwp_unpark_all
+// _lwp_wait
+// _lwp_wakeup
+// _pset_bind
+// _sched_getaffinity
+// _sched_getparam
+// _sched_setaffinity
+// _sched_setparam
+// acct
+// aio_cancel
+// aio_error
+// aio_fsync
+// aio_read
+// aio_return
+// aio_suspend
+// aio_write
+// break
+// clock_getres
+// clock_gettime
+// clock_settime
+// compat_09_ogetdomainname
+// compat_09_osetdomainname
+// compat_09_ouname
+// compat_10_omsgsys
+// compat_10_osemsys
+// compat_10_oshmsys
+// compat_12_fstat12
+// compat_12_getdirentries
+// compat_12_lstat12
+// compat_12_msync
+// compat_12_oreboot
+// compat_12_oswapon
+// compat_12_stat12
+// compat_13_sigaction13
+// compat_13_sigaltstack13
+// compat_13_sigpending13
+// compat_13_sigprocmask13
+// compat_13_sigreturn13
+// compat_13_sigsuspend13
+// com
