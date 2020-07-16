@@ -1,8 +1,9 @@
-// Copyright 2013 The Go Authors. All rights reserved.
+
+// Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build arm,netbsd
+// +build 386,openbsd
 
 package unix
 
@@ -16,8 +17,8 @@ func setTimeval(sec, usec int64) Timeval {
 
 func SetKevent(k *Kevent_t, fd, mode, flags int) {
 	k.Ident = uint32(fd)
-	k.Filter = uint32(mode)
-	k.Flags = uint32(flags)
+	k.Filter = int16(mode)
+	k.Flags = uint16(flags)
 }
 
 func (iov *Iovec) SetLen(length int) {
