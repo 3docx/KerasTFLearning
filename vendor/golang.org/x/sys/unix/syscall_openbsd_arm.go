@@ -20,4 +20,14 @@ func SetKevent(k *Kevent_t, fd, mode, flags int) {
 	k.Flags = uint16(flags)
 }
 
-func (iov *Iovec) SetLen(lengt
+func (iov *Iovec) SetLen(length int) {
+	iov.Len = uint32(length)
+}
+
+func (msghdr *Msghdr) SetControllen(length int) {
+	msghdr.Controllen = uint32(length)
+}
+
+func (cmsg *Cmsghdr) SetLen(length int) {
+	cmsg.Len = uint32(length)
+}
