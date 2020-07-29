@@ -275,3 +275,70 @@ func GetsockoptLinger(fd, level, opt int) (*Linger, error) {
 	vallen := _Socklen(SizeofLinger)
 	err := getsockopt(fd, level, opt, unsafe.Pointer(&linger), &vallen)
 	return &linger, err
+}
+
+func GetsockoptTimeval(fd, level, opt int) (*Timeval, error) {
+	var tv Timeval
+	vallen := _Socklen(unsafe.Sizeof(tv))
+	err := getsockopt(fd, level, opt, unsafe.Pointer(&tv), &vallen)
+	return &tv, err
+}
+
+func Recvfrom(fd int, p []byte, flags int) (n int, from Sockaddr, err error) {
+	var rsa RawSockaddrAny
+	var len _Socklen = SizeofSockaddrAny
+	if n, err = recvfrom(fd, p, flags, &rsa, &len); err != nil {
+		return
+	}
+	if rsa.Addr.Family != AF_UNSPEC {
+		from, err = anyToSockaddr(&rsa)
+	}
+	return
+}
+
+func Sendto(fd int, p []byte, flags int, to Sockaddr) (err error) {
+	ptr, n, err := to.sockaddr()
+	if err != nil {
+		return err
+	}
+	return sendto(fd, p, flags, ptr, n)
+}
+
+func SetsockoptByte(fd, level, opt int, value byte) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(&value), 1)
+}
+
+func SetsockoptInt(fd, level, opt int, value int) (err error) {
+	var n = int32(value)
+	return setsockopt(fd, level, opt, unsafe.Pointer(&n), 4)
+}
+
+func SetsockoptInet4Addr(fd, level, opt int, value [4]byte) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(&value[0]), 4)
+}
+
+func SetsockoptIPMreq(fd, level, opt int, mreq *IPMreq) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(mreq), SizeofIPMreq)
+}
+
+func SetsockoptIPv6Mreq(fd, level, opt int, mreq *IPv6Mreq) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(mreq), SizeofIPv6Mreq)
+}
+
+func SetsockoptICMPv6Filter(fd, level, opt int, filter *ICMPv6Filter) error {
+	return setsockopt(fd, level, opt, unsafe.Pointer(filter), SizeofICMPv6Filter)
+}
+
+func SetsockoptLinger(fd, level, opt int, l *Linger) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(l), SizeofLinger)
+}
+
+func SetsockoptString(fd, level, opt int, s string) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(&[]byte(s)[0]), uintptr(len(s)))
+}
+
+func SetsockoptTimeval(fd, level, opt int, tv *Timeval) (err error) {
+	return setsockopt(fd, level, opt, unsafe.Pointer(tv), unsafe.Sizeof(*tv))
+}
+
+func Soc
