@@ -341,4 +341,54 @@ func SetsockoptTimeval(fd, level, opt int, tv *Timeval) (err error) {
 	return setsockopt(fd, level, opt, unsafe.Pointer(tv), unsafe.Sizeof(*tv))
 }
 
-func Soc
+func Socket(domain, typ, proto int) (fd int, err error) {
+	if domain == AF_INET6 && SocketDisableIPv6 {
+		return -1, EAFNOSUPPORT
+	}
+	fd, err = socket(domain, typ, proto)
+	return
+}
+
+func Socketpair(domain, typ, proto int) (fd [2]int, err error) {
+	var fdx [2]int32
+	err = socketpair(domain, typ, proto, &fdx)
+	if err == nil {
+		fd[0] = int(fdx[0])
+		fd[1] = int(fdx[1])
+	}
+	return
+}
+
+func Sendfile(outfd int, infd int, offset *int64, count int) (written int, err error) {
+	if raceenabled {
+		raceReleaseMerge(unsafe.Pointer(&ioSync))
+	}
+	return sendfile(outfd, infd, offset, count)
+}
+
+var ioSync int64
+
+func CloseOnExec(fd int) { fcntl(fd, F_SETFD, FD_CLOEXEC) }
+
+func SetNonblock(fd int, nonblocking bool) (err error) {
+	flag, err := fcntl(fd, F_GETFL, 0)
+	if err != nil {
+		return err
+	}
+	if nonblocking {
+		flag |= O_NONBLOCK
+	} else {
+		flag &= ^O_NONBLOCK
+	}
+	_, err = fcntl(fd, F_SETFL, flag)
+	return err
+}
+
+// Exec calls execve(2), which replaces the calling executable in the process
+// tree. argv0 should be the full path to an executable ("/bin/ls") and the
+// executable name should also be the first argument in argv (["ls", "-l"]).
+// envv are the environment variables that should be passed to the new
+// process (["USER=go", "PWD=/tmp"]).
+func Exec(argv0 string, argv []string, envv []string) error {
+	return syscall.Exec(argv0, argv, envv)
+}
