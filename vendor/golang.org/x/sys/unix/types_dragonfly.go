@@ -211,4 +211,70 @@ const (
 	SizeofRtMetrics        = C.sizeof_struct_rt_metrics
 )
 
-type IfMsghdr C.struct_
+type IfMsghdr C.struct_if_msghdr
+
+type IfData C.struct_if_data
+
+type IfaMsghdr C.struct_ifa_msghdr
+
+type IfmaMsghdr C.struct_ifma_msghdr
+
+type IfAnnounceMsghdr C.struct_if_announcemsghdr
+
+type RtMsghdr C.struct_rt_msghdr
+
+type RtMetrics C.struct_rt_metrics
+
+// Berkeley packet filter
+
+const (
+	SizeofBpfVersion = C.sizeof_struct_bpf_version
+	SizeofBpfStat    = C.sizeof_struct_bpf_stat
+	SizeofBpfProgram = C.sizeof_struct_bpf_program
+	SizeofBpfInsn    = C.sizeof_struct_bpf_insn
+	SizeofBpfHdr     = C.sizeof_struct_bpf_hdr
+)
+
+type BpfVersion C.struct_bpf_version
+
+type BpfStat C.struct_bpf_stat
+
+type BpfProgram C.struct_bpf_program
+
+type BpfInsn C.struct_bpf_insn
+
+type BpfHdr C.struct_bpf_hdr
+
+// Terminal handling
+
+type Termios C.struct_termios
+
+type Winsize C.struct_winsize
+
+// fchmodat-like syscalls.
+
+const (
+	AT_FDCWD            = C.AT_FDCWD
+	AT_SYMLINK_NOFOLLOW = C.AT_SYMLINK_NOFOLLOW
+)
+
+// poll
+
+type PollFd C.struct_pollfd
+
+const (
+	POLLERR    = C.POLLERR
+	POLLHUP    = C.POLLHUP
+	POLLIN     = C.POLLIN
+	POLLNVAL   = C.POLLNVAL
+	POLLOUT    = C.POLLOUT
+	POLLPRI    = C.POLLPRI
+	POLLRDBAND = C.POLLRDBAND
+	POLLRDNORM = C.POLLRDNORM
+	POLLWRBAND = C.POLLWRBAND
+	POLLWRNORM = C.POLLWRNORM
+)
+
+// Uname
+
+type Utsname C.struct_utsname
