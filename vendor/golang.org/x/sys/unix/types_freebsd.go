@@ -119,4 +119,115 @@ struct if_data8 {
 	u_char  ifi_spare_char2;
 	u_char  ifi_datalen;
 	u_long  ifi_mtu;
-	u_long  i
+	u_long  ifi_metric;
+	u_long  ifi_baudrate;
+	u_long  ifi_ipackets;
+	u_long  ifi_ierrors;
+	u_long  ifi_opackets;
+	u_long  ifi_oerrors;
+	u_long  ifi_collisions;
+	u_long  ifi_ibytes;
+	u_long  ifi_obytes;
+	u_long  ifi_imcasts;
+	u_long  ifi_omcasts;
+	u_long  ifi_iqdrops;
+	u_long  ifi_noproto;
+	u_long  ifi_hwassist;
+// FIXME: these are now unions, so maybe need to change definitions?
+#undef ifi_epoch
+	time_t  ifi_epoch;
+#undef ifi_lastchange
+	struct  timeval ifi_lastchange;
+};
+
+// This structure is a duplicate of if_msghdr on FreeBSD 8-STABLE.
+// See /usr/include/net/if.h.
+struct if_msghdr8 {
+	u_short ifm_msglen;
+	u_char  ifm_version;
+	u_char  ifm_type;
+	int     ifm_addrs;
+	int     ifm_flags;
+	u_short ifm_index;
+	struct  if_data8 ifm_data;
+};
+*/
+import "C"
+
+// Machine characteristics; for internal use.
+
+const (
+	sizeofPtr      = C.sizeofPtr
+	sizeofShort    = C.sizeof_short
+	sizeofInt      = C.sizeof_int
+	sizeofLong     = C.sizeof_long
+	sizeofLongLong = C.sizeof_longlong
+)
+
+// Basic types
+
+type (
+	_C_short     C.short
+	_C_int       C.int
+	_C_long      C.long
+	_C_long_long C.longlong
+)
+
+// Time
+
+type Timespec C.struct_timespec
+
+type Timeval C.struct_timeval
+
+// Processes
+
+type Rusage C.struct_rusage
+
+type Rlimit C.struct_rlimit
+
+type _Gid_t C.gid_t
+
+// Files
+
+const ( // Directory mode bits
+	S_IFMT   = C.S_IFMT
+	S_IFIFO  = C.S_IFIFO
+	S_IFCHR  = C.S_IFCHR
+	S_IFDIR  = C.S_IFDIR
+	S_IFBLK  = C.S_IFBLK
+	S_IFREG  = C.S_IFREG
+	S_IFLNK  = C.S_IFLNK
+	S_IFSOCK = C.S_IFSOCK
+	S_ISUID  = C.S_ISUID
+	S_ISGID  = C.S_ISGID
+	S_ISVTX  = C.S_ISVTX
+	S_IRUSR  = C.S_IRUSR
+	S_IWUSR  = C.S_IWUSR
+	S_IXUSR  = C.S_IXUSR
+)
+
+type Stat_t C.struct_stat8
+
+type Statfs_t C.struct_statfs
+
+type Flock_t C.struct_flock
+
+type Dirent C.struct_dirent
+
+type Fsid C.struct_fsid
+
+// File system limits
+
+const (
+	PathMax = C.PATH_MAX
+)
+
+// Advice to Fadvise
+
+const (
+	FADV_NORMAL     = C.POSIX_FADV_NORMAL
+	FADV_RANDOM     = C.POSIX_FADV_RANDOM
+	FADV_SEQUENTIAL = C.POSIX_FADV_SEQUENTIAL
+	FADV_WILLNEED   = C.POSIX_FADV_WILLNEED
+	FADV_DONTNEED   = C.POSIX_FADV_DONTNEED
+	FADV_NOREUSE    = 
