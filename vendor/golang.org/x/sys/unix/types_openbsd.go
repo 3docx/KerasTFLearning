@@ -34,7 +34,6 @@ package unix
 #include <sys/signal.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <sys/sysctl.h>
 #include <sys/time.h>
 #include <sys/uio.h>
 #include <sys/un.h>
@@ -103,6 +102,23 @@ type _Gid_t C.gid_t
 
 // Files
 
+const ( // Directory mode bits
+	S_IFMT   = C.S_IFMT
+	S_IFIFO  = C.S_IFIFO
+	S_IFCHR  = C.S_IFCHR
+	S_IFDIR  = C.S_IFDIR
+	S_IFBLK  = C.S_IFBLK
+	S_IFREG  = C.S_IFREG
+	S_IFLNK  = C.S_IFLNK
+	S_IFSOCK = C.S_IFSOCK
+	S_ISUID  = C.S_ISUID
+	S_ISGID  = C.S_ISGID
+	S_ISVTX  = C.S_ISVTX
+	S_IRUSR  = C.S_IRUSR
+	S_IWUSR  = C.S_IWUSR
+	S_IXUSR  = C.S_IXUSR
+)
+
 type Stat_t C.struct_stat
 
 type Statfs_t C.struct_statfs
@@ -117,17 +133,6 @@ type Fsid C.fsid_t
 
 const (
 	PathMax = C.PATH_MAX
-)
-
-// Advice to Fadvise
-
-const (
-	FADV_NORMAL     = C.POSIX_FADV_NORMAL
-	FADV_RANDOM     = C.POSIX_FADV_RANDOM
-	FADV_SEQUENTIAL = C.POSIX_FADV_SEQUENTIAL
-	FADV_WILLNEED   = C.POSIX_FADV_WILLNEED
-	FADV_DONTNEED   = C.POSIX_FADV_DONTNEED
-	FADV_NOREUSE    = C.POSIX_FADV_NOREUSE
 )
 
 // Sockets
@@ -272,10 +277,6 @@ const (
 	POLLWRBAND = C.POLLWRBAND
 	POLLWRNORM = C.POLLWRNORM
 )
-
-// Sysctl
-
-type Sysctlnode C.struct_sysctlnode
 
 // Uname
 

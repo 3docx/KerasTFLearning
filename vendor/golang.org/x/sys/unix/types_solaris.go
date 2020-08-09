@@ -16,29 +16,35 @@ package unix
 
 /*
 #define KERNEL
+// These defines ensure that builds done on newer versions of Solaris are
+// backwards-compatible with older versions of Solaris and
+// OpenSolaris-based derivatives.
+#define __USE_SUNOS_SOCKETS__          // msghdr
+#define __USE_LEGACY_PROTOTYPES__      // iovec
 #include <dirent.h>
 #include <fcntl.h>
+#include <netdb.h>
+#include <limits.h>
 #include <poll.h>
 #include <signal.h>
 #include <termios.h>
+#include <termio.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/param.h>
-#include <sys/types.h>
-#include <sys/event.h>
 #include <sys/mman.h>
 #include <sys/mount.h>
-#include <sys/ptrace.h>
+#include <sys/param.h>
 #include <sys/resource.h>
 #include <sys/select.h>
 #include <sys/signal.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <sys/sysctl.h>
+#include <sys/statvfs.h>
 #include <sys/time.h>
-#include <sys/uio.h>
-#include <sys/un.h>
+#include <sys/times.h>
+#include <sys/types.h>
 #include <sys/utsname.h>
+#include <sys/un.h>
 #include <sys/wait.h>
 #include <net/bpf.h>
 #include <net/if.h>
@@ -47,6 +53,8 @@ package unix
 #include <netinet/in.h>
 #include <netinet/icmp6.h>
 #include <netinet/tcp.h>
+#include <ustat.h>
+#include <utime.h>
 
 enum {
 	sizeofPtr = sizeof(void*),
@@ -76,6 +84,8 @@ const (
 	sizeofInt      = C.sizeof_int
 	sizeofLong     = C.sizeof_long
 	sizeofLongLong = C.sizeof_longlong
+	PathMax        = C.PATH_MAX
+	MaxHostNameLen = C.MAXHOSTNAMELEN
 )
 
 // Basic types
@@ -93,6 +103,12 @@ type Timespec C.struct_timespec
 
 type Timeval C.struct_timeval
 
+type Timeval32 C.struct_timeval32
+
+type Tms C.struct_tms
+
+type Utimbuf C.struct_utimbuf
+
 // Processes
 
 type Rusage C.struct_rusage
@@ -103,32 +119,34 @@ type _Gid_t C.gid_t
 
 // Files
 
-type Stat_t C.struct_stat
+const ( // Directory mode bits
+	S_IFMT   = C.S_IFMT
+	S_IFIFO  = C.S_IFIFO
+	S_IFCHR  = C.S_IFCHR
+	S_IFDIR  = C.S_IFDIR
+	S_IFBLK  = C.S_IFBLK
+	S_IFREG  = C.S_IFREG
+	S_IFLNK  = C.S_IFLNK
+	S_IFSOCK = C.S_IFSOCK
+	S_ISUID  = C.S_ISUID
+	S_ISGID  = C.S_ISGID
+	S_ISVTX  = C.S_ISVTX
+	S_IRUSR  = C.S_IRUSR
+	S_IWUSR  = C.S_IWUSR
+	S_IXUSR  = C.S_IXUSR
+)
 
-type Statfs_t C.struct_statfs
+type Stat_t C.struct_stat
 
 type Flock_t C.struct_flock
 
 type Dirent C.struct_dirent
 
-type Fsid C.fsid_t
+// Filesystems
 
-// File system limits
+type _Fsblkcnt_t C.fsblkcnt_t
 
-const (
-	PathMax = C.PATH_MAX
-)
-
-// Advice to Fadvise
-
-const (
-	FADV_NORMAL     = C.POSIX_FADV_NORMAL
-	FADV_RANDOM     = C.POSIX_FADV_RANDOM
-	FADV_SEQUENTIAL = C.POSIX_FADV_SEQUENTIAL
-	FADV_WILLNEED   = C.POSIX_FADV_WILLNEED
-	FADV_DONTNEED   = C.POSIX_FADV_DONTNEED
-	FADV_NOREUSE    = C.POSIX_FADV_NOREUSE
-)
+type Statvfs_t C.struct_statvfs
 
 // Sockets
 
@@ -180,31 +198,32 @@ const (
 	SizeofICMPv6Filter     = C.sizeof_struct_icmp6_filter
 )
 
-// Ptrace requests
-
-const (
-	PTRACE_TRACEME = C.PT_TRACE_ME
-	PTRACE_CONT    = C.PT_CONTINUE
-	PTRACE_KILL    = C.PT_KILL
-)
-
-// Events (kqueue, kevent)
-
-type Kevent_t C.struct_kevent
-
 // Select
 
 type FdSet C.fd_set
 
+// Misc
+
+type Utsname C.struct_utsname
+
+type Ustat_t C.struct_ustat
+
+const (
+	AT_FDCWD            = C.AT_FDCWD
+	AT_SYMLINK_NOFOLLOW = C.AT_SYMLINK_NOFOLLOW
+	AT_SYMLINK_FOLLOW   = C.AT_SYMLINK_FOLLOW
+	AT_REMOVEDIR        = C.AT_REMOVEDIR
+	AT_EACCESS          = C.AT_EACCESS
+)
+
 // Routing and interface messages
 
 const (
-	SizeofIfMsghdr         = C.sizeof_struct_if_msghdr
-	SizeofIfData           = C.sizeof_struct_if_data
-	SizeofIfaMsghdr        = C.sizeof_struct_ifa_msghdr
-	SizeofIfAnnounceMsghdr = C.sizeof_struct_if_announcemsghdr
-	SizeofRtMsghdr         = C.sizeof_struct_rt_msghdr
-	SizeofRtMetrics        = C.sizeof_struct_rt_metrics
+	SizeofIfMsghdr  = C.sizeof_struct_if_msghdr
+	SizeofIfData    = C.sizeof_struct_if_data
+	SizeofIfaMsghdr = C.sizeof_struct_ifa_msghdr
+	SizeofRtMsghdr  = C.sizeof_struct_rt_msghdr
+	SizeofRtMetrics = C.sizeof_struct_rt_metrics
 )
 
 type IfMsghdr C.struct_if_msghdr
@@ -213,13 +232,9 @@ type IfData C.struct_if_data
 
 type IfaMsghdr C.struct_ifa_msghdr
 
-type IfAnnounceMsghdr C.struct_if_announcemsghdr
-
 type RtMsghdr C.struct_rt_msghdr
 
 type RtMetrics C.struct_rt_metrics
-
-type Mclpool C.struct_mclpool
 
 // Berkeley packet filter
 
@@ -239,22 +254,17 @@ type BpfProgram C.struct_bpf_program
 
 type BpfInsn C.struct_bpf_insn
 
-type BpfHdr C.struct_bpf_hdr
-
 type BpfTimeval C.struct_bpf_timeval
+
+type BpfHdr C.struct_bpf_hdr
 
 // Terminal handling
 
 type Termios C.struct_termios
 
+type Termio C.struct_termio
+
 type Winsize C.struct_winsize
-
-// fchmodat-like syscalls.
-
-const (
-	AT_FDCWD            = C.AT_FDCWD
-	AT_SYMLINK_NOFOLLOW = C.AT_SYMLINK_NOFOLLOW
-)
 
 // poll
 
@@ -272,11 +282,3 @@ const (
 	POLLWRBAND = C.POLLWRBAND
 	POLLWRNORM = C.POLLWRNORM
 )
-
-// Sysctl
-
-type Sysctlnode C.struct_sysctlnode
-
-// Uname
-
-type Utsname C.struct_utsname
