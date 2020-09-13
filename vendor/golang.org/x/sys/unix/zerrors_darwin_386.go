@@ -1600,4 +1600,62 @@ const (
 	SIGILL    = syscall.Signal(0x4)
 	SIGINFO   = syscall.Signal(0x1d)
 	SIGINT    = syscall.Signal(0x2)
-	S
+	SIGIO     = syscall.Signal(0x17)
+	SIGIOT    = syscall.Signal(0x6)
+	SIGKILL   = syscall.Signal(0x9)
+	SIGPIPE   = syscall.Signal(0xd)
+	SIGPROF   = syscall.Signal(0x1b)
+	SIGQUIT   = syscall.Signal(0x3)
+	SIGSEGV   = syscall.Signal(0xb)
+	SIGSTOP   = syscall.Signal(0x11)
+	SIGSYS    = syscall.Signal(0xc)
+	SIGTERM   = syscall.Signal(0xf)
+	SIGTRAP   = syscall.Signal(0x5)
+	SIGTSTP   = syscall.Signal(0x12)
+	SIGTTIN   = syscall.Signal(0x15)
+	SIGTTOU   = syscall.Signal(0x16)
+	SIGURG    = syscall.Signal(0x10)
+	SIGUSR1   = syscall.Signal(0x1e)
+	SIGUSR2   = syscall.Signal(0x1f)
+	SIGVTALRM = syscall.Signal(0x1a)
+	SIGWINCH  = syscall.Signal(0x1c)
+	SIGXCPU   = syscall.Signal(0x18)
+	SIGXFSZ   = syscall.Signal(0x19)
+)
+
+// Error table
+var errorList = [...]struct {
+	num  syscall.Errno
+	name string
+	desc string
+}{
+	{1, "EPERM", "operation not permitted"},
+	{2, "ENOENT", "no such file or directory"},
+	{3, "ESRCH", "no such process"},
+	{4, "EINTR", "interrupted system call"},
+	{5, "EIO", "input/output error"},
+	{6, "ENXIO", "device not configured"},
+	{7, "E2BIG", "argument list too long"},
+	{8, "ENOEXEC", "exec format error"},
+	{9, "EBADF", "bad file descriptor"},
+	{10, "ECHILD", "no child processes"},
+	{11, "EDEADLK", "resource deadlock avoided"},
+	{12, "ENOMEM", "cannot allocate memory"},
+	{13, "EACCES", "permission denied"},
+	{14, "EFAULT", "bad address"},
+	{15, "ENOTBLK", "block device required"},
+	{16, "EBUSY", "resource busy"},
+	{17, "EEXIST", "file exists"},
+	{18, "EXDEV", "cross-device link"},
+	{19, "ENODEV", "operation not supported by device"},
+	{20, "ENOTDIR", "not a directory"},
+	{21, "EISDIR", "is a directory"},
+	{22, "EINVAL", "invalid argument"},
+	{23, "ENFILE", "too many open files in system"},
+	{24, "EMFILE", "too many open files"},
+	{25, "ENOTTY", "inappropriate ioctl for device"},
+	{26, "ETXTBSY", "text file busy"},
+	{27, "EFBIG", "file too large"},
+	{28, "ENOSPC", "no space left on device"},
+	{29, "ESPIPE", "illegal seek"},
+	{30, "EROFS", "read-onl
