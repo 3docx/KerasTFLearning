@@ -1438,4 +1438,57 @@ const (
 	TIOCSWINSZ                        = 0x80087467
 	TIOCTIMESTAMP                     = 0x40087459
 	TIOCUCNTL                         = 0x80047466
-	TOSTOP              
+	TOSTOP                            = 0x400000
+	VDISCARD                          = 0xf
+	VDSUSP                            = 0xb
+	VEOF                              = 0x0
+	VEOL                              = 0x1
+	VEOL2                             = 0x2
+	VERASE                            = 0x3
+	VINTR                             = 0x8
+	VKILL                             = 0x5
+	VLNEXT                            = 0xe
+	VMIN                              = 0x10
+	VM_LOADAVG                        = 0x2
+	VM_MACHFACTOR                     = 0x4
+	VM_MAXID                          = 0x6
+	VM_METER                          = 0x1
+	VM_SWAPUSAGE                      = 0x5
+	VQUIT                             = 0x9
+	VREPRINT                          = 0x6
+	VSTART                            = 0xc
+	VSTATUS                           = 0x12
+	VSTOP                             = 0xd
+	VSUSP                             = 0xa
+	VT0                               = 0x0
+	VT1                               = 0x10000
+	VTDLY                             = 0x10000
+	VTIME                             = 0x11
+	VWERASE                           = 0x4
+	WCONTINUED                        = 0x10
+	WCOREFLAG                         = 0x80
+	WEXITED                           = 0x4
+	WNOHANG                           = 0x1
+	WNOWAIT                           = 0x20
+	WORDSIZE                          = 0x20
+	WSTOPPED                          = 0x8
+	WUNTRACED                         = 0x2
+)
+
+// Errors
+const (
+	E2BIG           = syscall.Errno(0x7)
+	EACCES          = syscall.Errno(0xd)
+	EADDRINUSE      = syscall.Errno(0x30)
+	EADDRNOTAVAIL   = syscall.Errno(0x31)
+	EAFNOSUPPORT    = syscall.Errno(0x2f)
+	EAGAIN          = syscall.Errno(0x23)
+	EALREADY        = syscall.Errno(0x25)
+	EAUTH           = syscall.Errno(0x50)
+	EBADARCH        = syscall.Errno(0x56)
+	EBADEXEC        = syscall.Errno(0x55)
+	EBADF           = syscall.Errno(0x9)
+	EBADMACHO       = syscall.Errno(0x58)
+	EBADMSG         = syscall.Errno(0x5e)
+	EBADRPC         = syscall.Errno(0x48)
+	EBUSY           = syscall.Errn
