@@ -2465,4 +2465,50 @@ var errorList = [...]struct {
 	{96, "EPFNOSUPPORT", "protocol family not supported"},
 	{97, "EAFNOSUPPORT", "address family not supported by protocol"},
 	{98, "EADDRINUSE", "address already in use"},
-	{99, "EADDRNOTAVAIL", "cann
+	{99, "EADDRNOTAVAIL", "cannot assign requested address"},
+	{100, "ENETDOWN", "network is down"},
+	{101, "ENETUNREACH", "network is unreachable"},
+	{102, "ENETRESET", "network dropped connection on reset"},
+	{103, "ECONNABORTED", "software caused connection abort"},
+	{104, "ECONNRESET", "connection reset by peer"},
+	{105, "ENOBUFS", "no buffer space available"},
+	{106, "EISCONN", "transport endpoint is already connected"},
+	{107, "ENOTCONN", "transport endpoint is not connected"},
+	{108, "ESHUTDOWN", "cannot send after transport endpoint shutdown"},
+	{109, "ETOOMANYREFS", "too many references: cannot splice"},
+	{110, "ETIMEDOUT", "connection timed out"},
+	{111, "ECONNREFUSED", "connection refused"},
+	{112, "EHOSTDOWN", "host is down"},
+	{113, "EHOSTUNREACH", "no route to host"},
+	{114, "EALREADY", "operation already in progress"},
+	{115, "EINPROGRESS", "operation now in progress"},
+	{116, "ESTALE", "stale file handle"},
+	{117, "EUCLEAN", "structure needs cleaning"},
+	{118, "ENOTNAM", "not a XENIX named type file"},
+	{119, "ENAVAIL", "no XENIX semaphores available"},
+	{120, "EISNAM", "is a named type file"},
+	{121, "EREMOTEIO", "remote I/O error"},
+	{122, "EDQUOT", "disk quota exceeded"},
+	{123, "ENOMEDIUM", "no medium found"},
+	{124, "EMEDIUMTYPE", "wrong medium type"},
+	{125, "ECANCELED", "operation canceled"},
+	{126, "ENOKEY", "required key not available"},
+	{127, "EKEYEXPIRED", "key has expired"},
+	{128, "EKEYREVOKED", "key has been revoked"},
+	{129, "EKEYREJECTED", "key was rejected by service"},
+	{130, "EOWNERDEAD", "owner died"},
+	{131, "ENOTRECOVERABLE", "state not recoverable"},
+	{132, "ERFKILL", "operation not possible due to RF-kill"},
+	{133, "EHWPOISON", "memory page has hardware error"},
+}
+
+// Signal table
+var signalList = [...]struct {
+	num  syscall.Signal
+	name string
+	desc string
+}{
+	{1, "SIGHUP", "hangup"},
+	{2, "SIGINT", "interrupt"},
+	{3, "SIGQUIT", "quit"},
+	{4, "SIGILL", "illegal instruction"
