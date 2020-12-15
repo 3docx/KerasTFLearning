@@ -2064,3 +2064,535 @@ const (
 	TP_STATUS_CSUM_VALID                 = 0x80
 	TP_STATUS_KERNEL                     = 0x0
 	TP_STATUS_LOSING                     = 0x4
+	TP_STATUS_SENDING                    = 0x2
+	TP_STATUS_SEND_REQUEST               = 0x1
+	TP_STATUS_TS_RAW_HARDWARE            = -0x80000000
+	TP_STATUS_TS_SOFTWARE                = 0x20000000
+	TP_STATUS_TS_SYS_HARDWARE            = 0x40000000
+	TP_STATUS_USER                       = 0x1
+	TP_STATUS_VLAN_TPID_VALID            = 0x40
+	TP_STATUS_VLAN_VALID                 = 0x10
+	TP_STATUS_WRONG_FORMAT               = 0x4
+	TRACEFS_MAGIC                        = 0x74726163
+	TS_COMM_LEN                          = 0x20
+	TUNATTACHFILTER                      = 0x801054d5
+	TUNDETACHFILTER                      = 0x801054d6
+	TUNGETFEATURES                       = 0x400454cf
+	TUNGETFILTER                         = 0x401054db
+	TUNGETIFF                            = 0x400454d2
+	TUNGETSNDBUF                         = 0x400454d3
+	TUNGETVNETBE                         = 0x400454df
+	TUNGETVNETHDRSZ                      = 0x400454d7
+	TUNGETVNETLE                         = 0x400454dd
+	TUNSETDEBUG                          = 0x800454c9
+	TUNSETFILTEREBPF                     = 0x400454e1
+	TUNSETGROUP                          = 0x800454ce
+	TUNSETIFF                            = 0x800454ca
+	TUNSETIFINDEX                        = 0x800454da
+	TUNSETLINK                           = 0x800454cd
+	TUNSETNOCSUM                         = 0x800454c8
+	TUNSETOFFLOAD                        = 0x800454d0
+	TUNSETOWNER                          = 0x800454cc
+	TUNSETPERSIST                        = 0x800454cb
+	TUNSETQUEUE                          = 0x800454d9
+	TUNSETSNDBUF                         = 0x800454d4
+	TUNSETSTEERINGEBPF                   = 0x400454e0
+	TUNSETTXFILTER                       = 0x800454d1
+	TUNSETVNETBE                         = 0x800454de
+	TUNSETVNETHDRSZ                      = 0x800454d8
+	TUNSETVNETLE                         = 0x800454dc
+	UDF_SUPER_MAGIC                      = 0x15013346
+	UMOUNT_NOFOLLOW                      = 0x8
+	USBDEVICE_SUPER_MAGIC                = 0x9fa2
+	UTIME_NOW                            = 0x3fffffff
+	UTIME_OMIT                           = 0x3ffffffe
+	V9FS_MAGIC                           = 0x1021997
+	VDISCARD                             = 0x10
+	VEOF                                 = 0x4
+	VEOL                                 = 0x6
+	VEOL2                                = 0x8
+	VERASE                               = 0x2
+	VINTR                                = 0x0
+	VKILL                                = 0x3
+	VLNEXT                               = 0xf
+	VMADDR_CID_ANY                       = 0xffffffff
+	VMADDR_CID_HOST                      = 0x2
+	VMADDR_CID_HYPERVISOR                = 0x0
+	VMADDR_CID_RESERVED                  = 0x1
+	VMADDR_PORT_ANY                      = 0xffffffff
+	VMIN                                 = 0x5
+	VM_SOCKETS_INVALID_VERSION           = 0xffffffff
+	VQUIT                                = 0x1
+	VREPRINT                             = 0xb
+	VSTART                               = 0xd
+	VSTOP                                = 0xe
+	VSUSP                                = 0xc
+	VSWTC                                = 0x9
+	VT0                                  = 0x0
+	VT1                                  = 0x10000
+	VTDLY                                = 0x10000
+	VTIME                                = 0x7
+	VWERASE                              = 0xa
+	WALL                                 = 0x40000000
+	WCLONE                               = 0x80000000
+	WCONTINUED                           = 0x8
+	WDIOC_GETBOOTSTATUS                  = 0x40045702
+	WDIOC_GETPRETIMEOUT                  = 0x40045709
+	WDIOC_GETSTATUS                      = 0x40045701
+	WDIOC_GETSUPPORT                     = 0x40285700
+	WDIOC_GETTEMP                        = 0x40045703
+	WDIOC_GETTIMELEFT                    = 0x4004570a
+	WDIOC_GETTIMEOUT                     = 0x40045707
+	WDIOC_KEEPALIVE                      = 0x40045705
+	WDIOC_SETOPTIONS                     = 0x40045704
+	WDIOC_SETPRETIMEOUT                  = 0xc0045708
+	WDIOC_SETTIMEOUT                     = 0xc0045706
+	WEXITED                              = 0x4
+	WIN_ACKMEDIACHANGE                   = 0xdb
+	WIN_CHECKPOWERMODE1                  = 0xe5
+	WIN_CHECKPOWERMODE2                  = 0x98
+	WIN_DEVICE_RESET                     = 0x8
+	WIN_DIAGNOSE                         = 0x90
+	WIN_DOORLOCK                         = 0xde
+	WIN_DOORUNLOCK                       = 0xdf
+	WIN_DOWNLOAD_MICROCODE               = 0x92
+	WIN_FLUSH_CACHE                      = 0xe7
+	WIN_FLUSH_CACHE_EXT                  = 0xea
+	WIN_FORMAT                           = 0x50
+	WIN_GETMEDIASTATUS                   = 0xda
+	WIN_IDENTIFY                         = 0xec
+	WIN_IDENTIFY_DMA                     = 0xee
+	WIN_IDLEIMMEDIATE                    = 0xe1
+	WIN_INIT                             = 0x60
+	WIN_MEDIAEJECT                       = 0xed
+	WIN_MULTREAD                         = 0xc4
+	WIN_MULTREAD_EXT                     = 0x29
+	WIN_MULTWRITE                        = 0xc5
+	WIN_MULTWRITE_EXT                    = 0x39
+	WIN_NOP                              = 0x0
+	WIN_PACKETCMD                        = 0xa0
+	WIN_PIDENTIFY                        = 0xa1
+	WIN_POSTBOOT                         = 0xdc
+	WIN_PREBOOT                          = 0xdd
+	WIN_QUEUED_SERVICE                   = 0xa2
+	WIN_READ                             = 0x20
+	WIN_READDMA                          = 0xc8
+	WIN_READDMA_EXT                      = 0x25
+	WIN_READDMA_ONCE                     = 0xc9
+	WIN_READDMA_QUEUED                   = 0xc7
+	WIN_READDMA_QUEUED_EXT               = 0x26
+	WIN_READ_BUFFER                      = 0xe4
+	WIN_READ_EXT                         = 0x24
+	WIN_READ_LONG                        = 0x22
+	WIN_READ_LONG_ONCE                   = 0x23
+	WIN_READ_NATIVE_MAX                  = 0xf8
+	WIN_READ_NATIVE_MAX_EXT              = 0x27
+	WIN_READ_ONCE                        = 0x21
+	WIN_RECAL                            = 0x10
+	WIN_RESTORE                          = 0x10
+	WIN_SECURITY_DISABLE                 = 0xf6
+	WIN_SECURITY_ERASE_PREPARE           = 0xf3
+	WIN_SECURITY_ERASE_UNIT              = 0xf4
+	WIN_SECURITY_FREEZE_LOCK             = 0xf5
+	WIN_SECURITY_SET_PASS                = 0xf1
+	WIN_SECURITY_UNLOCK                  = 0xf2
+	WIN_SEEK                             = 0x70
+	WIN_SETFEATURES                      = 0xef
+	WIN_SETIDLE1                         = 0xe3
+	WIN_SETIDLE2                         = 0x97
+	WIN_SETMULT                          = 0xc6
+	WIN_SET_MAX                          = 0xf9
+	WIN_SET_MAX_EXT                      = 0x37
+	WIN_SLEEPNOW1                        = 0xe6
+	WIN_SLEEPNOW2                        = 0x99
+	WIN_SMART                            = 0xb0
+	WIN_SPECIFY                          = 0x91
+	WIN_SRST                             = 0x8
+	WIN_STANDBY                          = 0xe2
+	WIN_STANDBY2                         = 0x96
+	WIN_STANDBYNOW1                      = 0xe0
+	WIN_STANDBYNOW2                      = 0x94
+	WIN_VERIFY                           = 0x40
+	WIN_VERIFY_EXT                       = 0x42
+	WIN_VERIFY_ONCE                      = 0x41
+	WIN_WRITE                            = 0x30
+	WIN_WRITEDMA                         = 0xca
+	WIN_WRITEDMA_EXT                     = 0x35
+	WIN_WRITEDMA_ONCE                    = 0xcb
+	WIN_WRITEDMA_QUEUED                  = 0xcc
+	WIN_WRITEDMA_QUEUED_EXT              = 0x36
+	WIN_WRITE_BUFFER                     = 0xe8
+	WIN_WRITE_EXT                        = 0x34
+	WIN_WRITE_LONG                       = 0x32
+	WIN_WRITE_LONG_ONCE                  = 0x33
+	WIN_WRITE_ONCE                       = 0x31
+	WIN_WRITE_SAME                       = 0xe9
+	WIN_WRITE_VERIFY                     = 0x3c
+	WNOHANG                              = 0x1
+	WNOTHREAD                            = 0x20000000
+	WNOWAIT                              = 0x1000000
+	WORDSIZE                             = 0x40
+	WSTOPPED                             = 0x2
+	WUNTRACED                            = 0x2
+	XATTR_CREATE                         = 0x1
+	XATTR_REPLACE                        = 0x2
+	XCASE                                = 0x4000
+	XENFS_SUPER_MAGIC                    = 0xabba1974
+	XTABS                                = 0xc00
+	ZSMALLOC_MAGIC                       = 0x58295829
+)
+
+// Errors
+const (
+	E2BIG           = syscall.Errno(0x7)
+	EACCES          = syscall.Errno(0xd)
+	EADDRINUSE      = syscall.Errno(0x62)
+	EADDRNOTAVAIL   = syscall.Errno(0x63)
+	EADV            = syscall.Errno(0x44)
+	EAFNOSUPPORT    = syscall.Errno(0x61)
+	EAGAIN          = syscall.Errno(0xb)
+	EALREADY        = syscall.Errno(0x72)
+	EBADE           = syscall.Errno(0x34)
+	EBADF           = syscall.Errno(0x9)
+	EBADFD          = syscall.Errno(0x4d)
+	EBADMSG         = syscall.Errno(0x4a)
+	EBADR           = syscall.Errno(0x35)
+	EBADRQC         = syscall.Errno(0x38)
+	EBADSLT         = syscall.Errno(0x39)
+	EBFONT          = syscall.Errno(0x3b)
+	EBUSY           = syscall.Errno(0x10)
+	ECANCELED       = syscall.Errno(0x7d)
+	ECHILD          = syscall.Errno(0xa)
+	ECHRNG          = syscall.Errno(0x2c)
+	ECOMM           = syscall.Errno(0x46)
+	ECONNABORTED    = syscall.Errno(0x67)
+	ECONNREFUSED    = syscall.Errno(0x6f)
+	ECONNRESET      = syscall.Errno(0x68)
+	EDEADLK         = syscall.Errno(0x23)
+	EDEADLOCK       = syscall.Errno(0x3a)
+	EDESTADDRREQ    = syscall.Errno(0x59)
+	EDOM            = syscall.Errno(0x21)
+	EDOTDOT         = syscall.Errno(0x49)
+	EDQUOT          = syscall.Errno(0x7a)
+	EEXIST          = syscall.Errno(0x11)
+	EFAULT          = syscall.Errno(0xe)
+	EFBIG           = syscall.Errno(0x1b)
+	EHOSTDOWN       = syscall.Errno(0x70)
+	EHOSTUNREACH    = syscall.Errno(0x71)
+	EHWPOISON       = syscall.Errno(0x85)
+	EIDRM           = syscall.Errno(0x2b)
+	EILSEQ          = syscall.Errno(0x54)
+	EINPROGRESS     = syscall.Errno(0x73)
+	EINTR           = syscall.Errno(0x4)
+	EINVAL          = syscall.Errno(0x16)
+	EIO             = syscall.Errno(0x5)
+	EISCONN         = syscall.Errno(0x6a)
+	EISDIR          = syscall.Errno(0x15)
+	EISNAM          = syscall.Errno(0x78)
+	EKEYEXPIRED     = syscall.Errno(0x7f)
+	EKEYREJECTED    = syscall.Errno(0x81)
+	EKEYREVOKED     = syscall.Errno(0x80)
+	EL2HLT          = syscall.Errno(0x33)
+	EL2NSYNC        = syscall.Errno(0x2d)
+	EL3HLT          = syscall.Errno(0x2e)
+	EL3RST          = syscall.Errno(0x2f)
+	ELIBACC         = syscall.Errno(0x4f)
+	ELIBBAD         = syscall.Errno(0x50)
+	ELIBEXEC        = syscall.Errno(0x53)
+	ELIBMAX         = syscall.Errno(0x52)
+	ELIBSCN         = syscall.Errno(0x51)
+	ELNRNG          = syscall.Errno(0x30)
+	ELOOP           = syscall.Errno(0x28)
+	EMEDIUMTYPE     = syscall.Errno(0x7c)
+	EMFILE          = syscall.Errno(0x18)
+	EMLINK          = syscall.Errno(0x1f)
+	EMSGSIZE        = syscall.Errno(0x5a)
+	EMULTIHOP       = syscall.Errno(0x48)
+	ENAMETOOLONG    = syscall.Errno(0x24)
+	ENAVAIL         = syscall.Errno(0x77)
+	ENETDOWN        = syscall.Errno(0x64)
+	ENETRESET       = syscall.Errno(0x66)
+	ENETUNREACH     = syscall.Errno(0x65)
+	ENFILE          = syscall.Errno(0x17)
+	ENOANO          = syscall.Errno(0x37)
+	ENOBUFS         = syscall.Errno(0x69)
+	ENOCSI          = syscall.Errno(0x32)
+	ENODATA         = syscall.Errno(0x3d)
+	ENODEV          = syscall.Errno(0x13)
+	ENOENT          = syscall.Errno(0x2)
+	ENOEXEC         = syscall.Errno(0x8)
+	ENOKEY          = syscall.Errno(0x7e)
+	ENOLCK          = syscall.Errno(0x25)
+	ENOLINK         = syscall.Errno(0x43)
+	ENOMEDIUM       = syscall.Errno(0x7b)
+	ENOMEM          = syscall.Errno(0xc)
+	ENOMSG          = syscall.Errno(0x2a)
+	ENONET          = syscall.Errno(0x40)
+	ENOPKG          = syscall.Errno(0x41)
+	ENOPROTOOPT     = syscall.Errno(0x5c)
+	ENOSPC          = syscall.Errno(0x1c)
+	ENOSR           = syscall.Errno(0x3f)
+	ENOSTR          = syscall.Errno(0x3c)
+	ENOSYS          = syscall.Errno(0x26)
+	ENOTBLK         = syscall.Errno(0xf)
+	ENOTCONN        = syscall.Errno(0x6b)
+	ENOTDIR         = syscall.Errno(0x14)
+	ENOTEMPTY       = syscall.Errno(0x27)
+	ENOTNAM         = syscall.Errno(0x76)
+	ENOTRECOVERABLE = syscall.Errno(0x83)
+	ENOTSOCK        = syscall.Errno(0x58)
+	ENOTSUP         = syscall.Errno(0x5f)
+	ENOTTY          = syscall.Errno(0x19)
+	ENOTUNIQ        = syscall.Errno(0x4c)
+	ENXIO           = syscall.Errno(0x6)
+	EOPNOTSUPP      = syscall.Errno(0x5f)
+	EOVERFLOW       = syscall.Errno(0x4b)
+	EOWNERDEAD      = syscall.Errno(0x82)
+	EPERM           = syscall.Errno(0x1)
+	EPFNOSUPPORT    = syscall.Errno(0x60)
+	EPIPE           = syscall.Errno(0x20)
+	EPROTO          = syscall.Errno(0x47)
+	EPROTONOSUPPORT = syscall.Errno(0x5d)
+	EPROTOTYPE      = syscall.Errno(0x5b)
+	ERANGE          = syscall.Errno(0x22)
+	EREMCHG         = syscall.Errno(0x4e)
+	EREMOTE         = syscall.Errno(0x42)
+	EREMOTEIO       = syscall.Errno(0x79)
+	ERESTART        = syscall.Errno(0x55)
+	ERFKILL         = syscall.Errno(0x84)
+	EROFS           = syscall.Errno(0x1e)
+	ESHUTDOWN       = syscall.Errno(0x6c)
+	ESOCKTNOSUPPORT = syscall.Errno(0x5e)
+	ESPIPE          = syscall.Errno(0x1d)
+	ESRCH           = syscall.Errno(0x3)
+	ESRMNT          = syscall.Errno(0x45)
+	ESTALE          = syscall.Errno(0x74)
+	ESTRPIPE        = syscall.Errno(0x56)
+	ETIME           = syscall.Errno(0x3e)
+	ETIMEDOUT       = syscall.Errno(0x6e)
+	ETOOMANYREFS    = syscall.Errno(0x6d)
+	ETXTBSY         = syscall.Errno(0x1a)
+	EUCLEAN         = syscall.Errno(0x75)
+	EUNATCH         = syscall.Errno(0x31)
+	EUSERS          = syscall.Errno(0x57)
+	EWOULDBLOCK     = syscall.Errno(0xb)
+	EXDEV           = syscall.Errno(0x12)
+	EXFULL          = syscall.Errno(0x36)
+)
+
+// Signals
+const (
+	SIGABRT   = syscall.Signal(0x6)
+	SIGALRM   = syscall.Signal(0xe)
+	SIGBUS    = syscall.Signal(0x7)
+	SIGCHLD   = syscall.Signal(0x11)
+	SIGCLD    = syscall.Signal(0x11)
+	SIGCONT   = syscall.Signal(0x12)
+	SIGFPE    = syscall.Signal(0x8)
+	SIGHUP    = syscall.Signal(0x1)
+	SIGILL    = syscall.Signal(0x4)
+	SIGINT    = syscall.Signal(0x2)
+	SIGIO     = syscall.Signal(0x1d)
+	SIGIOT    = syscall.Signal(0x6)
+	SIGKILL   = syscall.Signal(0x9)
+	SIGPIPE   = syscall.Signal(0xd)
+	SIGPOLL   = syscall.Signal(0x1d)
+	SIGPROF   = syscall.Signal(0x1b)
+	SIGPWR    = syscall.Signal(0x1e)
+	SIGQUIT   = syscall.Signal(0x3)
+	SIGSEGV   = syscall.Signal(0xb)
+	SIGSTKFLT = syscall.Signal(0x10)
+	SIGSTOP   = syscall.Signal(0x13)
+	SIGSYS    = syscall.Signal(0x1f)
+	SIGTERM   = syscall.Signal(0xf)
+	SIGTRAP   = syscall.Signal(0x5)
+	SIGTSTP   = syscall.Signal(0x14)
+	SIGTTIN   = syscall.Signal(0x15)
+	SIGTTOU   = syscall.Signal(0x16)
+	SIGURG    = syscall.Signal(0x17)
+	SIGUSR1   = syscall.Signal(0xa)
+	SIGUSR2   = syscall.Signal(0xc)
+	SIGVTALRM = syscall.Signal(0x1a)
+	SIGWINCH  = syscall.Signal(0x1c)
+	SIGXCPU   = syscall.Signal(0x18)
+	SIGXFSZ   = syscall.Signal(0x19)
+)
+
+// Error table
+var errorList = [...]struct {
+	num  syscall.Errno
+	name string
+	desc string
+}{
+	{1, "EPERM", "operation not permitted"},
+	{2, "ENOENT", "no such file or directory"},
+	{3, "ESRCH", "no such process"},
+	{4, "EINTR", "interrupted system call"},
+	{5, "EIO", "input/output error"},
+	{6, "ENXIO", "no such device or address"},
+	{7, "E2BIG", "argument list too long"},
+	{8, "ENOEXEC", "exec format error"},
+	{9, "EBADF", "bad file descriptor"},
+	{10, "ECHILD", "no child processes"},
+	{11, "EAGAIN", "resource temporarily unavailable"},
+	{12, "ENOMEM", "cannot allocate memory"},
+	{13, "EACCES", "permission denied"},
+	{14, "EFAULT", "bad address"},
+	{15, "ENOTBLK", "block device required"},
+	{16, "EBUSY", "device or resource busy"},
+	{17, "EEXIST", "file exists"},
+	{18, "EXDEV", "invalid cross-device link"},
+	{19, "ENODEV", "no such device"},
+	{20, "ENOTDIR", "not a directory"},
+	{21, "EISDIR", "is a directory"},
+	{22, "EINVAL", "invalid argument"},
+	{23, "ENFILE", "too many open files in system"},
+	{24, "EMFILE", "too many open files"},
+	{25, "ENOTTY", "inappropriate ioctl for device"},
+	{26, "ETXTBSY", "text file busy"},
+	{27, "EFBIG", "file too large"},
+	{28, "ENOSPC", "no space left on device"},
+	{29, "ESPIPE", "illegal seek"},
+	{30, "EROFS", "read-only file system"},
+	{31, "EMLINK", "too many links"},
+	{32, "EPIPE", "broken pipe"},
+	{33, "EDOM", "numerical argument out of domain"},
+	{34, "ERANGE", "numerical result out of range"},
+	{35, "EDEADLK", "resource deadlock avoided"},
+	{36, "ENAMETOOLONG", "file name too long"},
+	{37, "ENOLCK", "no locks available"},
+	{38, "ENOSYS", "function not implemented"},
+	{39, "ENOTEMPTY", "directory not empty"},
+	{40, "ELOOP", "too many levels of symbolic links"},
+	{42, "ENOMSG", "no message of desired type"},
+	{43, "EIDRM", "identifier removed"},
+	{44, "ECHRNG", "channel number out of range"},
+	{45, "EL2NSYNC", "level 2 not synchronized"},
+	{46, "EL3HLT", "level 3 halted"},
+	{47, "EL3RST", "level 3 reset"},
+	{48, "ELNRNG", "link number out of range"},
+	{49, "EUNATCH", "protocol driver not attached"},
+	{50, "ENOCSI", "no CSI structure available"},
+	{51, "EL2HLT", "level 2 halted"},
+	{52, "EBADE", "invalid exchange"},
+	{53, "EBADR", "invalid request descriptor"},
+	{54, "EXFULL", "exchange full"},
+	{55, "ENOANO", "no anode"},
+	{56, "EBADRQC", "invalid request code"},
+	{57, "EBADSLT", "invalid slot"},
+	{58, "EDEADLOCK", "file locking deadlock error"},
+	{59, "EBFONT", "bad font file format"},
+	{60, "ENOSTR", "device not a stream"},
+	{61, "ENODATA", "no data available"},
+	{62, "ETIME", "timer expired"},
+	{63, "ENOSR", "out of streams resources"},
+	{64, "ENONET", "machine is not on the network"},
+	{65, "ENOPKG", "package not installed"},
+	{66, "EREMOTE", "object is remote"},
+	{67, "ENOLINK", "link has been severed"},
+	{68, "EADV", "advertise error"},
+	{69, "ESRMNT", "srmount error"},
+	{70, "ECOMM", "communication error on send"},
+	{71, "EPROTO", "protocol error"},
+	{72, "EMULTIHOP", "multihop attempted"},
+	{73, "EDOTDOT", "RFS specific error"},
+	{74, "EBADMSG", "bad message"},
+	{75, "EOVERFLOW", "value too large for defined data type"},
+	{76, "ENOTUNIQ", "name not unique on network"},
+	{77, "EBADFD", "file descriptor in bad state"},
+	{78, "EREMCHG", "remote address changed"},
+	{79, "ELIBACC", "can not access a needed shared library"},
+	{80, "ELIBBAD", "accessing a corrupted shared library"},
+	{81, "ELIBSCN", ".lib section in a.out corrupted"},
+	{82, "ELIBMAX", "attempting to link in too many shared libraries"},
+	{83, "ELIBEXEC", "cannot exec a shared library directly"},
+	{84, "EILSEQ", "invalid or incomplete multibyte or wide character"},
+	{85, "ERESTART", "interrupted system call should be restarted"},
+	{86, "ESTRPIPE", "streams pipe error"},
+	{87, "EUSERS", "too many users"},
+	{88, "ENOTSOCK", "socket operation on non-socket"},
+	{89, "EDESTADDRREQ", "destination address required"},
+	{90, "EMSGSIZE", "message too long"},
+	{91, "EPROTOTYPE", "protocol wrong type for socket"},
+	{92, "ENOPROTOOPT", "protocol not available"},
+	{93, "EPROTONOSUPPORT", "protocol not supported"},
+	{94, "ESOCKTNOSUPPORT", "socket type not supported"},
+	{95, "ENOTSUP", "operation not supported"},
+	{96, "EPFNOSUPPORT", "protocol family not supported"},
+	{97, "EAFNOSUPPORT", "address family not supported by protocol"},
+	{98, "EADDRINUSE", "address already in use"},
+	{99, "EADDRNOTAVAIL", "cannot assign requested address"},
+	{100, "ENETDOWN", "network is down"},
+	{101, "ENETUNREACH", "network is unreachable"},
+	{102, "ENETRESET", "network dropped connection on reset"},
+	{103, "ECONNABORTED", "software caused connection abort"},
+	{104, "ECONNRESET", "connection reset by peer"},
+	{105, "ENOBUFS", "no buffer space available"},
+	{106, "EISCONN", "transport endpoint is already connected"},
+	{107, "ENOTCONN", "transport endpoint is not connected"},
+	{108, "ESHUTDOWN", "cannot send after transport endpoint shutdown"},
+	{109, "ETOOMANYREFS", "too many references: cannot splice"},
+	{110, "ETIMEDOUT", "connection timed out"},
+	{111, "ECONNREFUSED", "connection refused"},
+	{112, "EHOSTDOWN", "host is down"},
+	{113, "EHOSTUNREACH", "no route to host"},
+	{114, "EALREADY", "operation already in progress"},
+	{115, "EINPROGRESS", "operation now in progress"},
+	{116, "ESTALE", "stale file handle"},
+	{117, "EUCLEAN", "structure needs cleaning"},
+	{118, "ENOTNAM", "not a XENIX named type file"},
+	{119, "ENAVAIL", "no XENIX semaphores available"},
+	{120, "EISNAM", "is a named type file"},
+	{121, "EREMOTEIO", "remote I/O error"},
+	{122, "EDQUOT", "disk quota exceeded"},
+	{123, "ENOMEDIUM", "no medium found"},
+	{124, "EMEDIUMTYPE", "wrong medium type"},
+	{125, "ECANCELED", "operation canceled"},
+	{126, "ENOKEY", "required key not available"},
+	{127, "EKEYEXPIRED", "key has expired"},
+	{128, "EKEYREVOKED", "key has been revoked"},
+	{129, "EKEYREJECTED", "key was rejected by service"},
+	{130, "EOWNERDEAD", "owner died"},
+	{131, "ENOTRECOVERABLE", "state not recoverable"},
+	{132, "ERFKILL", "operation not possible due to RF-kill"},
+	{133, "EHWPOISON", "memory page has hardware error"},
+}
+
+// Signal table
+var signalList = [...]struct {
+	num  syscall.Signal
+	name string
+	desc string
+}{
+	{1, "SIGHUP", "hangup"},
+	{2, "SIGINT", "interrupt"},
+	{3, "SIGQUIT", "quit"},
+	{4, "SIGILL", "illegal instruction"},
+	{5, "SIGTRAP", "trace/breakpoint trap"},
+	{6, "SIGABRT", "aborted"},
+	{7, "SIGBUS", "bus error"},
+	{8, "SIGFPE", "floating point exception"},
+	{9, "SIGKILL", "killed"},
+	{10, "SIGUSR1", "user defined signal 1"},
+	{11, "SIGSEGV", "segmentation fault"},
+	{12, "SIGUSR2", "user defined signal 2"},
+	{13, "SIGPIPE", "broken pipe"},
+	{14, "SIGALRM", "alarm clock"},
+	{15, "SIGTERM", "terminated"},
+	{16, "SIGSTKFLT", "stack fault"},
+	{17, "SIGCHLD", "child exited"},
+	{18, "SIGCONT", "continued"},
+	{19, "SIGSTOP", "stopped (signal)"},
+	{20, "SIGTSTP", "stopped"},
+	{21, "SIGTTIN", "stopped (tty input)"},
+	{22, "SIGTTOU", "stopped (tty output)"},
+	{23, "SIGURG", "urgent I/O condition"},
+	{24, "SIGXCPU", "CPU time limit exceeded"},
+	{25, "SIGXFSZ", "file size limit exceeded"},
+	{26, "SIGVTALRM", "virtual timer expired"},
+	{27, "SIGPROF", "profiling timer expired"},
+	{28, "SIGWINCH", "window changed"},
+	{29, "SIGIO", "I/O possible"},
+	{30, "SIGPWR", "power failure"},
+	{31, "SIGSYS", "bad system call"},
+}
