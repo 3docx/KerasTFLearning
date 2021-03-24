@@ -2361,4 +2361,69 @@ const (
 	ERFKILL         = syscall.Errno(0x84)
 	EROFS           = syscall.Errno(0x1e)
 	ESHUTDOWN       = syscall.Errno(0x6c)
-	ESOCKTNOSUPPORT = sy
+	ESOCKTNOSUPPORT = syscall.Errno(0x5e)
+	ESPIPE          = syscall.Errno(0x1d)
+	ESRCH           = syscall.Errno(0x3)
+	ESRMNT          = syscall.Errno(0x45)
+	ESTALE          = syscall.Errno(0x74)
+	ESTRPIPE        = syscall.Errno(0x56)
+	ETIME           = syscall.Errno(0x3e)
+	ETIMEDOUT       = syscall.Errno(0x6e)
+	ETOOMANYREFS    = syscall.Errno(0x6d)
+	ETXTBSY         = syscall.Errno(0x1a)
+	EUCLEAN         = syscall.Errno(0x75)
+	EUNATCH         = syscall.Errno(0x31)
+	EUSERS          = syscall.Errno(0x57)
+	EWOULDBLOCK     = syscall.Errno(0xb)
+	EXDEV           = syscall.Errno(0x12)
+	EXFULL          = syscall.Errno(0x36)
+)
+
+// Signals
+const (
+	SIGABRT   = syscall.Signal(0x6)
+	SIGALRM   = syscall.Signal(0xe)
+	SIGBUS    = syscall.Signal(0x7)
+	SIGCHLD   = syscall.Signal(0x11)
+	SIGCLD    = syscall.Signal(0x11)
+	SIGCONT   = syscall.Signal(0x12)
+	SIGFPE    = syscall.Signal(0x8)
+	SIGHUP    = syscall.Signal(0x1)
+	SIGILL    = syscall.Signal(0x4)
+	SIGINT    = syscall.Signal(0x2)
+	SIGIO     = syscall.Signal(0x1d)
+	SIGIOT    = syscall.Signal(0x6)
+	SIGKILL   = syscall.Signal(0x9)
+	SIGPIPE   = syscall.Signal(0xd)
+	SIGPOLL   = syscall.Signal(0x1d)
+	SIGPROF   = syscall.Signal(0x1b)
+	SIGPWR    = syscall.Signal(0x1e)
+	SIGQUIT   = syscall.Signal(0x3)
+	SIGSEGV   = syscall.Signal(0xb)
+	SIGSTKFLT = syscall.Signal(0x10)
+	SIGSTOP   = syscall.Signal(0x13)
+	SIGSYS    = syscall.Signal(0x1f)
+	SIGTERM   = syscall.Signal(0xf)
+	SIGTRAP   = syscall.Signal(0x5)
+	SIGTSTP   = syscall.Signal(0x14)
+	SIGTTIN   = syscall.Signal(0x15)
+	SIGTTOU   = syscall.Signal(0x16)
+	SIGURG    = syscall.Signal(0x17)
+	SIGUSR1   = syscall.Signal(0xa)
+	SIGUSR2   = syscall.Signal(0xc)
+	SIGVTALRM = syscall.Signal(0x1a)
+	SIGWINCH  = syscall.Signal(0x1c)
+	SIGXCPU   = syscall.Signal(0x18)
+	SIGXFSZ   = syscall.Signal(0x19)
+)
+
+// Error table
+var errorList = [...]struct {
+	num  syscall.Errno
+	name string
+	desc string
+}{
+	{1, "EPERM", "operation not permitted"},
+	{2, "ENOENT", "no such file or directory"},
+	{3, "ESRCH", "no such process"},
+	{4, "EINTR", "inte
