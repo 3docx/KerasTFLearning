@@ -2209,4 +2209,52 @@ const (
 	WIN_SRST                             = 0x8
 	WIN_STANDBY                          = 0xe2
 	WIN_STANDBY2                         = 0x96
-	W
+	WIN_STANDBYNOW1                      = 0xe0
+	WIN_STANDBYNOW2                      = 0x94
+	WIN_VERIFY                           = 0x40
+	WIN_VERIFY_EXT                       = 0x42
+	WIN_VERIFY_ONCE                      = 0x41
+	WIN_WRITE                            = 0x30
+	WIN_WRITEDMA                         = 0xca
+	WIN_WRITEDMA_EXT                     = 0x35
+	WIN_WRITEDMA_ONCE                    = 0xcb
+	WIN_WRITEDMA_QUEUED                  = 0xcc
+	WIN_WRITEDMA_QUEUED_EXT              = 0x36
+	WIN_WRITE_BUFFER                     = 0xe8
+	WIN_WRITE_EXT                        = 0x34
+	WIN_WRITE_LONG                       = 0x32
+	WIN_WRITE_LONG_ONCE                  = 0x33
+	WIN_WRITE_ONCE                       = 0x31
+	WIN_WRITE_SAME                       = 0xe9
+	WIN_WRITE_VERIFY                     = 0x3c
+	WNOHANG                              = 0x1
+	WNOTHREAD                            = 0x20000000
+	WNOWAIT                              = 0x1000000
+	WORDSIZE                             = 0x40
+	WSTOPPED                             = 0x2
+	WUNTRACED                            = 0x2
+	XATTR_CREATE                         = 0x1
+	XATTR_REPLACE                        = 0x2
+	XCASE                                = 0x4
+	XENFS_SUPER_MAGIC                    = 0xabba1974
+	XTABS                                = 0x1800
+	ZSMALLOC_MAGIC                       = 0x58295829
+)
+
+// Errors
+const (
+	E2BIG           = syscall.Errno(0x7)
+	EACCES          = syscall.Errno(0xd)
+	EADDRINUSE      = syscall.Errno(0x62)
+	EADDRNOTAVAIL   = syscall.Errno(0x63)
+	EADV            = syscall.Errno(0x44)
+	EAFNOSUPPORT    = syscall.Errno(0x61)
+	EAGAIN          = syscall.Errno(0xb)
+	EALREADY        = syscall.Errno(0x72)
+	EBADE           = syscall.Errno(0x34)
+	EBADF           = syscall.Errno(0x9)
+	EBADFD          = syscall.Errno(0x4d)
+	EBADMSG         = syscall.Errno(0x4a)
+	EBADR           = syscall.Errno(0x35)
+	EBADRQC         = syscall.Errno(0x38)
+	EBADSLT         = syscall.Errn
