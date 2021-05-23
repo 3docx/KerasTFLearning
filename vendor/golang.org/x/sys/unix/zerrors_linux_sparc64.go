@@ -1773,4 +1773,57 @@ const (
 	VTDLY                            = 0x4000
 	VTIME                            = 0x5
 	VWERASE                          = 0xe
-	WALL
+	WALL                             = 0x40000000
+	WCLONE                           = 0x80000000
+	WCONTINUED                       = 0x8
+	WEXITED                          = 0x4
+	WNOHANG                          = 0x1
+	WNOTHREAD                        = 0x20000000
+	WNOWAIT                          = 0x1000000
+	WORDSIZE                         = 0x40
+	WRAP                             = 0x20000
+	WSTOPPED                         = 0x2
+	WUNTRACED                        = 0x2
+	XCASE                            = 0x4
+	XTABS                            = 0x1800
+	__TIOCFLUSH                      = 0x80047410
+)
+
+// Errors
+const (
+	E2BIG           = syscall.Errno(0x7)
+	EACCES          = syscall.Errno(0xd)
+	EADDRINUSE      = syscall.Errno(0x30)
+	EADDRNOTAVAIL   = syscall.Errno(0x31)
+	EADV            = syscall.Errno(0x53)
+	EAFNOSUPPORT    = syscall.Errno(0x2f)
+	EAGAIN          = syscall.Errno(0xb)
+	EALREADY        = syscall.Errno(0x25)
+	EBADE           = syscall.Errno(0x66)
+	EBADF           = syscall.Errno(0x9)
+	EBADFD          = syscall.Errno(0x5d)
+	EBADMSG         = syscall.Errno(0x4c)
+	EBADR           = syscall.Errno(0x67)
+	EBADRQC         = syscall.Errno(0x6a)
+	EBADSLT         = syscall.Errno(0x6b)
+	EBFONT          = syscall.Errno(0x6d)
+	EBUSY           = syscall.Errno(0x10)
+	ECANCELED       = syscall.Errno(0x7f)
+	ECHILD          = syscall.Errno(0xa)
+	ECHRNG          = syscall.Errno(0x5e)
+	ECOMM           = syscall.Errno(0x55)
+	ECONNABORTED    = syscall.Errno(0x35)
+	ECONNREFUSED    = syscall.Errno(0x3d)
+	ECONNRESET      = syscall.Errno(0x36)
+	EDEADLK         = syscall.Errno(0x4e)
+	EDEADLOCK       = syscall.Errno(0x6c)
+	EDESTADDRREQ    = syscall.Errno(0x27)
+	EDOM            = syscall.Errno(0x21)
+	EDOTDOT         = syscall.Errno(0x58)
+	EDQUOT          = syscall.Errno(0x45)
+	EEXIST          = syscall.Errno(0x11)
+	EFAULT          = syscall.Errno(0xe)
+	EFBIG           = syscall.Errno(0x1b)
+	EHOSTDOWN       = syscall.Errno(0x40)
+	EHOSTUNREACH    = syscall.Errno(0x41)
+	EHWP
