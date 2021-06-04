@@ -1933,4 +1933,72 @@ const (
 const (
 	SIGABRT   = syscall.Signal(0x6)
 	SIGALRM   = syscall.Signal(0xe)
-	SIGBUS    = syscall.Signal
+	SIGBUS    = syscall.Signal(0xa)
+	SIGCHLD   = syscall.Signal(0x14)
+	SIGCLD    = syscall.Signal(0x14)
+	SIGCONT   = syscall.Signal(0x13)
+	SIGEMT    = syscall.Signal(0x7)
+	SIGFPE    = syscall.Signal(0x8)
+	SIGHUP    = syscall.Signal(0x1)
+	SIGILL    = syscall.Signal(0x4)
+	SIGINT    = syscall.Signal(0x2)
+	SIGIO     = syscall.Signal(0x17)
+	SIGIOT    = syscall.Signal(0x6)
+	SIGKILL   = syscall.Signal(0x9)
+	SIGLOST   = syscall.Signal(0x1d)
+	SIGPIPE   = syscall.Signal(0xd)
+	SIGPOLL   = syscall.Signal(0x17)
+	SIGPROF   = syscall.Signal(0x1b)
+	SIGPWR    = syscall.Signal(0x1d)
+	SIGQUIT   = syscall.Signal(0x3)
+	SIGSEGV   = syscall.Signal(0xb)
+	SIGSTOP   = syscall.Signal(0x11)
+	SIGSYS    = syscall.Signal(0xc)
+	SIGTERM   = syscall.Signal(0xf)
+	SIGTRAP   = syscall.Signal(0x5)
+	SIGTSTP   = syscall.Signal(0x12)
+	SIGTTIN   = syscall.Signal(0x15)
+	SIGTTOU   = syscall.Signal(0x16)
+	SIGURG    = syscall.Signal(0x10)
+	SIGUSR1   = syscall.Signal(0x1e)
+	SIGUSR2   = syscall.Signal(0x1f)
+	SIGVTALRM = syscall.Signal(0x1a)
+	SIGWINCH  = syscall.Signal(0x1c)
+	SIGXCPU   = syscall.Signal(0x18)
+	SIGXFSZ   = syscall.Signal(0x19)
+)
+
+// Error table
+var errors = [...]string{
+	1:   "operation not permitted",
+	2:   "no such file or directory",
+	3:   "no such process",
+	4:   "interrupted system call",
+	5:   "input/output error",
+	6:   "no such device or address",
+	7:   "argument list too long",
+	8:   "exec format error",
+	9:   "bad file descriptor",
+	10:  "no child processes",
+	11:  "resource temporarily unavailable",
+	12:  "cannot allocate memory",
+	13:  "permission denied",
+	14:  "bad address",
+	15:  "block device required",
+	16:  "device or resource busy",
+	17:  "file exists",
+	18:  "invalid cross-device link",
+	19:  "no such device",
+	20:  "not a directory",
+	21:  "is a directory",
+	22:  "invalid argument",
+	23:  "too many open files in system",
+	24:  "too many open files",
+	25:  "inappropriate ioctl for device",
+	26:  "text file busy",
+	27:  "file too large",
+	28:  "no space left on device",
+	29:  "illegal seek",
+	30:  "read-only file system",
+	31:  "too many links",
+	32:  "br
