@@ -2136,4 +2136,7 @@ var signals = [...]string{
 	26: "virtual timer expired",
 	27: "profiling timer expired",
 	28: "window changed",
-	29:
+	29: "resource lost",
+	30: "user defined signal 1",
+	31: "user defined signal 2",
+}
