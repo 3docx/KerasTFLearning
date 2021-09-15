@@ -490,3 +490,1009 @@ const (
 	IN_CLASSD_NSHIFT              = 0x1c
 	IN_CLASSE_NET                 = 0xffffffff
 	IN_LOOPBACKNET                = 0x7f
+	IN_PRIVATE12_MASK             = 0xfff00000
+	IN_PRIVATE12_NET              = 0xac100000
+	IN_PRIVATE16_MASK             = 0xffff0000
+	IN_PRIVATE16_NET              = 0xc0a80000
+	IN_PRIVATE8_MASK              = 0xff000000
+	IN_PRIVATE8_NET               = 0xa000000
+	IPPROTO_AH                    = 0x33
+	IPPROTO_DSTOPTS               = 0x3c
+	IPPROTO_EGP                   = 0x8
+	IPPROTO_ENCAP                 = 0x4
+	IPPROTO_EON                   = 0x50
+	IPPROTO_ESP                   = 0x32
+	IPPROTO_FRAGMENT              = 0x2c
+	IPPROTO_GGP                   = 0x3
+	IPPROTO_HELLO                 = 0x3f
+	IPPROTO_HOPOPTS               = 0x0
+	IPPROTO_ICMP                  = 0x1
+	IPPROTO_ICMPV6                = 0x3a
+	IPPROTO_IDP                   = 0x16
+	IPPROTO_IGMP                  = 0x2
+	IPPROTO_IP                    = 0x0
+	IPPROTO_IPV6                  = 0x29
+	IPPROTO_MAX                   = 0x100
+	IPPROTO_ND                    = 0x4d
+	IPPROTO_NONE                  = 0x3b
+	IPPROTO_OSPF                  = 0x59
+	IPPROTO_PIM                   = 0x67
+	IPPROTO_PUP                   = 0xc
+	IPPROTO_RAW                   = 0xff
+	IPPROTO_ROUTING               = 0x2b
+	IPPROTO_RSVP                  = 0x2e
+	IPPROTO_SCTP                  = 0x84
+	IPPROTO_TCP                   = 0x6
+	IPPROTO_UDP                   = 0x11
+	IPV6_ADD_MEMBERSHIP           = 0x9
+	IPV6_BOUND_IF                 = 0x41
+	IPV6_CHECKSUM                 = 0x18
+	IPV6_DONTFRAG                 = 0x21
+	IPV6_DROP_MEMBERSHIP          = 0xa
+	IPV6_DSTOPTS                  = 0xf
+	IPV6_FLOWINFO_FLOWLABEL       = 0xffff0f00
+	IPV6_FLOWINFO_TCLASS          = 0xf00f
+	IPV6_HOPLIMIT                 = 0xc
+	IPV6_HOPOPTS                  = 0xe
+	IPV6_JOIN_GROUP               = 0x9
+	IPV6_LEAVE_GROUP              = 0xa
+	IPV6_MULTICAST_HOPS           = 0x7
+	IPV6_MULTICAST_IF             = 0x6
+	IPV6_MULTICAST_LOOP           = 0x8
+	IPV6_NEXTHOP                  = 0xd
+	IPV6_PAD1_OPT                 = 0x0
+	IPV6_PATHMTU                  = 0x25
+	IPV6_PKTINFO                  = 0xb
+	IPV6_PREFER_SRC_CGA           = 0x20
+	IPV6_PREFER_SRC_CGADEFAULT    = 0x10
+	IPV6_PREFER_SRC_CGAMASK       = 0x30
+	IPV6_PREFER_SRC_COA           = 0x2
+	IPV6_PREFER_SRC_DEFAULT       = 0x15
+	IPV6_PREFER_SRC_HOME          = 0x1
+	IPV6_PREFER_SRC_MASK          = 0x3f
+	IPV6_PREFER_SRC_MIPDEFAULT    = 0x1
+	IPV6_PREFER_SRC_MIPMASK       = 0x3
+	IPV6_PREFER_SRC_NONCGA        = 0x10
+	IPV6_PREFER_SRC_PUBLIC        = 0x4
+	IPV6_PREFER_SRC_TMP           = 0x8
+	IPV6_PREFER_SRC_TMPDEFAULT    = 0x4
+	IPV6_PREFER_SRC_TMPMASK       = 0xc
+	IPV6_RECVDSTOPTS              = 0x28
+	IPV6_RECVHOPLIMIT             = 0x13
+	IPV6_RECVHOPOPTS              = 0x14
+	IPV6_RECVPATHMTU              = 0x24
+	IPV6_RECVPKTINFO              = 0x12
+	IPV6_RECVRTHDR                = 0x16
+	IPV6_RECVRTHDRDSTOPTS         = 0x17
+	IPV6_RECVTCLASS               = 0x19
+	IPV6_RTHDR                    = 0x10
+	IPV6_RTHDRDSTOPTS             = 0x11
+	IPV6_RTHDR_TYPE_0             = 0x0
+	IPV6_SEC_OPT                  = 0x22
+	IPV6_SRC_PREFERENCES          = 0x23
+	IPV6_TCLASS                   = 0x26
+	IPV6_UNICAST_HOPS             = 0x5
+	IPV6_UNSPEC_SRC               = 0x42
+	IPV6_USE_MIN_MTU              = 0x20
+	IPV6_V6ONLY                   = 0x27
+	IP_ADD_MEMBERSHIP             = 0x13
+	IP_ADD_SOURCE_MEMBERSHIP      = 0x17
+	IP_BLOCK_SOURCE               = 0x15
+	IP_BOUND_IF                   = 0x41
+	IP_BROADCAST                  = 0x106
+	IP_BROADCAST_TTL              = 0x43
+	IP_DEFAULT_MULTICAST_LOOP     = 0x1
+	IP_DEFAULT_MULTICAST_TTL      = 0x1
+	IP_DF                         = 0x4000
+	IP_DHCPINIT_IF                = 0x45
+	IP_DONTFRAG                   = 0x1b
+	IP_DONTROUTE                  = 0x105
+	IP_DROP_MEMBERSHIP            = 0x14
+	IP_DROP_SOURCE_MEMBERSHIP     = 0x18
+	IP_HDRINCL                    = 0x2
+	IP_MAXPACKET                  = 0xffff
+	IP_MF                         = 0x2000
+	IP_MSS                        = 0x240
+	IP_MULTICAST_IF               = 0x10
+	IP_MULTICAST_LOOP             = 0x12
+	IP_MULTICAST_TTL              = 0x11
+	IP_NEXTHOP                    = 0x19
+	IP_OPTIONS                    = 0x1
+	IP_PKTINFO                    = 0x1a
+	IP_RECVDSTADDR                = 0x7
+	IP_RECVIF                     = 0x9
+	IP_RECVOPTS                   = 0x5
+	IP_RECVPKTINFO                = 0x1a
+	IP_RECVRETOPTS                = 0x6
+	IP_RECVSLLA                   = 0xa
+	IP_RECVTTL                    = 0xb
+	IP_RETOPTS                    = 0x8
+	IP_REUSEADDR                  = 0x104
+	IP_SEC_OPT                    = 0x22
+	IP_TOS                        = 0x3
+	IP_TTL                        = 0x4
+	IP_UNBLOCK_SOURCE             = 0x16
+	IP_UNSPEC_SRC                 = 0x42
+	ISIG                          = 0x1
+	ISTRIP                        = 0x20
+	IUCLC                         = 0x200
+	IXANY                         = 0x800
+	IXOFF                         = 0x1000
+	IXON                          = 0x400
+	LOCK_EX                       = 0x2
+	LOCK_NB                       = 0x4
+	LOCK_SH                       = 0x1
+	LOCK_UN                       = 0x8
+	MADV_ACCESS_DEFAULT           = 0x6
+	MADV_ACCESS_LWP               = 0x7
+	MADV_ACCESS_MANY              = 0x8
+	MADV_DONTNEED                 = 0x4
+	MADV_FREE                     = 0x5
+	MADV_NORMAL                   = 0x0
+	MADV_PURGE                    = 0x9
+	MADV_RANDOM                   = 0x1
+	MADV_SEQUENTIAL               = 0x2
+	MADV_WILLNEED                 = 0x3
+	MAP_32BIT                     = 0x80
+	MAP_ALIGN                     = 0x200
+	MAP_ANON                      = 0x100
+	MAP_ANONYMOUS                 = 0x100
+	MAP_FILE                      = 0x0
+	MAP_FIXED                     = 0x10
+	MAP_INITDATA                  = 0x800
+	MAP_NORESERVE                 = 0x40
+	MAP_PRIVATE                   = 0x2
+	MAP_RENAME                    = 0x20
+	MAP_SHARED                    = 0x1
+	MAP_TEXT                      = 0x400
+	MAP_TYPE                      = 0xf
+	MCL_CURRENT                   = 0x1
+	MCL_FUTURE                    = 0x2
+	MSG_CTRUNC                    = 0x10
+	MSG_DONTROUTE                 = 0x4
+	MSG_DONTWAIT                  = 0x80
+	MSG_DUPCTRL                   = 0x800
+	MSG_EOR                       = 0x8
+	MSG_MAXIOVLEN                 = 0x10
+	MSG_NOTIFICATION              = 0x100
+	MSG_OOB                       = 0x1
+	MSG_PEEK                      = 0x2
+	MSG_TRUNC                     = 0x20
+	MSG_WAITALL                   = 0x40
+	MSG_XPG4_2                    = 0x8000
+	MS_ASYNC                      = 0x1
+	MS_INVALIDATE                 = 0x2
+	MS_OLDSYNC                    = 0x0
+	MS_SYNC                       = 0x4
+	M_FLUSH                       = 0x86
+	NAME_MAX                      = 0xff
+	NEWDEV                        = 0x1
+	NL0                           = 0x0
+	NL1                           = 0x100
+	NLDLY                         = 0x100
+	NOFLSH                        = 0x80
+	OCRNL                         = 0x8
+	OFDEL                         = 0x80
+	OFILL                         = 0x40
+	OLCUC                         = 0x2
+	OLDDEV                        = 0x0
+	ONBITSMAJOR                   = 0x7
+	ONBITSMINOR                   = 0x8
+	ONLCR                         = 0x4
+	ONLRET                        = 0x20
+	ONOCR                         = 0x10
+	OPENFAIL                      = -0x1
+	OPOST                         = 0x1
+	O_ACCMODE                     = 0x600003
+	O_APPEND                      = 0x8
+	O_CLOEXEC                     = 0x800000
+	O_CREAT                       = 0x100
+	O_DSYNC                       = 0x40
+	O_EXCL                        = 0x400
+	O_EXEC                        = 0x400000
+	O_LARGEFILE                   = 0x2000
+	O_NDELAY                      = 0x4
+	O_NOCTTY                      = 0x800
+	O_NOFOLLOW                    = 0x20000
+	O_NOLINKS                     = 0x40000
+	O_NONBLOCK                    = 0x80
+	O_RDONLY                      = 0x0
+	O_RDWR                        = 0x2
+	O_RSYNC                       = 0x8000
+	O_SEARCH                      = 0x200000
+	O_SIOCGIFCONF                 = -0x3ff796ec
+	O_SIOCGLIFCONF                = -0x3fef9688
+	O_SYNC                        = 0x10
+	O_TRUNC                       = 0x200
+	O_WRONLY                      = 0x1
+	O_XATTR                       = 0x4000
+	PARENB                        = 0x100
+	PAREXT                        = 0x100000
+	PARMRK                        = 0x8
+	PARODD                        = 0x200
+	PENDIN                        = 0x4000
+	PRIO_PGRP                     = 0x1
+	PRIO_PROCESS                  = 0x0
+	PRIO_USER                     = 0x2
+	PROT_EXEC                     = 0x4
+	PROT_NONE                     = 0x0
+	PROT_READ                     = 0x1
+	PROT_WRITE                    = 0x2
+	RLIMIT_AS                     = 0x6
+	RLIMIT_CORE                   = 0x4
+	RLIMIT_CPU                    = 0x0
+	RLIMIT_DATA                   = 0x2
+	RLIMIT_FSIZE                  = 0x1
+	RLIMIT_NOFILE                 = 0x5
+	RLIMIT_STACK                  = 0x3
+	RLIM_INFINITY                 = -0x3
+	RTAX_AUTHOR                   = 0x6
+	RTAX_BRD                      = 0x7
+	RTAX_DST                      = 0x0
+	RTAX_GATEWAY                  = 0x1
+	RTAX_GENMASK                  = 0x3
+	RTAX_IFA                      = 0x5
+	RTAX_IFP                      = 0x4
+	RTAX_MAX                      = 0x9
+	RTAX_NETMASK                  = 0x2
+	RTAX_SRC                      = 0x8
+	RTA_AUTHOR                    = 0x40
+	RTA_BRD                       = 0x80
+	RTA_DST                       = 0x1
+	RTA_GATEWAY                   = 0x2
+	RTA_GENMASK                   = 0x8
+	RTA_IFA                       = 0x20
+	RTA_IFP                       = 0x10
+	RTA_NETMASK                   = 0x4
+	RTA_NUMBITS                   = 0x9
+	RTA_SRC                       = 0x100
+	RTF_BLACKHOLE                 = 0x1000
+	RTF_CLONING                   = 0x100
+	RTF_DONE                      = 0x40
+	RTF_DYNAMIC                   = 0x10
+	RTF_GATEWAY                   = 0x2
+	RTF_HOST                      = 0x4
+	RTF_INDIRECT                  = 0x40000
+	RTF_KERNEL                    = 0x80000
+	RTF_LLINFO                    = 0x400
+	RTF_MASK                      = 0x80
+	RTF_MODIFIED                  = 0x20
+	RTF_MULTIRT                   = 0x10000
+	RTF_PRIVATE                   = 0x2000
+	RTF_PROTO1                    = 0x8000
+	RTF_PROTO2                    = 0x4000
+	RTF_REJECT                    = 0x8
+	RTF_SETSRC                    = 0x20000
+	RTF_STATIC                    = 0x800
+	RTF_UP                        = 0x1
+	RTF_XRESOLVE                  = 0x200
+	RTF_ZONE                      = 0x100000
+	RTM_ADD                       = 0x1
+	RTM_CHANGE                    = 0x3
+	RTM_CHGADDR                   = 0xf
+	RTM_DELADDR                   = 0xd
+	RTM_DELETE                    = 0x2
+	RTM_FREEADDR                  = 0x10
+	RTM_GET                       = 0x4
+	RTM_IFINFO                    = 0xe
+	RTM_LOCK                      = 0x8
+	RTM_LOSING                    = 0x5
+	RTM_MISS                      = 0x7
+	RTM_NEWADDR                   = 0xc
+	RTM_OLDADD                    = 0x9
+	RTM_OLDDEL                    = 0xa
+	RTM_REDIRECT                  = 0x6
+	RTM_RESOLVE                   = 0xb
+	RTM_VERSION                   = 0x3
+	RTV_EXPIRE                    = 0x4
+	RTV_HOPCOUNT                  = 0x2
+	RTV_MTU                       = 0x1
+	RTV_RPIPE                     = 0x8
+	RTV_RTT                       = 0x40
+	RTV_RTTVAR                    = 0x80
+	RTV_SPIPE                     = 0x10
+	RTV_SSTHRESH                  = 0x20
+	RT_AWARE                      = 0x1
+	RUSAGE_CHILDREN               = -0x1
+	RUSAGE_SELF                   = 0x0
+	SCM_RIGHTS                    = 0x1010
+	SCM_TIMESTAMP                 = 0x1013
+	SCM_UCRED                     = 0x1012
+	SHUT_RD                       = 0x0
+	SHUT_RDWR                     = 0x2
+	SHUT_WR                       = 0x1
+	SIG2STR_MAX                   = 0x20
+	SIOCADDMULTI                  = -0x7fdf96cf
+	SIOCADDRT                     = -0x7fcf8df6
+	SIOCATMARK                    = 0x40047307
+	SIOCDARP                      = -0x7fdb96e0
+	SIOCDELMULTI                  = -0x7fdf96ce
+	SIOCDELRT                     = -0x7fcf8df5
+	SIOCDXARP                     = -0x7fff9658
+	SIOCGARP                      = -0x3fdb96e1
+	SIOCGDSTINFO                  = -0x3fff965c
+	SIOCGENADDR                   = -0x3fdf96ab
+	SIOCGENPSTATS                 = -0x3fdf96c7
+	SIOCGETLSGCNT                 = -0x3fef8deb
+	SIOCGETNAME                   = 0x40107334
+	SIOCGETPEER                   = 0x40107335
+	SIOCGETPROP                   = -0x3fff8f44
+	SIOCGETSGCNT                  = -0x3feb8deb
+	SIOCGETSYNC                   = -0x3fdf96d3
+	SIOCGETVIFCNT                 = -0x3feb8dec
+	SIOCGHIWAT                    = 0x40047301
+	SIOCGIFADDR                   = -0x3fdf96f3
+	SIOCGIFBRDADDR                = -0x3fdf96e9
+	SIOCGIFCONF                   = -0x3ff796a4
+	SIOCGIFDSTADDR                = -0x3fdf96f1
+	SIOCGIFFLAGS                  = -0x3fdf96ef
+	SIOCGIFHWADDR                 = -0x3fdf9647
+	SIOCGIFINDEX                  = -0x3fdf96a6
+	SIOCGIFMEM                    = -0x3fdf96ed
+	SIOCGIFMETRIC                 = -0x3fdf96e5
+	SIOCGIFMTU                    = -0x3fdf96ea
+	SIOCGIFMUXID                  = -0x3fdf96a8
+	SIOCGIFNETMASK                = -0x3fdf96e7
+	SIOCGIFNUM                    = 0x40046957
+	SIOCGIP6ADDRPOLICY            = -0x3fff965e
+	SIOCGIPMSFILTER               = -0x3ffb964c
+	SIOCGLIFADDR                  = -0x3f87968f
+	SIOCGLIFBINDING               = -0x3f879666
+	SIOCGLIFBRDADDR               = -0x3f879685
+	SIOCGLIFCONF                  = -0x3fef965b
+	SIOCGLIFDADSTATE              = -0x3f879642
+	SIOCGLIFDSTADDR               = -0x3f87968d
+	SIOCGLIFFLAGS                 = -0x3f87968b
+	SIOCGLIFGROUPINFO             = -0x3f4b9663
+	SIOCGLIFGROUPNAME             = -0x3f879664
+	SIOCGLIFHWADDR                = -0x3f879640
+	SIOCGLIFINDEX                 = -0x3f87967b
+	SIOCGLIFLNKINFO               = -0x3f879674
+	SIOCGLIFMETRIC                = -0x3f879681
+	SIOCGLIFMTU                   = -0x3f879686
+	SIOCGLIFMUXID                 = -0x3f87967d
+	SIOCGLIFNETMASK               = -0x3f879683
+	SIOCGLIFNUM                   = -0x3ff3967e
+	SIOCGLIFSRCOF                 = -0x3fef964f
+	SIOCGLIFSUBNET                = -0x3f879676
+	SIOCGLIFTOKEN                 = -0x3f879678
+	SIOCGLIFUSESRC                = -0x3f879651
+	SIOCGLIFZONE                  = -0x3f879656
+	SIOCGLOWAT                    = 0x40047303
+	SIOCGMSFILTER                 = -0x3ffb964e
+	SIOCGPGRP                     = 0x40047309
+	SIOCGSTAMP                    = -0x3fef9646
+	SIOCGXARP                     = -0x3fff9659
+	SIOCIFDETACH                  = -0x7fdf96c8
+	SIOCILB                       = -0x3ffb9645
+	SIOCLIFADDIF                  = -0x3f879691
+	SIOCLIFDELND                  = -0x7f879673
+	SIOCLIFGETND                  = -0x3f879672
+	SIOCLIFREMOVEIF               = -0x7f879692
+	SIOCLIFSETND                  = -0x7f879671
+	SIOCLOWER                     = -0x7fdf96d7
+	SIOCSARP                      = -0x7fdb96e2
+	SIOCSCTPGOPT                  = -0x3fef9653
+	SIOCSCTPPEELOFF               = -0x3ffb9652
+	SIOCSCTPSOPT                  = -0x7fef9654
+	SIOCSENABLESDP                = -0x3ffb9649
+	SIOCSETPROP                   = -0x7ffb8f43
+	SIOCSETSYNC                   = -0x7fdf96d4
+	SIOCSHIWAT                    = -0x7ffb8d00
+	SIOCSIFADDR                   = -0x7fdf96f4
+	SIOCSIFBRDADDR                = -0x7fdf96e8
+	SIOCSIFDSTADDR                = -0x7fdf96f2
+	SIOCSIFFLAGS                  = -0x7fdf96f0
+	SIOCSIFINDEX                  = -0x7fdf96a5
+	SIOCSIFMEM                    = -0x7fdf96ee
+	SIOCSIFMETRIC                 = -0x7fdf96e4
+	SIOCSIFMTU                    = -0x7fdf96eb
+	SIOCSIFMUXID                  = -0x7fdf96a7
+	SIOCSIFNAME                   = -0x7fdf96b7
+	SIOCSIFNETMASK                = -0x7fdf96e6
+	SIOCSIP6ADDRPOLICY            = -0x7fff965d
+	SIOCSIPMSFILTER               = -0x7ffb964b
+	SIOCSLGETREQ                  = -0x3fdf96b9
+	SIOCSLIFADDR                  = -0x7f879690
+	SIOCSLIFBRDADDR               = -0x7f879684
+	SIOCSLIFDSTADDR               = -0x7f87968e
+	SIOCSLIFFLAGS                 = -0x7f87968c
+	SIOCSLIFGROUPNAME             = -0x7f879665
+	SIOCSLIFINDEX                 = -0x7f87967a
+	SIOCSLIFLNKINFO               = -0x7f879675
+	SIOCSLIFMETRIC                = -0x7f879680
+	SIOCSLIFMTU                   = -0x7f879687
+	SIOCSLIFMUXID                 = -0x7f87967c
+	SIOCSLIFNAME                  = -0x3f87967f
+	SIOCSLIFNETMASK               = -0x7f879682
+	SIOCSLIFPREFIX                = -0x3f879641
+	SIOCSLIFSUBNET                = -0x7f879677
+	SIOCSLIFTOKEN                 = -0x7f879679
+	SIOCSLIFUSESRC                = -0x7f879650
+	SIOCSLIFZONE                  = -0x7f879655
+	SIOCSLOWAT                    = -0x7ffb8cfe
+	SIOCSLSTAT                    = -0x7fdf96b8
+	SIOCSMSFILTER                 = -0x7ffb964d
+	SIOCSPGRP                     = -0x7ffb8cf8
+	SIOCSPROMISC                  = -0x7ffb96d0
+	SIOCSQPTR                     = -0x3ffb9648
+	SIOCSSDSTATS                  = -0x3fdf96d2
+	SIOCSSESTATS                  = -0x3fdf96d1
+	SIOCSXARP                     = -0x7fff965a
+	SIOCTMYADDR                   = -0x3ff79670
+	SIOCTMYSITE                   = -0x3ff7966e
+	SIOCTONLINK                   = -0x3ff7966f
+	SIOCUPPER                     = -0x7fdf96d8
+	SIOCX25RCV                    = -0x3fdf96c4
+	SIOCX25TBL                    = -0x3fdf96c3
+	SIOCX25XMT                    = -0x3fdf96c5
+	SIOCXPROTO                    = 0x20007337
+	SOCK_CLOEXEC                  = 0x80000
+	SOCK_DGRAM                    = 0x1
+	SOCK_NDELAY                   = 0x200000
+	SOCK_NONBLOCK                 = 0x100000
+	SOCK_RAW                      = 0x4
+	SOCK_RDM                      = 0x5
+	SOCK_SEQPACKET                = 0x6
+	SOCK_STREAM                   = 0x2
+	SOCK_TYPE_MASK                = 0xffff
+	SOL_FILTER                    = 0xfffc
+	SOL_PACKET                    = 0xfffd
+	SOL_ROUTE                     = 0xfffe
+	SOL_SOCKET                    = 0xffff
+	SOMAXCONN                     = 0x80
+	SO_ACCEPTCONN                 = 0x2
+	SO_ALL                        = 0x3f
+	SO_ALLZONES                   = 0x1014
+	SO_ANON_MLP                   = 0x100a
+	SO_ATTACH_FILTER              = 0x40000001
+	SO_BAND                       = 0x4000
+	SO_BROADCAST                  = 0x20
+	SO_COPYOPT                    = 0x80000
+	SO_DEBUG                      = 0x1
+	SO_DELIM                      = 0x8000
+	SO_DETACH_FILTER              = 0x40000002
+	SO_DGRAM_ERRIND               = 0x200
+	SO_DOMAIN                     = 0x100c
+	SO_DONTLINGER                 = -0x81
+	SO_DONTROUTE                  = 0x10
+	SO_ERROPT                     = 0x40000
+	SO_ERROR                      = 0x1007
+	SO_EXCLBIND                   = 0x1015
+	SO_HIWAT                      = 0x10
+	SO_ISNTTY                     = 0x800
+	SO_ISTTY                      = 0x400
+	SO_KEEPALIVE                  = 0x8
+	SO_LINGER                     = 0x80
+	SO_LOWAT                      = 0x20
+	SO_MAC_EXEMPT                 = 0x100b
+	SO_MAC_IMPLICIT               = 0x1016
+	SO_MAXBLK                     = 0x100000
+	SO_MAXPSZ                     = 0x8
+	SO_MINPSZ                     = 0x4
+	SO_MREADOFF                   = 0x80
+	SO_MREADON                    = 0x40
+	SO_NDELOFF                    = 0x200
+	SO_NDELON                     = 0x100
+	SO_NODELIM                    = 0x10000
+	SO_OOBINLINE                  = 0x100
+	SO_PROTOTYPE                  = 0x1009
+	SO_RCVBUF                     = 0x1002
+	SO_RCVLOWAT                   = 0x1004
+	SO_RCVPSH                     = 0x100d
+	SO_RCVTIMEO                   = 0x1006
+	SO_READOPT                    = 0x1
+	SO_RECVUCRED                  = 0x400
+	SO_REUSEADDR                  = 0x4
+	SO_SECATTR                    = 0x1011
+	SO_SNDBUF                     = 0x1001
+	SO_SNDLOWAT                   = 0x1003
+	SO_SNDTIMEO                   = 0x1005
+	SO_STRHOLD                    = 0x20000
+	SO_TAIL                       = 0x200000
+	SO_TIMESTAMP                  = 0x1013
+	SO_TONSTOP                    = 0x2000
+	SO_TOSTOP                     = 0x1000
+	SO_TYPE                       = 0x1008
+	SO_USELOOPBACK                = 0x40
+	SO_VRRP                       = 0x1017
+	SO_WROFF                      = 0x2
+	TAB0                          = 0x0
+	TAB1                          = 0x800
+	TAB2                          = 0x1000
+	TAB3                          = 0x1800
+	TABDLY                        = 0x1800
+	TCFLSH                        = 0x5407
+	TCGETA                        = 0x5401
+	TCGETS                        = 0x540d
+	TCIFLUSH                      = 0x0
+	TCIOFF                        = 0x2
+	TCIOFLUSH                     = 0x2
+	TCION                         = 0x3
+	TCOFLUSH                      = 0x1
+	TCOOFF                        = 0x0
+	TCOON                         = 0x1
+	TCP_ABORT_THRESHOLD           = 0x11
+	TCP_ANONPRIVBIND              = 0x20
+	TCP_CONN_ABORT_THRESHOLD      = 0x13
+	TCP_CONN_NOTIFY_THRESHOLD     = 0x12
+	TCP_CORK                      = 0x18
+	TCP_EXCLBIND                  = 0x21
+	TCP_INIT_CWND                 = 0x15
+	TCP_KEEPALIVE                 = 0x8
+	TCP_KEEPALIVE_ABORT_THRESHOLD = 0x17
+	TCP_KEEPALIVE_THRESHOLD       = 0x16
+	TCP_KEEPCNT                   = 0x23
+	TCP_KEEPIDLE                  = 0x22
+	TCP_KEEPINTVL                 = 0x24
+	TCP_LINGER2                   = 0x1c
+	TCP_MAXSEG                    = 0x2
+	TCP_MSS                       = 0x218
+	TCP_NODELAY                   = 0x1
+	TCP_NOTIFY_THRESHOLD          = 0x10
+	TCP_RECVDSTADDR               = 0x14
+	TCP_RTO_INITIAL               = 0x19
+	TCP_RTO_MAX                   = 0x1b
+	TCP_RTO_MIN                   = 0x1a
+	TCSAFLUSH                     = 0x5410
+	TCSBRK                        = 0x5405
+	TCSETA                        = 0x5402
+	TCSETAF                       = 0x5404
+	TCSETAW                       = 0x5403
+	TCSETS                        = 0x540e
+	TCSETSF                       = 0x5410
+	TCSETSW                       = 0x540f
+	TCXONC                        = 0x5406
+	TIOC                          = 0x5400
+	TIOCCBRK                      = 0x747a
+	TIOCCDTR                      = 0x7478
+	TIOCCILOOP                    = 0x746c
+	TIOCEXCL                      = 0x740d
+	TIOCFLUSH                     = 0x7410
+	TIOCGETC                      = 0x7412
+	TIOCGETD                      = 0x7400
+	TIOCGETP                      = 0x7408
+	TIOCGLTC                      = 0x7474
+	TIOCGPGRP                     = 0x7414
+	TIOCGPPS                      = 0x547d
+	TIOCGPPSEV                    = 0x547f
+	TIOCGSID                      = 0x7416
+	TIOCGSOFTCAR                  = 0x5469
+	TIOCGWINSZ                    = 0x5468
+	TIOCHPCL                      = 0x7402
+	TIOCKBOF                      = 0x5409
+	TIOCKBON                      = 0x5408
+	TIOCLBIC                      = 0x747e
+	TIOCLBIS                      = 0x747f
+	TIOCLGET                      = 0x747c
+	TIOCLSET                      = 0x747d
+	TIOCMBIC                      = 0x741c
+	TIOCMBIS                      = 0x741b
+	TIOCMGET                      = 0x741d
+	TIOCMSET                      = 0x741a
+	TIOCM_CAR                     = 0x40
+	TIOCM_CD                      = 0x40
+	TIOCM_CTS                     = 0x20
+	TIOCM_DSR                     = 0x100
+	TIOCM_DTR                     = 0x2
+	TIOCM_LE                      = 0x1
+	TIOCM_RI                      = 0x80
+	TIOCM_RNG                     = 0x80
+	TIOCM_RTS                     = 0x4
+	TIOCM_SR                      = 0x10
+	TIOCM_ST                      = 0x8
+	TIOCNOTTY                     = 0x7471
+	TIOCNXCL                      = 0x740e
+	TIOCOUTQ                      = 0x7473
+	TIOCREMOTE                    = 0x741e
+	TIOCSBRK                      = 0x747b
+	TIOCSCTTY                     = 0x7484
+	TIOCSDTR                      = 0x7479
+	TIOCSETC                      = 0x7411
+	TIOCSETD                      = 0x7401
+	TIOCSETN                      = 0x740a
+	TIOCSETP                      = 0x7409
+	TIOCSIGNAL                    = 0x741f
+	TIOCSILOOP                    = 0x746d
+	TIOCSLTC                      = 0x7475
+	TIOCSPGRP                     = 0x7415
+	TIOCSPPS                      = 0x547e
+	TIOCSSOFTCAR                  = 0x546a
+	TIOCSTART                     = 0x746e
+	TIOCSTI                       = 0x7417
+	TIOCSTOP                      = 0x746f
+	TIOCSWINSZ                    = 0x5467
+	TOSTOP                        = 0x100
+	VCEOF                         = 0x8
+	VCEOL                         = 0x9
+	VDISCARD                      = 0xd
+	VDSUSP                        = 0xb
+	VEOF                          = 0x4
+	VEOL                          = 0x5
+	VEOL2                         = 0x6
+	VERASE                        = 0x2
+	VERASE2                       = 0x11
+	VINTR                         = 0x0
+	VKILL                         = 0x3
+	VLNEXT                        = 0xf
+	VMIN                          = 0x4
+	VQUIT                         = 0x1
+	VREPRINT                      = 0xc
+	VSTART                        = 0x8
+	VSTATUS                       = 0x10
+	VSTOP                         = 0x9
+	VSUSP                         = 0xa
+	VSWTCH                        = 0x7
+	VT0                           = 0x0
+	VT1                           = 0x4000
+	VTDLY                         = 0x4000
+	VTIME                         = 0x5
+	VWERASE                       = 0xe
+	WCONTFLG                      = 0xffff
+	WCONTINUED                    = 0x8
+	WCOREFLG                      = 0x80
+	WEXITED                       = 0x1
+	WNOHANG                       = 0x40
+	WNOWAIT                       = 0x80
+	WOPTMASK                      = 0xcf
+	WRAP                          = 0x20000
+	WSIGMASK                      = 0x7f
+	WSTOPFLG                      = 0x7f
+	WSTOPPED                      = 0x4
+	WTRAPPED                      = 0x2
+	WUNTRACED                     = 0x4
+	XCASE                         = 0x4
+	XTABS                         = 0x1800
+)
+
+// Errors
+const (
+	E2BIG           = syscall.Errno(0x7)
+	EACCES          = syscall.Errno(0xd)
+	EADDRINUSE      = syscall.Errno(0x7d)
+	EADDRNOTAVAIL   = syscall.Errno(0x7e)
+	EADV            = syscall.Errno(0x44)
+	EAFNOSUPPORT    = syscall.Errno(0x7c)
+	EAGAIN          = syscall.Errno(0xb)
+	EALREADY        = syscall.Errno(0x95)
+	EBADE           = syscall.Errno(0x32)
+	EBADF           = syscall.Errno(0x9)
+	EBADFD          = syscall.Errno(0x51)
+	EBADMSG         = syscall.Errno(0x4d)
+	EBADR           = syscall.Errno(0x33)
+	EBADRQC         = syscall.Errno(0x36)
+	EBADSLT         = syscall.Errno(0x37)
+	EBFONT          = syscall.Errno(0x39)
+	EBUSY           = syscall.Errno(0x10)
+	ECANCELED       = syscall.Errno(0x2f)
+	ECHILD          = syscall.Errno(0xa)
+	ECHRNG          = syscall.Errno(0x25)
+	ECOMM           = syscall.Errno(0x46)
+	ECONNABORTED    = syscall.Errno(0x82)
+	ECONNREFUSED    = syscall.Errno(0x92)
+	ECONNRESET      = syscall.Errno(0x83)
+	EDEADLK         = syscall.Errno(0x2d)
+	EDEADLOCK       = syscall.Errno(0x38)
+	EDESTADDRREQ    = syscall.Errno(0x60)
+	EDOM            = syscall.Errno(0x21)
+	EDQUOT          = syscall.Errno(0x31)
+	EEXIST          = syscall.Errno(0x11)
+	EFAULT          = syscall.Errno(0xe)
+	EFBIG           = syscall.Errno(0x1b)
+	EHOSTDOWN       = syscall.Errno(0x93)
+	EHOSTUNREACH    = syscall.Errno(0x94)
+	EIDRM           = syscall.Errno(0x24)
+	EILSEQ          = syscall.Errno(0x58)
+	EINPROGRESS     = syscall.Errno(0x96)
+	EINTR           = syscall.Errno(0x4)
+	EINVAL          = syscall.Errno(0x16)
+	EIO             = syscall.Errno(0x5)
+	EISCONN         = syscall.Errno(0x85)
+	EISDIR          = syscall.Errno(0x15)
+	EL2HLT          = syscall.Errno(0x2c)
+	EL2NSYNC        = syscall.Errno(0x26)
+	EL3HLT          = syscall.Errno(0x27)
+	EL3RST          = syscall.Errno(0x28)
+	ELIBACC         = syscall.Errno(0x53)
+	ELIBBAD         = syscall.Errno(0x54)
+	ELIBEXEC        = syscall.Errno(0x57)
+	ELIBMAX         = syscall.Errno(0x56)
+	ELIBSCN         = syscall.Errno(0x55)
+	ELNRNG          = syscall.Errno(0x29)
+	ELOCKUNMAPPED   = syscall.Errno(0x48)
+	ELOOP           = syscall.Errno(0x5a)
+	EMFILE          = syscall.Errno(0x18)
+	EMLINK          = syscall.Errno(0x1f)
+	EMSGSIZE        = syscall.Errno(0x61)
+	EMULTIHOP       = syscall.Errno(0x4a)
+	ENAMETOOLONG    = syscall.Errno(0x4e)
+	ENETDOWN        = syscall.Errno(0x7f)
+	ENETRESET       = syscall.Errno(0x81)
+	ENETUNREACH     = syscall.Errno(0x80)
+	ENFILE          = syscall.Errno(0x17)
+	ENOANO          = syscall.Errno(0x35)
+	ENOBUFS         = syscall.Errno(0x84)
+	ENOCSI          = syscall.Errno(0x2b)
+	ENODATA         = syscall.Errno(0x3d)
+	ENODEV          = syscall.Errno(0x13)
+	ENOENT          = syscall.Errno(0x2)
+	ENOEXEC         = syscall.Errno(0x8)
+	ENOLCK          = syscall.Errno(0x2e)
+	ENOLINK         = syscall.Errno(0x43)
+	ENOMEM          = syscall.Errno(0xc)
+	ENOMSG          = syscall.Errno(0x23)
+	ENONET          = syscall.Errno(0x40)
+	ENOPKG          = syscall.Errno(0x41)
+	ENOPROTOOPT     = syscall.Errno(0x63)
+	ENOSPC          = syscall.Errno(0x1c)
+	ENOSR           = syscall.Errno(0x3f)
+	ENOSTR          = syscall.Errno(0x3c)
+	ENOSYS          = syscall.Errno(0x59)
+	ENOTACTIVE      = syscall.Errno(0x49)
+	ENOTBLK         = syscall.Errno(0xf)
+	ENOTCONN        = syscall.Errno(0x86)
+	ENOTDIR         = syscall.Errno(0x14)
+	ENOTEMPTY       = syscall.Errno(0x5d)
+	ENOTRECOVERABLE = syscall.Errno(0x3b)
+	ENOTSOCK        = syscall.Errno(0x5f)
+	ENOTSUP         = syscall.Errno(0x30)
+	ENOTTY          = syscall.Errno(0x19)
+	ENOTUNIQ        = syscall.Errno(0x50)
+	ENXIO           = syscall.Errno(0x6)
+	EOPNOTSUPP      = syscall.Errno(0x7a)
+	EOVERFLOW       = syscall.Errno(0x4f)
+	EOWNERDEAD      = syscall.Errno(0x3a)
+	EPERM           = syscall.Errno(0x1)
+	EPFNOSUPPORT    = syscall.Errno(0x7b)
+	EPIPE           = syscall.Errno(0x20)
+	EPROTO          = syscall.Errno(0x47)
+	EPROTONOSUPPORT = syscall.Errno(0x78)
+	EPROTOTYPE      = syscall.Errno(0x62)
+	ERANGE          = syscall.Errno(0x22)
+	EREMCHG         = syscall.Errno(0x52)
+	EREMOTE         = syscall.Errno(0x42)
+	ERESTART        = syscall.Errno(0x5b)
+	EROFS           = syscall.Errno(0x1e)
+	ESHUTDOWN       = syscall.Errno(0x8f)
+	ESOCKTNOSUPPORT = syscall.Errno(0x79)
+	ESPIPE          = syscall.Errno(0x1d)
+	ESRCH           = syscall.Errno(0x3)
+	ESRMNT          = syscall.Errno(0x45)
+	ESTALE          = syscall.Errno(0x97)
+	ESTRPIPE        = syscall.Errno(0x5c)
+	ETIME           = syscall.Errno(0x3e)
+	ETIMEDOUT       = syscall.Errno(0x91)
+	ETOOMANYREFS    = syscall.Errno(0x90)
+	ETXTBSY         = syscall.Errno(0x1a)
+	EUNATCH         = syscall.Errno(0x2a)
+	EUSERS          = syscall.Errno(0x5e)
+	EWOULDBLOCK     = syscall.Errno(0xb)
+	EXDEV           = syscall.Errno(0x12)
+	EXFULL          = syscall.Errno(0x34)
+)
+
+// Signals
+const (
+	SIGABRT    = syscall.Signal(0x6)
+	SIGALRM    = syscall.Signal(0xe)
+	SIGBUS     = syscall.Signal(0xa)
+	SIGCANCEL  = syscall.Signal(0x24)
+	SIGCHLD    = syscall.Signal(0x12)
+	SIGCLD     = syscall.Signal(0x12)
+	SIGCONT    = syscall.Signal(0x19)
+	SIGEMT     = syscall.Signal(0x7)
+	SIGFPE     = syscall.Signal(0x8)
+	SIGFREEZE  = syscall.Signal(0x22)
+	SIGHUP     = syscall.Signal(0x1)
+	SIGILL     = syscall.Signal(0x4)
+	SIGINFO    = syscall.Signal(0x29)
+	SIGINT     = syscall.Signal(0x2)
+	SIGIO      = syscall.Signal(0x16)
+	SIGIOT     = syscall.Signal(0x6)
+	SIGJVM1    = syscall.Signal(0x27)
+	SIGJVM2    = syscall.Signal(0x28)
+	SIGKILL    = syscall.Signal(0x9)
+	SIGLOST    = syscall.Signal(0x25)
+	SIGLWP     = syscall.Signal(0x21)
+	SIGPIPE    = syscall.Signal(0xd)
+	SIGPOLL    = syscall.Signal(0x16)
+	SIGPROF    = syscall.Signal(0x1d)
+	SIGPWR     = syscall.Signal(0x13)
+	SIGQUIT    = syscall.Signal(0x3)
+	SIGSEGV    = syscall.Signal(0xb)
+	SIGSTOP    = syscall.Signal(0x17)
+	SIGSYS     = syscall.Signal(0xc)
+	SIGTERM    = syscall.Signal(0xf)
+	SIGTHAW    = syscall.Signal(0x23)
+	SIGTRAP    = syscall.Signal(0x5)
+	SIGTSTP    = syscall.Signal(0x18)
+	SIGTTIN    = syscall.Signal(0x1a)
+	SIGTTOU    = syscall.Signal(0x1b)
+	SIGURG     = syscall.Signal(0x15)
+	SIGUSR1    = syscall.Signal(0x10)
+	SIGUSR2    = syscall.Signal(0x11)
+	SIGVTALRM  = syscall.Signal(0x1c)
+	SIGWAITING = syscall.Signal(0x20)
+	SIGWINCH   = syscall.Signal(0x14)
+	SIGXCPU    = syscall.Signal(0x1e)
+	SIGXFSZ    = syscall.Signal(0x1f)
+	SIGXRES    = syscall.Signal(0x26)
+)
+
+// Error table
+var errorList = [...]struct {
+	num  syscall.Errno
+	name string
+	desc string
+}{
+	{1, "EPERM", "not owner"},
+	{2, "ENOENT", "no such file or directory"},
+	{3, "ESRCH", "no such process"},
+	{4, "EINTR", "interrupted system call"},
+	{5, "EIO", "I/O error"},
+	{6, "ENXIO", "no such device or address"},
+	{7, "E2BIG", "arg list too long"},
+	{8, "ENOEXEC", "exec format error"},
+	{9, "EBADF", "bad file number"},
+	{10, "ECHILD", "no child processes"},
+	{11, "EAGAIN", "resource temporarily unavailable"},
+	{12, "ENOMEM", "not enough space"},
+	{13, "EACCES", "permission denied"},
+	{14, "EFAULT", "bad address"},
+	{15, "ENOTBLK", "block device required"},
+	{16, "EBUSY", "device busy"},
+	{17, "EEXIST", "file exists"},
+	{18, "EXDEV", "cross-device link"},
+	{19, "ENODEV", "no such device"},
+	{20, "ENOTDIR", "not a directory"},
+	{21, "EISDIR", "is a directory"},
+	{22, "EINVAL", "invalid argument"},
+	{23, "ENFILE", "file table overflow"},
+	{24, "EMFILE", "too many open files"},
+	{25, "ENOTTY", "inappropriate ioctl for device"},
+	{26, "ETXTBSY", "text file busy"},
+	{27, "EFBIG", "file too large"},
+	{28, "ENOSPC", "no space left on device"},
+	{29, "ESPIPE", "illegal seek"},
+	{30, "EROFS", "read-only file system"},
+	{31, "EMLINK", "too many links"},
+	{32, "EPIPE", "broken pipe"},
+	{33, "EDOM", "argument out of domain"},
+	{34, "ERANGE", "result too large"},
+	{35, "ENOMSG", "no message of desired type"},
+	{36, "EIDRM", "identifier removed"},
+	{37, "ECHRNG", "channel number out of range"},
+	{38, "EL2NSYNC", "level 2 not synchronized"},
+	{39, "EL3HLT", "level 3 halted"},
+	{40, "EL3RST", "level 3 reset"},
+	{41, "ELNRNG", "link number out of range"},
+	{42, "EUNATCH", "protocol driver not attached"},
+	{43, "ENOCSI", "no CSI structure available"},
+	{44, "EL2HLT", "level 2 halted"},
+	{45, "EDEADLK", "deadlock situation detected/avoided"},
+	{46, "ENOLCK", "no record locks available"},
+	{47, "ECANCELED", "operation canceled"},
+	{48, "ENOTSUP", "operation not supported"},
+	{49, "EDQUOT", "disc quota exceeded"},
+	{50, "EBADE", "bad exchange descriptor"},
+	{51, "EBADR", "bad request descriptor"},
+	{52, "EXFULL", "message tables full"},
+	{53, "ENOANO", "anode table overflow"},
+	{54, "EBADRQC", "bad request code"},
+	{55, "EBADSLT", "invalid slot"},
+	{56, "EDEADLOCK", "file locking deadlock"},
+	{57, "EBFONT", "bad font file format"},
+	{58, "EOWNERDEAD", "owner of the lock died"},
+	{59, "ENOTRECOVERABLE", "lock is not recoverable"},
+	{60, "ENOSTR", "not a stream device"},
+	{61, "ENODATA", "no data available"},
+	{62, "ETIME", "timer expired"},
+	{63, "ENOSR", "out of stream resources"},
+	{64, "ENONET", "machine is not on the network"},
+	{65, "ENOPKG", "package not installed"},
+	{66, "EREMOTE", "object is remote"},
+	{67, "ENOLINK", "link has been severed"},
+	{68, "EADV", "advertise error"},
+	{69, "ESRMNT", "srmount error"},
+	{70, "ECOMM", "communication error on send"},
+	{71, "EPROTO", "protocol error"},
+	{72, "ELOCKUNMAPPED", "locked lock was unmapped "},
+	{73, "ENOTACTIVE", "facility is not active"},
+	{74, "EMULTIHOP", "multihop attempted"},
+	{77, "EBADMSG", "not a data message"},
+	{78, "ENAMETOOLONG", "file name too long"},
+	{79, "EOVERFLOW", "value too large for defined data type"},
+	{80, "ENOTUNIQ", "name not unique on network"},
+	{81, "EBADFD", "file descriptor in bad state"},
+	{82, "EREMCHG", "remote address changed"},
+	{83, "ELIBACC", "can not access a needed shared library"},
+	{84, "ELIBBAD", "accessing a corrupted shared library"},
+	{85, "ELIBSCN", ".lib section in a.out corrupted"},
+	{86, "ELIBMAX", "attempting to link in more shared libraries than system limit"},
+	{87, "ELIBEXEC", "can not exec a shared library directly"},
+	{88, "EILSEQ", "illegal byte sequence"},
+	{89, "ENOSYS", "operation not applicable"},
+	{90, "ELOOP", "number of symbolic links encountered during path name traversal exceeds MAXSYMLINKS"},
+	{91, "ERESTART", "error 91"},
+	{92, "ESTRPIPE", "error 92"},
+	{93, "ENOTEMPTY", "directory not empty"},
+	{94, "EUSERS", "too many users"},
+	{95, "ENOTSOCK", "socket operation on non-socket"},
+	{96, "EDESTADDRREQ", "destination address required"},
+	{97, "EMSGSIZE", "message too long"},
+	{98, "EPROTOTYPE", "protocol wrong type for socket"},
+	{99, "ENOPROTOOPT", "option not supported by protocol"},
+	{120, "EPROTONOSUPPORT", "protocol not supported"},
+	{121, "ESOCKTNOSUPPORT", "socket type not supported"},
+	{122, "EOPNOTSUPP", "operation not supported on transport endpoint"},
+	{123, "EPFNOSUPPORT", "protocol family not supported"},
+	{124, "EAFNOSUPPORT", "address family not supported by protocol family"},
+	{125, "EADDRINUSE", "address already in use"},
+	{126, "EADDRNOTAVAIL", "cannot assign requested address"},
+	{127, "ENETDOWN", "network is down"},
+	{128, "ENETUNREACH", "network is unreachable"},
+	{129, "ENETRESET", "network dropped connection because of reset"},
+	{130, "ECONNABORTED", "software caused connection abort"},
+	{131, "ECONNRESET", "connection reset by peer"},
+	{132, "ENOBUFS", "no buffer space available"},
+	{133, "EISCONN", "transport endpoint is already connected"},
+	{134, "ENOTCONN", "transport endpoint is not connected"},
+	{143, "ESHUTDOWN", "cannot send after socket shutdown"},
+	{144, "ETOOMANYREFS", "too many references: cannot splice"},
+	{145, "ETIMEDOUT", "connection timed out"},
+	{146, "ECONNREFUSED", "connection refused"},
+	{147, "EHOSTDOWN", "host is down"},
+	{148, "EHOSTUNREACH", "no route to host"},
+	{149, "EALREADY", "operation already in progress"},
+	{150, "EINPROGRESS", "operation now in progress"},
+	{151, "ESTALE", "stale NFS file handle"},
+}
+
+// Signal table
+var signalList = [...]struct {
+	num  syscall.Signal
+	name string
+	desc string
+}{
+	{1, "SIGHUP", "hangup"},
+	{2, "SIGINT", "interrupt"},
+	{3, "SIGQUIT", "quit"},
+	{4, "SIGILL", "illegal Instruction"},
+	{5, "SIGTRAP", "trace/Breakpoint Trap"},
+	{6, "SIGABRT", "abort"},
+	{7, "SIGEMT", "emulation Trap"},
+	{8, "SIGFPE", "arithmetic Exception"},
+	{9, "SIGKILL", "killed"},
+	{10, "SIGBUS", "bus Error"},
+	{11, "SIGSEGV", "segmentation Fault"},
+	{12, "SIGSYS", "bad System Call"},
+	{13, "SIGPIPE", "broken Pipe"},
+	{14, "SIGALRM", "alarm Clock"},
+	{15, "SIGTERM", "terminated"},
+	{16, "SIGUSR1", "user Signal 1"},
+	{17, "SIGUSR2", "user Signal 2"},
+	{18, "SIGCHLD", "child Status Changed"},
+	{19, "SIGPWR", "power-Fail/Restart"},
+	{20, "SIGWINCH", "window Size Change"},
+	{21, "SIGURG", "urgent Socket Condition"},
+	{22, "SIGIO", "pollable Event"},
+	{23, "SIGSTOP", "stopped (signal)"},
+	{24, "SIGTSTP", "stopped (user)"},
+	{25, "SIGCONT", "continued"},
+	{26, "SIGTTIN", "stopped (tty input)"},
+	{27, "SIGTTOU", "stopped (tty output)"},
+	{28, "SIGVTALRM", "virtual Timer Expired"},
+	{29, "SIGPROF", "profiling Timer Expired"},
+	{30, "SIGXCPU", "cpu Limit Exceeded"},
+	{31, "SIGXFSZ", "file Size Limit Exceeded"},
+	{32, "SIGWAITING", "no runnable lwp"},
+	{33, "SIGLWP", "inter-lwp signal"},
+	{34, "SIGFREEZE", "checkpoint Freeze"},
+	{35, "SIGTHAW", "checkpoint Thaw"},
+	{36, "SIGCANCEL", "thread Cancellation"},
+	{37, "SIGLOST", "resource Lost"},
+	{38, "SIGXRES", "resource Control Exceeded"},
+	{39, "SIGJVM1", "reserved for JVM 1"},
+	{40, "SIGJVM2", "reserved for JVM 2"},
+	{41, "SIGINFO", "information Request"},
+}
