@@ -36,4 +36,6 @@ func PtraceGetRegsArm64(pid int, regsout *PtraceRegsArm64) error {
 }
 
 // PtraceSetRegsArm64 sets the registers used by arm64 binaries.
-func PtraceSetRegsArm64(pid i
+func PtraceSetRegsArm64(pid int, regs *PtraceRegsArm64) error {
+	return ptrace(PTRACE_SETREGS, pid, 0, uintptr(unsafe.Pointer(regs)))
+}
