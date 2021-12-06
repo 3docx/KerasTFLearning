@@ -1,0 +1,1 @@
+// mksyscall.pl -b32 -arm -tags linux,mips syscall_linux.go syscall_linux
