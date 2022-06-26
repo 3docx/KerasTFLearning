@@ -225,4 +225,25 @@ const (
 	SYS_KQUEUE                 = 362 // { int kqueue(void); }
 	SYS_KEVENT                 = 363 // { int kevent(int fd, \
 	SYS_KENV                   = 390 // { int kenv(int what, const char *name, char *value, int len); }
-	SYS_LCHFLAGS              
+	SYS_LCHFLAGS               = 391 // { int lchflags(char *path, int flags); }
+	SYS_UUIDGEN                = 392 // { int uuidgen(struct uuid *store, int count); }
+	SYS_SENDFILE               = 393 // { int sendfile(int fd, int s, off_t offset, size_t nbytes, \
+	SYS_VARSYM_SET             = 450 // { int varsym_set(int level, const char *name, const char *data); }
+	SYS_VARSYM_GET             = 451 // { int varsym_get(int mask, const char *wild, char *buf, int bufsize); }
+	SYS_VARSYM_LIST            = 452 // { int varsym_list(int level, char *buf, int maxsize, int *marker); }
+	SYS_EXEC_SYS_REGISTER      = 465 // { int exec_sys_register(void *entry); }
+	SYS_EXEC_SYS_UNREGISTER    = 466 // { int exec_sys_unregister(int id); }
+	SYS_SYS_CHECKPOINT         = 467 // { int sys_checkpoint(int type, int fd, pid_t pid, int retval); }
+	SYS_MOUNTCTL               = 468 // { int mountctl(const char *path, int op, int fd, const void *ctl, int ctllen, void *buf, int buflen); }
+	SYS_UMTX_SLEEP             = 469 // { int umtx_sleep(volatile const int *ptr, int value, int timeout); }
+	SYS_UMTX_WAKEUP            = 470 // { int umtx_wakeup(volatile const int *ptr, int count); }
+	SYS_JAIL_ATTACH            = 471 // { int jail_attach(int jid); }
+	SYS_SET_TLS_AREA           = 472 // { int set_tls_area(int which, struct tls_info *info, size_t infosize); }
+	SYS_GET_TLS_AREA           = 473 // { int get_tls_area(int which, struct tls_info *info, size_t infosize); }
+	SYS_CLOSEFROM              = 474 // { int closefrom(int fd); }
+	SYS_STAT                   = 475 // { int stat(const char *path, struct stat *ub); }
+	SYS_FSTAT                  = 476 // { int fstat(int fd, struct stat *sb); }
+	SYS_LSTAT                  = 477 // { int lstat(const char *path, struct stat *ub); }
+	SYS_FHSTAT                 = 478 // { int fhstat(const struct fhandle *u_fhp, struct stat *sb); }
+	SYS_GETDIRENTRIES          = 479 // { int getdirentries(int fd, char *buf, u_int count, \
+	SYS_GETDENTS               = 480 // { int g
