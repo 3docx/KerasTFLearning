@@ -269,4 +269,28 @@ const (
 	SYS_FSTATVFS               = 501 // { int fstatvfs(int fd, struct statvfs *buf); }
 	SYS_FHSTATVFS              = 502 // { int fhstatvfs(const struct fhandle *u_fhp, struct statvfs *buf); }
 	SYS_GETVFSSTAT             = 503 // { int getvfsstat(struct statfs *buf,          \
-	SYS_OPENAT     
+	SYS_OPENAT                 = 504 // { int openat(int fd, char *path, int flags, int mode); }
+	SYS_FSTATAT                = 505 // { int fstatat(int fd, char *path, 	\
+	SYS_FCHMODAT               = 506 // { int fchmodat(int fd, char *path, int mode, \
+	SYS_FCHOWNAT               = 507 // { int fchownat(int fd, char *path, int uid, int gid, \
+	SYS_UNLINKAT               = 508 // { int unlinkat(int fd, char *path, int flags); }
+	SYS_FACCESSAT              = 509 // { int faccessat(int fd, char *path, int amode, \
+	SYS_MQ_OPEN                = 510 // { mqd_t mq_open(const char * name, int oflag, \
+	SYS_MQ_CLOSE               = 511 // { int mq_close(mqd_t mqdes); }
+	SYS_MQ_UNLINK              = 512 // { int mq_unlink(const char *name); }
+	SYS_MQ_GETATTR             = 513 // { int mq_getattr(mqd_t mqdes, \
+	SYS_MQ_SETATTR             = 514 // { int mq_setattr(mqd_t mqdes, \
+	SYS_MQ_NOTIFY              = 515 // { int mq_notify(mqd_t mqdes, \
+	SYS_MQ_SEND                = 516 // { int mq_send(mqd_t mqdes, const char *msg_ptr, \
+	SYS_MQ_RECEIVE             = 517 // { ssize_t mq_receive(mqd_t mqdes, char *msg_ptr, \
+	SYS_MQ_TIMEDSEND           = 518 // { int mq_timedsend(mqd_t mqdes, \
+	SYS_MQ_TIMEDRECEIVE        = 519 // { ssize_t mq_timedreceive(mqd_t mqdes, \
+	SYS_IOPRIO_SET             = 520 // { int ioprio_set(int which, int who, int prio); }
+	SYS_IOPRIO_GET             = 521 // { int ioprio_get(int which, int who); }
+	SYS_CHROOT_KERNEL          = 522 // { int chroot_kernel(char *path); }
+	SYS_RENAMEAT               = 523 // { int renameat(int oldfd, char *old, int newfd, \
+	SYS_MKDIRAT                = 524 // { int mkdirat(int fd, char *path, mode_t mode); }
+	SYS_MKFIFOAT               = 525 // { int mkfifoat(int fd, char *path, mode_t mode); }
+	SYS_MKNODAT                = 526 // { int mknodat(int fd, char *path, mode_t mode, \
+	SYS_READLINKAT             = 527 // { int readlinkat(int fd, char *path, char *buf, \
+	SYS_SYMLINKAT
