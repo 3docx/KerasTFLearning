@@ -293,4 +293,23 @@ const (
 	SYS_MKFIFOAT               = 525 // { int mkfifoat(int fd, char *path, mode_t mode); }
 	SYS_MKNODAT                = 526 // { int mknodat(int fd, char *path, mode_t mode, \
 	SYS_READLINKAT             = 527 // { int readlinkat(int fd, char *path, char *buf, \
-	SYS_SYMLINKAT
+	SYS_SYMLINKAT              = 528 // { int symlinkat(char *path1, int fd, char *path2); }
+	SYS_SWAPOFF                = 529 // { int swapoff(char *name); }
+	SYS_VQUOTACTL              = 530 // { int vquotactl(const char *path, \
+	SYS_LINKAT                 = 531 // { int linkat(int fd1, char *path1, int fd2, \
+	SYS_EACCESS                = 532 // { int eaccess(char *path, int flags); }
+	SYS_LPATHCONF              = 533 // { int lpathconf(char *path, int name); }
+	SYS_VMM_GUEST_CTL          = 534 // { int vmm_guest_ctl(int op, struct vmm_guest_options *options); }
+	SYS_VMM_GUEST_SYNC_ADDR    = 535 // { int vmm_guest_sync_addr(long *dstaddr, long *srcaddr); }
+	SYS_PROCCTL                = 536 // { int procctl(idtype_t idtype, id_t id, int cmd, void *data); }
+	SYS_CHFLAGSAT              = 537 // { int chflagsat(int fd, const char *path, int flags, int atflags);}
+	SYS_PIPE2                  = 538 // { int pipe2(int *fildes, int flags); }
+	SYS_UTIMENSAT              = 539 // { int utimensat(int fd, const char *path, const struct timespec *ts, int flags); }
+	SYS_FUTIMENS               = 540 // { int futimens(int fd, const struct timespec *ts); }
+	SYS_ACCEPT4                = 541 // { int accept4(int s, caddr_t name, int *anamelen, int flags); }
+	SYS_LWP_SETNAME            = 542 // { int lwp_setname(lwpid_t tid, const char *name); }
+	SYS_PPOLL                  = 543 // { int ppoll(struct pollfd *fds, u_int nfds, \
+	SYS_LWP_SETAFFINITY        = 544 // { int lwp_setaffinity(pid_t pid, lwpid_t tid, const cpumask_t *mask); }
+	SYS_LWP_GETAFFINITY        = 545 // { int lwp_getaffinity(pid_t pid, lwpid_t tid, cpumask_t *mask); }
+	SYS_LWP_CREATE2            = 546 // { int lwp_create2(struct lwp_params *params, const cpumask_t *mask); }
+)
