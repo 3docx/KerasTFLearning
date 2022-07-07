@@ -26,4 +26,35 @@ const (
 	SYS_MOUNT                  = 21  // { int mount(char *type, char *path, \
 	SYS_UNMOUNT                = 22  // { int unmount(char *path, int flags); }
 	SYS_SETUID                 = 23  // { int setuid(uid_t uid); }
-	SYS_GETUID              
+	SYS_GETUID                 = 24  // { uid_t getuid(void); }
+	SYS_GETEUID                = 25  // { uid_t geteuid(void); }
+	SYS_PTRACE                 = 26  // { int ptrace(int req, pid_t pid, \
+	SYS_RECVMSG                = 27  // { int recvmsg(int s, struct msghdr *msg, \
+	SYS_SENDMSG                = 28  // { int sendmsg(int s, struct msghdr *msg, \
+	SYS_RECVFROM               = 29  // { int recvfrom(int s, caddr_t buf, \
+	SYS_ACCEPT                 = 30  // { int accept(int s, \
+	SYS_GETPEERNAME            = 31  // { int getpeername(int fdes, \
+	SYS_GETSOCKNAME            = 32  // { int getsockname(int fdes, \
+	SYS_ACCESS                 = 33  // { int access(char *path, int amode); }
+	SYS_CHFLAGS                = 34  // { int chflags(const char *path, u_long flags); }
+	SYS_FCHFLAGS               = 35  // { int fchflags(int fd, u_long flags); }
+	SYS_SYNC                   = 36  // { int sync(void); }
+	SYS_KILL                   = 37  // { int kill(int pid, int signum); }
+	SYS_GETPPID                = 39  // { pid_t getppid(void); }
+	SYS_DUP                    = 41  // { int dup(u_int fd); }
+	SYS_PIPE                   = 42  // { int pipe(void); }
+	SYS_GETEGID                = 43  // { gid_t getegid(void); }
+	SYS_PROFIL                 = 44  // { int profil(caddr_t samples, size_t size, \
+	SYS_KTRACE                 = 45  // { int ktrace(const char *fname, int ops, \
+	SYS_GETGID                 = 47  // { gid_t getgid(void); }
+	SYS_GETLOGIN               = 49  // { int getlogin(char *namebuf, u_int \
+	SYS_SETLOGIN               = 50  // { int setlogin(char *namebuf); }
+	SYS_ACCT                   = 51  // { int acct(char *path); }
+	SYS_SIGALTSTACK            = 53  // { int sigaltstack(stack_t *ss, \
+	SYS_IOCTL                  = 54  // { int ioctl(int fd, u_long com, \
+	SYS_REBOOT                 = 55  // { int reboot(int opt); }
+	SYS_REVOKE                 = 56  // { int revoke(char *path); }
+	SYS_SYMLINK                = 57  // { int symlink(char *path, char *link); }
+	SYS_READLINK               = 58  // { ssize_t readlink(char *path, char *buf, \
+	SYS_EXECVE                 = 59  // { int execve(char *fname, char **argv, \
+	
