@@ -57,4 +57,32 @@ const (
 	SYS_SYMLINK                = 57  // { int symlink(char *path, char *link); }
 	SYS_READLINK               = 58  // { ssize_t readlink(char *path, char *buf, \
 	SYS_EXECVE                 = 59  // { int execve(char *fname, char **argv, \
-	
+	SYS_UMASK                  = 60  // { int umask(int newmask); } umask umask_args \
+	SYS_CHROOT                 = 61  // { int chroot(char *path); }
+	SYS_MSYNC                  = 65  // { int msync(void *addr, size_t len, \
+	SYS_VFORK                  = 66  // { int vfork(void); }
+	SYS_SBRK                   = 69  // { int sbrk(int incr); }
+	SYS_SSTK                   = 70  // { int sstk(int incr); }
+	SYS_OVADVISE               = 72  // { int ovadvise(int anom); } vadvise \
+	SYS_MUNMAP                 = 73  // { int munmap(void *addr, size_t len); }
+	SYS_MPROTECT               = 74  // { int mprotect(const void *addr, size_t len, \
+	SYS_MADVISE                = 75  // { int madvise(void *addr, size_t len, \
+	SYS_MINCORE                = 78  // { int mincore(const void *addr, size_t len, \
+	SYS_GETGROUPS              = 79  // { int getgroups(u_int gidsetsize, \
+	SYS_SETGROUPS              = 80  // { int setgroups(u_int gidsetsize, \
+	SYS_GETPGRP                = 81  // { int getpgrp(void); }
+	SYS_SETPGID                = 82  // { int setpgid(int pid, int pgid); }
+	SYS_SETITIMER              = 83  // { int setitimer(u_int which, struct \
+	SYS_SWAPON                 = 85  // { int swapon(char *name); }
+	SYS_GETITIMER              = 86  // { int getitimer(u_int which, \
+	SYS_GETDTABLESIZE          = 89  // { int getdtablesize(void); }
+	SYS_DUP2                   = 90  // { int dup2(u_int from, u_int to); }
+	SYS_FCNTL                  = 92  // { int fcntl(int fd, int cmd, long arg); }
+	SYS_SELECT                 = 93  // { int select(int nd, fd_set *in, fd_set *ou, \
+	SYS_FSYNC                  = 95  // { int fsync(int fd); }
+	SYS_SETPRIORITY            = 96  // { int setpriority(int which, int who, \
+	SYS_SOCKET                 = 97  // { int socket(int domain, int type, \
+	SYS_CONNECT                = 98  // { int connect(int s, caddr_t name, \
+	SYS_GETPRIORITY            = 100 // { int getpriority(int which, int who); }
+	SYS_BIND                   = 104 // { int bind(int s, caddr_t name, \
+	SYS_SETSOCKOPT         
