@@ -275,4 +275,31 @@ const (
 	SYS_SETAUID                = 448 // { int setauid(uid_t *auid); }
 	SYS_GETAUDIT               = 449 // { int getaudit(struct auditinfo *auditinfo); }
 	SYS_SETAUDIT               = 450 // { int setaudit(struct auditinfo *auditinfo); }
-	SYS_GETAUDIT_ADDR         
+	SYS_GETAUDIT_ADDR          = 451 // { int getaudit_addr( \
+	SYS_SETAUDIT_ADDR          = 452 // { int setaudit_addr( \
+	SYS_AUDITCTL               = 453 // { int auditctl(char *path); }
+	SYS__UMTX_OP               = 454 // { int _umtx_op(void *obj, int op, \
+	SYS_THR_NEW                = 455 // { int thr_new(struct thr_param *param, \
+	SYS_SIGQUEUE               = 456 // { int sigqueue(pid_t pid, int signum, void *value); }
+	SYS_ABORT2                 = 463 // { int abort2(const char *why, int nargs, void **args); }
+	SYS_THR_SET_NAME           = 464 // { int thr_set_name(long id, const char *name); }
+	SYS_RTPRIO_THREAD          = 466 // { int rtprio_thread(int function, \
+	SYS_PREAD                  = 475 // { ssize_t pread(int fd, void *buf, \
+	SYS_PWRITE                 = 476 // { ssize_t pwrite(int fd, const void *buf, \
+	SYS_MMAP                   = 477 // { caddr_t mmap(caddr_t addr, size_t len, \
+	SYS_LSEEK                  = 478 // { off_t lseek(int fd, off_t offset, \
+	SYS_TRUNCATE               = 479 // { int truncate(char *path, off_t length); }
+	SYS_FTRUNCATE              = 480 // { int ftruncate(int fd, off_t length); }
+	SYS_THR_KILL2              = 481 // { int thr_kill2(pid_t pid, long id, int sig); }
+	SYS_SHM_OPEN               = 482 // { int shm_open(const char *path, int flags, \
+	SYS_SHM_UNLINK             = 483 // { int shm_unlink(const char *path); }
+	SYS_CPUSET                 = 484 // { int cpuset(cpusetid_t *setid); }
+	SYS_CPUSET_SETID           = 485 // { int cpuset_setid(cpuwhich_t which, id_t id, \
+	SYS_CPUSET_GETID           = 486 // { int cpuset_getid(cpulevel_t level, \
+	SYS_CPUSET_GETAFFINITY     = 487 // { int cpuset_getaffinity(cpulevel_t level, \
+	SYS_CPUSET_SETAFFINITY     = 488 // { int cpuset_setaffinity(cpulevel_t level, \
+	SYS_FACCESSAT              = 489 // { int faccessat(int fd, char *path, int amode, \
+	SYS_FCHMODAT               = 490 // { int fchmodat(int fd, char *path, mode_t mode, \
+	SYS_FCHOWNAT               = 491 // { int fchownat(int fd, char *path, uid_t uid, \
+	SYS_FEXECVE                = 492 // { int fexecve(int fd, char **argv, \
+	SYS_FSTATAT   
