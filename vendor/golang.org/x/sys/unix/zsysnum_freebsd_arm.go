@@ -302,4 +302,30 @@ const (
 	SYS_FCHMODAT               = 490 // { int fchmodat(int fd, char *path, mode_t mode, \
 	SYS_FCHOWNAT               = 491 // { int fchownat(int fd, char *path, uid_t uid, \
 	SYS_FEXECVE                = 492 // { int fexecve(int fd, char **argv, \
-	SYS_FSTATAT   
+	SYS_FSTATAT                = 493 // { int fstatat(int fd, char *path, \
+	SYS_FUTIMESAT              = 494 // { int futimesat(int fd, char *path, \
+	SYS_LINKAT                 = 495 // { int linkat(int fd1, char *path1, int fd2, \
+	SYS_MKDIRAT                = 496 // { int mkdirat(int fd, char *path, mode_t mode); }
+	SYS_MKFIFOAT               = 497 // { int mkfifoat(int fd, char *path, mode_t mode); }
+	SYS_MKNODAT                = 498 // { int mknodat(int fd, char *path, mode_t mode, \
+	SYS_OPENAT                 = 499 // { int openat(int fd, char *path, int flag, \
+	SYS_READLINKAT             = 500 // { int readlinkat(int fd, char *path, char *buf, \
+	SYS_RENAMEAT               = 501 // { int renameat(int oldfd, char *old, int newfd, \
+	SYS_SYMLINKAT              = 502 // { int symlinkat(char *path1, int fd, \
+	SYS_UNLINKAT               = 503 // { int unlinkat(int fd, char *path, int flag); }
+	SYS_POSIX_OPENPT           = 504 // { int posix_openpt(int flags); }
+	SYS_JAIL_GET               = 506 // { int jail_get(struct iovec *iovp, \
+	SYS_JAIL_SET               = 507 // { int jail_set(struct iovec *iovp, \
+	SYS_JAIL_REMOVE            = 508 // { int jail_remove(int jid); }
+	SYS_CLOSEFROM              = 509 // { int closefrom(int lowfd); }
+	SYS_LPATHCONF              = 513 // { int lpathconf(char *path, int name); }
+	SYS___CAP_RIGHTS_GET       = 515 // { int __cap_rights_get(int version, \
+	SYS_CAP_ENTER              = 516 // { int cap_enter(void); }
+	SYS_CAP_GETMODE            = 517 // { int cap_getmode(u_int *modep); }
+	SYS_PDFORK                 = 518 // { int pdfork(int *fdp, int flags); }
+	SYS_PDKILL                 = 519 // { int pdkill(int fd, int signum); }
+	SYS_PDGETPID               = 520 // { int pdgetpid(int fd, pid_t *pidp); }
+	SYS_PSELECT                = 522 // { int pselect(int nd, fd_set *in, \
+	SYS_GETLOGINCLASS          = 523 // { int getloginclass(char *namebuf, \
+	SYS_SETLOGINCLASS          = 524 // { int setloginclass(const char *namebuf); }
+	S
