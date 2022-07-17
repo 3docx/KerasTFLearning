@@ -328,4 +328,26 @@ const (
 	SYS_PSELECT                = 522 // { int pselect(int nd, fd_set *in, \
 	SYS_GETLOGINCLASS          = 523 // { int getloginclass(char *namebuf, \
 	SYS_SETLOGINCLASS          = 524 // { int setloginclass(const char *namebuf); }
-	S
+	SYS_RCTL_GET_RACCT         = 525 // { int rctl_get_racct(const void *inbufp, \
+	SYS_RCTL_GET_RULES         = 526 // { int rctl_get_rules(const void *inbufp, \
+	SYS_RCTL_GET_LIMITS        = 527 // { int rctl_get_limits(const void *inbufp, \
+	SYS_RCTL_ADD_RULE          = 528 // { int rctl_add_rule(const void *inbufp, \
+	SYS_RCTL_REMOVE_RULE       = 529 // { int rctl_remove_rule(const void *inbufp, \
+	SYS_POSIX_FALLOCATE        = 530 // { int posix_fallocate(int fd, \
+	SYS_POSIX_FADVISE          = 531 // { int posix_fadvise(int fd, off_t offset, \
+	SYS_WAIT6                  = 532 // { int wait6(idtype_t idtype, id_t id, \
+	SYS_CAP_RIGHTS_LIMIT       = 533 // { int cap_rights_limit(int fd, \
+	SYS_CAP_IOCTLS_LIMIT       = 534 // { int cap_ioctls_limit(int fd, \
+	SYS_CAP_IOCTLS_GET         = 535 // { ssize_t cap_ioctls_get(int fd, \
+	SYS_CAP_FCNTLS_LIMIT       = 536 // { int cap_fcntls_limit(int fd, \
+	SYS_CAP_FCNTLS_GET         = 537 // { int cap_fcntls_get(int fd, \
+	SYS_BINDAT                 = 538 // { int bindat(int fd, int s, caddr_t name, \
+	SYS_CONNECTAT              = 539 // { int connectat(int fd, int s, caddr_t name, \
+	SYS_CHFLAGSAT              = 540 // { int chflagsat(int fd, const char *path, \
+	SYS_ACCEPT4                = 541 // { int accept4(int s, \
+	SYS_PIPE2                  = 542 // { int pipe2(int *fildes, int flags); }
+	SYS_PROCCTL                = 544 // { int procctl(idtype_t idtype, id_t id, \
+	SYS_PPOLL                  = 545 // { int ppoll(struct pollfd *fds, u_int nfds, \
+	SYS_FUTIMENS               = 546 // { int futimens(int fd, \
+	SYS_UTIMENSAT              = 547 // { int utimensat(int fd, \
+)
