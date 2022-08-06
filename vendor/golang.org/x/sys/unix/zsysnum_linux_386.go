@@ -369,4 +369,22 @@ const (
 	SYS_ACCEPT4                = 364
 	SYS_GETSOCKOPT             = 365
 	SYS_SETSOCKOPT             = 366
-	
+	SYS_GETSOCKNAME            = 367
+	SYS_GETPEERNAME            = 368
+	SYS_SENDTO                 = 369
+	SYS_SENDMSG                = 370
+	SYS_RECVFROM               = 371
+	SYS_RECVMSG                = 372
+	SYS_SHUTDOWN               = 373
+	SYS_USERFAULTFD            = 374
+	SYS_MEMBARRIER             = 375
+	SYS_MLOCK2                 = 376
+	SYS_COPY_FILE_RANGE        = 377
+	SYS_PREADV2                = 378
+	SYS_PWRITEV2               = 379
+	SYS_PKEY_MPROTECT          = 380
+	SYS_PKEY_ALLOC             = 381
+	SYS_PKEY_FREE              = 382
+	SYS_STATX                  = 383
+	SYS_ARCH_PRCTL             = 384
+)
