@@ -329,4 +329,20 @@ const (
 	SYS_KCMP                   = 341
 	SYS_FINIT_MODULE           = 342
 	SYS_SCHED_SETATTR          = 343
-	SY
+	SYS_SCHED_GETATTR          = 344
+	SYS_RENAMEAT2              = 345
+	SYS_SECCOMP                = 346
+	SYS_GETRANDOM              = 347
+	SYS_MEMFD_CREATE           = 348
+	SYS_BPF                    = 349
+	SYS_EXECVEAT               = 350
+	SYS_MEMBARRIER             = 351
+	SYS_USERFAULTFD            = 352
+	SYS_BIND                   = 353
+	SYS_LISTEN                 = 354
+	SYS_SETSOCKOPT             = 355
+	SYS_MLOCK2                 = 356
+	SYS_COPY_FILE_RANGE        = 357
+	SYS_PREADV2                = 358
+	SYS_PWRITEV2               = 359
+)
