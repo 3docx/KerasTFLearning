@@ -42,4 +42,29 @@ const (
 	SYS_GETEGID              = 43  // { gid_t|sys||getegid(void); }
 	SYS_PROFIL               = 44  // { int|sys||profil(char *samples, size_t size, u_long offset, u_int scale); }
 	SYS_KTRACE               = 45  // { int|sys||ktrace(const char *fname, int ops, int facs, pid_t pid); }
-	SYS_GETGID               
+	SYS_GETGID               = 47  // { gid_t|sys||getgid_with_egid(void); }
+	SYS___GETLOGIN           = 49  // { int|sys||__getlogin(char *namebuf, size_t namelen); }
+	SYS___SETLOGIN           = 50  // { int|sys||__setlogin(const char *namebuf); }
+	SYS_ACCT                 = 51  // { int|sys||acct(const char *path); }
+	SYS_IOCTL                = 54  // { int|sys||ioctl(int fd, u_long com, ... void *data); }
+	SYS_REVOKE               = 56  // { int|sys||revoke(const char *path); }
+	SYS_SYMLINK              = 57  // { int|sys||symlink(const char *path, const char *link); }
+	SYS_READLINK             = 58  // { ssize_t|sys||readlink(const char *path, char *buf, size_t count); }
+	SYS_EXECVE               = 59  // { int|sys||execve(const char *path, char * const *argp, char * const *envp); }
+	SYS_UMASK                = 60  // { mode_t|sys||umask(mode_t newmask); }
+	SYS_CHROOT               = 61  // { int|sys||chroot(const char *path); }
+	SYS_VFORK                = 66  // { int|sys||vfork(void); }
+	SYS_SBRK                 = 69  // { int|sys||sbrk(intptr_t incr); }
+	SYS_SSTK                 = 70  // { int|sys||sstk(int incr); }
+	SYS_VADVISE              = 72  // { int|sys||ovadvise(int anom); }
+	SYS_MUNMAP               = 73  // { int|sys||munmap(void *addr, size_t len); }
+	SYS_MPROTECT             = 74  // { int|sys||mprotect(void *addr, size_t len, int prot); }
+	SYS_MADVISE              = 75  // { int|sys||madvise(void *addr, size_t len, int behav); }
+	SYS_MINCORE              = 78  // { int|sys||mincore(void *addr, size_t len, char *vec); }
+	SYS_GETGROUPS            = 79  // { int|sys||getgroups(int gidsetsize, gid_t *gidset); }
+	SYS_SETGROUPS            = 80  // { int|sys||setgroups(int gidsetsize, const gid_t *gidset); }
+	SYS_GETPGRP              = 81  // { int|sys||getpgrp(void); }
+	SYS_SETPGID              = 82  // { int|sys||setpgid(pid_t pid, pid_t pgid); }
+	SYS_DUP2                 = 90  // { int|sys||dup2(int from, int to); }
+	SYS_FCNTL                = 92  // { int|sys||fcntl(int fd, int cmd, ... void *arg); }
+	SYS_FSYNC       
