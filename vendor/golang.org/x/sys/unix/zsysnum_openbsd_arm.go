@@ -133,4 +133,31 @@ const (
 	SYS_ADJTIME        = 140 // { int sys_adjtime(const struct timeval *delta, \
 	SYS_SETSID         = 147 // { int sys_setsid(void); }
 	SYS_QUOTACTL       = 148 // { int sys_quotactl(const char *path, int cmd, \
-	SYS_NFSSVC       
+	SYS_NFSSVC         = 155 // { int sys_nfssvc(int flag, void *argp); }
+	SYS_GETFH          = 161 // { int sys_getfh(const char *fname, fhandle_t *fhp); }
+	SYS_SYSARCH        = 165 // { int sys_sysarch(int op, void *parms); }
+	SYS_PREAD          = 173 // { ssize_t sys_pread(int fd, void *buf, \
+	SYS_PWRITE         = 174 // { ssize_t sys_pwrite(int fd, const void *buf, \
+	SYS_SETGID         = 181 // { int sys_setgid(gid_t gid); }
+	SYS_SETEGID        = 182 // { int sys_setegid(gid_t egid); }
+	SYS_SETEUID        = 183 // { int sys_seteuid(uid_t euid); }
+	SYS_PATHCONF       = 191 // { long sys_pathconf(const char *path, int name); }
+	SYS_FPATHCONF      = 192 // { long sys_fpathconf(int fd, int name); }
+	SYS_SWAPCTL        = 193 // { int sys_swapctl(int cmd, const void *arg, int misc); }
+	SYS_GETRLIMIT      = 194 // { int sys_getrlimit(int which, \
+	SYS_SETRLIMIT      = 195 // { int sys_setrlimit(int which, \
+	SYS_MMAP           = 197 // { void *sys_mmap(void *addr, size_t len, int prot, \
+	SYS_LSEEK          = 199 // { off_t sys_lseek(int fd, int pad, off_t offset, \
+	SYS_TRUNCATE       = 200 // { int sys_truncate(const char *path, int pad, \
+	SYS_FTRUNCATE      = 201 // { int sys_ftruncate(int fd, int pad, off_t length); }
+	SYS___SYSCTL       = 202 // { int sys___sysctl(const int *name, u_int namelen, \
+	SYS_MLOCK          = 203 // { int sys_mlock(const void *addr, size_t len); }
+	SYS_MUNLOCK        = 204 // { int sys_munlock(const void *addr, size_t len); }
+	SYS_GETPGID        = 207 // { pid_t sys_getpgid(pid_t pid); }
+	SYS_UTRACE         = 209 // { int sys_utrace(const char *label, const void *addr, \
+	SYS_SEMGET         = 221 // { int sys_semget(key_t key, int nsems, int semflg); }
+	SYS_MSGGET         = 225 // { int sys_msgget(key_t key, int msgflg); }
+	SYS_MSGSND         = 226 // { int sys_msgsnd(int msqid, const void *msgp, size_t msgsz, \
+	SYS_MSGRCV         = 227 // { int sys_msgrcv(int msqid, void *msgp, size_t msgsz, \
+	SYS_SHMAT          = 228 // { void *sys_shmat(int shmid, const void *shmaddr, \
+	SYS_SH
