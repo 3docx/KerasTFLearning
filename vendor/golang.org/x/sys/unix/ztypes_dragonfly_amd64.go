@@ -286,4 +286,130 @@ type FdSet struct {
 const (
 	SizeofIfMsghdr         = 0xb0
 	SizeofIfData           = 0xa0
-	SizeofIf
+	SizeofIfaMsghdr        = 0x14
+	SizeofIfmaMsghdr       = 0x10
+	SizeofIfAnnounceMsghdr = 0x18
+	SizeofRtMsghdr         = 0x98
+	SizeofRtMetrics        = 0x70
+)
+
+type IfMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Addrs   int32
+	Flags   int32
+	Index   uint16
+	_       [2]byte
+	Data    IfData
+}
+
+type IfData struct {
+	Type       uint8
+	Physical   uint8
+	Addrlen    uint8
+	Hdrlen     uint8
+	Recvquota  uint8
+	Xmitquota  uint8
+	_          [2]byte
+	Mtu        uint64
+	Metric     uint64
+	Link_state uint64
+	Baudrate   uint64
+	Ipackets   uint64
+	Ierrors    uint64
+	Opackets   uint64
+	Oerrors    uint64
+	Collisions uint64
+	Ibytes     uint64
+	Obytes     uint64
+	Imcasts    uint64
+	Omcasts    uint64
+	Iqdrops    uint64
+	Noproto    uint64
+	Hwassist   uint64
+	Oqdrops    uint64
+	Lastchange Timeval
+}
+
+type IfaMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Addrs   int32
+	Flags   int32
+	Index   uint16
+	_       [2]byte
+	Metric  int32
+}
+
+type IfmaMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Addrs   int32
+	Flags   int32
+	Index   uint16
+	_       [2]byte
+}
+
+type IfAnnounceMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Index   uint16
+	Name    [16]int8
+	What    uint16
+}
+
+type RtMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Index   uint16
+	_       [2]byte
+	Flags   int32
+	Addrs   int32
+	Pid     int32
+	Seq     int32
+	Errno   int32
+	Use     int32
+	Inits   uint64
+	Rmx     RtMetrics
+}
+
+type RtMetrics struct {
+	Locks     uint64
+	Mtu       uint64
+	Pksent    uint64
+	Expire    uint64
+	Sendpipe  uint64
+	Ssthresh  uint64
+	Rtt       uint64
+	Rttvar    uint64
+	Recvpipe  uint64
+	Hopcount  uint64
+	Mssopt    uint16
+	Pad       uint16
+	_         [4]byte
+	Msl       uint64
+	Iwmaxsegs uint64
+	Iwcapsegs uint64
+}
+
+const (
+	SizeofBpfVersion = 0x4
+	SizeofBpfStat    = 0x8
+	SizeofBpfProgram = 0x10
+	SizeofBpfInsn    = 0x8
+	SizeofBpfHdr     = 0x20
+)
+
+type BpfVersion struct {
+	Major uint16
+	Minor uint16
+}
+
+type BpfStat struct {
+	Recv uint32
+	Drop ui
