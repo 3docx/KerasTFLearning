@@ -161,4 +161,137 @@ type RawSockaddrInet4 struct {
 	Zero   [8]int8
 }
 
-type RawSockaddrInet6 
+type RawSockaddrInet6 struct {
+	Len      uint8
+	Family   uint8
+	Port     uint16
+	Flowinfo uint32
+	Addr     [16]byte /* in6_addr */
+	Scope_id uint32
+}
+
+type RawSockaddrUnix struct {
+	Len    uint8
+	Family uint8
+	Path   [104]int8
+}
+
+type RawSockaddrDatalink struct {
+	Len    uint8
+	Family uint8
+	Index  uint16
+	Type   uint8
+	Nlen   uint8
+	Alen   uint8
+	Slen   uint8
+	Data   [46]int8
+}
+
+type RawSockaddr struct {
+	Len    uint8
+	Family uint8
+	Data   [14]int8
+}
+
+type RawSockaddrAny struct {
+	Addr RawSockaddr
+	Pad  [92]int8
+}
+
+type _Socklen uint32
+
+type Linger struct {
+	Onoff  int32
+	Linger int32
+}
+
+type Iovec struct {
+	Base *byte
+	Len  uint64
+}
+
+type IPMreq struct {
+	Multiaddr [4]byte /* in_addr */
+	Interface [4]byte /* in_addr */
+}
+
+type IPMreqn struct {
+	Multiaddr [4]byte /* in_addr */
+	Address   [4]byte /* in_addr */
+	Ifindex   int32
+}
+
+type IPv6Mreq struct {
+	Multiaddr [16]byte /* in6_addr */
+	Interface uint32
+}
+
+type Msghdr struct {
+	Name       *byte
+	Namelen    uint32
+	Pad_cgo_0  [4]byte
+	Iov        *Iovec
+	Iovlen     int32
+	Pad_cgo_1  [4]byte
+	Control    *byte
+	Controllen uint32
+	Flags      int32
+}
+
+type Cmsghdr struct {
+	Len   uint32
+	Level int32
+	Type  int32
+}
+
+type Inet6Pktinfo struct {
+	Addr    [16]byte /* in6_addr */
+	Ifindex uint32
+}
+
+type IPv6MTUInfo struct {
+	Addr RawSockaddrInet6
+	Mtu  uint32
+}
+
+type ICMPv6Filter struct {
+	Filt [8]uint32
+}
+
+const (
+	SizeofSockaddrInet4    = 0x10
+	SizeofSockaddrInet6    = 0x1c
+	SizeofSockaddrAny      = 0x6c
+	SizeofSockaddrUnix     = 0x6a
+	SizeofSockaddrDatalink = 0x36
+	SizeofLinger           = 0x8
+	SizeofIPMreq           = 0x8
+	SizeofIPMreqn          = 0xc
+	SizeofIPv6Mreq         = 0x14
+	SizeofMsghdr           = 0x30
+	SizeofCmsghdr          = 0xc
+	SizeofInet6Pktinfo     = 0x14
+	SizeofIPv6MTUInfo      = 0x20
+	SizeofICMPv6Filter     = 0x20
+)
+
+const (
+	PTRACE_TRACEME = 0x0
+	PTRACE_CONT    = 0x7
+	PTRACE_KILL    = 0x8
+)
+
+type Kevent_t struct {
+	Ident  uint64
+	Filter int16
+	Flags  uint16
+	Fflags uint32
+	Data   int64
+	Udata  *byte
+}
+
+type FdSet struct {
+	X__fds_bits [16]uint64
+}
+
+co
