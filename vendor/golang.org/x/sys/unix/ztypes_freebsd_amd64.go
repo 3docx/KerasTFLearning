@@ -389,4 +389,135 @@ type IfaMsghdr struct {
 	Version   uint8
 	Type      uint8
 	Addrs     int32
-	Fla
+	Flags     int32
+	Index     uint16
+	Pad_cgo_0 [2]byte
+	Metric    int32
+}
+
+type IfmaMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Addrs     int32
+	Flags     int32
+	Index     uint16
+	Pad_cgo_0 [2]byte
+}
+
+type IfAnnounceMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Index   uint16
+	Name    [16]int8
+	What    uint16
+}
+
+type RtMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Index     uint16
+	Pad_cgo_0 [2]byte
+	Flags     int32
+	Addrs     int32
+	Pid       int32
+	Seq       int32
+	Errno     int32
+	Fmask     int32
+	Inits     uint64
+	Rmx       RtMetrics
+}
+
+type RtMetrics struct {
+	Locks    uint64
+	Mtu      uint64
+	Hopcount uint64
+	Expire   uint64
+	Recvpipe uint64
+	Sendpipe uint64
+	Ssthresh uint64
+	Rtt      uint64
+	Rttvar   uint64
+	Pksent   uint64
+	Weight   uint64
+	Filler   [3]uint64
+}
+
+const (
+	SizeofBpfVersion    = 0x4
+	SizeofBpfStat       = 0x8
+	SizeofBpfZbuf       = 0x18
+	SizeofBpfProgram    = 0x10
+	SizeofBpfInsn       = 0x8
+	SizeofBpfHdr        = 0x20
+	SizeofBpfZbufHeader = 0x20
+)
+
+type BpfVersion struct {
+	Major uint16
+	Minor uint16
+}
+
+type BpfStat struct {
+	Recv uint32
+	Drop uint32
+}
+
+type BpfZbuf struct {
+	Bufa   *byte
+	Bufb   *byte
+	Buflen uint64
+}
+
+type BpfProgram struct {
+	Len       uint32
+	Pad_cgo_0 [4]byte
+	Insns     *BpfInsn
+}
+
+type BpfInsn struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type BpfHdr struct {
+	Tstamp    Timeval
+	Caplen    uint32
+	Datalen   uint32
+	Hdrlen    uint16
+	Pad_cgo_0 [6]byte
+}
+
+type BpfZbufHeader struct {
+	Kernel_gen uint32
+	Kernel_len uint32
+	User_gen   uint32
+	X_bzh_pad  [5]uint32
+}
+
+type Termios struct {
+	Iflag  uint32
+	Oflag  uint32
+	Cflag  uint32
+	Lflag  uint32
+	Cc     [20]uint8
+	Ispeed uint32
+	Ospeed uint32
+}
+
+type Winsize struct {
+	Row    uint16
+	Col    uint16
+	Xpixel uint16
+	Ypixel uint16
+}
+
+const (
+	AT_FDCWD            = -0x64
+	AT_REMOVEDIR        = 0x800
+	AT_SYMLINK_FOLLOW   = 0x400
+	AT_SYML
