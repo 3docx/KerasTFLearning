@@ -36,4 +36,129 @@ type Rusage struct {
 	Maxrss   int64
 	Ixrss    int64
 	Idrss    int64
-	
+	Isrss    int64
+	Minflt   int64
+	Majflt   int64
+	Nswap    int64
+	Inblock  int64
+	Oublock  int64
+	Msgsnd   int64
+	Msgrcv   int64
+	Nsignals int64
+	Nvcsw    int64
+	Nivcsw   int64
+}
+
+type Rlimit struct {
+	Cur int64
+	Max int64
+}
+
+type _Gid_t uint32
+
+const (
+	S_IFMT   = 0xf000
+	S_IFIFO  = 0x1000
+	S_IFCHR  = 0x2000
+	S_IFDIR  = 0x4000
+	S_IFBLK  = 0x6000
+	S_IFREG  = 0x8000
+	S_IFLNK  = 0xa000
+	S_IFSOCK = 0xc000
+	S_ISUID  = 0x800
+	S_ISGID  = 0x400
+	S_ISVTX  = 0x200
+	S_IRUSR  = 0x100
+	S_IWUSR  = 0x80
+	S_IXUSR  = 0x40
+)
+
+type Stat_t struct {
+	Dev           uint32
+	Ino           uint32
+	Mode          uint16
+	Nlink         uint16
+	Uid           uint32
+	Gid           uint32
+	Rdev          uint32
+	Atimespec     Timespec
+	Mtimespec     Timespec
+	Ctimespec     Timespec
+	Size          int64
+	Blocks        int64
+	Blksize       int32
+	Flags         uint32
+	Gen           uint32
+	Lspare        int32
+	Birthtimespec Timespec
+}
+
+type Statfs_t struct {
+	Version     uint32
+	Type        uint32
+	Flags       uint64
+	Bsize       uint64
+	Iosize      uint64
+	Blocks      uint64
+	Bfree       uint64
+	Bavail      int64
+	Files       uint64
+	Ffree       int64
+	Syncwrites  uint64
+	Asyncwrites uint64
+	Syncreads   uint64
+	Asyncreads  uint64
+	Spare       [10]uint64
+	Namemax     uint32
+	Owner       uint32
+	Fsid        Fsid
+	Charspare   [80]int8
+	Fstypename  [16]int8
+	Mntfromname [88]int8
+	Mntonname   [88]int8
+}
+
+type Flock_t struct {
+	Start     int64
+	Len       int64
+	Pid       int32
+	Type      int16
+	Whence    int16
+	Sysid     int32
+	Pad_cgo_0 [4]byte
+}
+
+type Dirent struct {
+	Fileno uint32
+	Reclen uint16
+	Type   uint8
+	Namlen uint8
+	Name   [256]int8
+}
+
+type Fsid struct {
+	Val [2]int32
+}
+
+const (
+	PathMax = 0x400
+)
+
+const (
+	FADV_NORMAL     = 0x0
+	FADV_RANDOM     = 0x1
+	FADV_SEQUENTIAL = 0x2
+	FADV_WILLNEED   = 0x3
+	FADV_DONTNEED   = 0x4
+	FADV_NOREUSE    = 0x5
+)
+
+type RawSockaddrInet4 struct {
+	Len    uint8
+	Family uint8
+	Port   uint16
+	Addr   [4]byte /* in_addr */
+	Zero   [8]int8
+}
+
+type RawSockaddrInet6 
