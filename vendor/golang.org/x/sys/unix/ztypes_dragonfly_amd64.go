@@ -412,4 +412,75 @@ type BpfVersion struct {
 
 type BpfStat struct {
 	Recv uint32
-	Drop ui
+	Drop uint32
+}
+
+type BpfProgram struct {
+	Len   uint32
+	_     [4]byte
+	Insns *BpfInsn
+}
+
+type BpfInsn struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type BpfHdr struct {
+	Tstamp  Timeval
+	Caplen  uint32
+	Datalen uint32
+	Hdrlen  uint16
+	_       [6]byte
+}
+
+type Termios struct {
+	Iflag  uint32
+	Oflag  uint32
+	Cflag  uint32
+	Lflag  uint32
+	Cc     [20]uint8
+	Ispeed uint32
+	Ospeed uint32
+}
+
+type Winsize struct {
+	Row    uint16
+	Col    uint16
+	Xpixel uint16
+	Ypixel uint16
+}
+
+const (
+	AT_FDCWD            = 0xfffafdcd
+	AT_SYMLINK_NOFOLLOW = 0x1
+)
+
+type PollFd struct {
+	Fd      int32
+	Events  int16
+	Revents int16
+}
+
+const (
+	POLLERR    = 0x8
+	POLLHUP    = 0x10
+	POLLIN     = 0x1
+	POLLNVAL   = 0x20
+	POLLOUT    = 0x4
+	POLLPRI    = 0x2
+	POLLRDBAND = 0x80
+	POLLRDNORM = 0x40
+	POLLWRBAND = 0x100
+	POLLWRNORM = 0x4
+)
+
+type Utsname struct {
+	Sysname  [32]byte
+	Nodename [32]byte
+	Release  [32]byte
+	Version  [32]byte
+	Machine  [32]byte
+}
