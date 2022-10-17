@@ -91,4 +91,138 @@ type Stat_t struct {
 	Blksize       int32
 	Flags         uint32
 	Gen           uint32
-	Lspare        int
+	Lspare        int32
+	Birthtimespec Timespec
+}
+
+type Statfs_t struct {
+	Version     uint32
+	Type        uint32
+	Flags       uint64
+	Bsize       uint64
+	Iosize      uint64
+	Blocks      uint64
+	Bfree       uint64
+	Bavail      int64
+	Files       uint64
+	Ffree       int64
+	Syncwrites  uint64
+	Asyncwrites uint64
+	Syncreads   uint64
+	Asyncreads  uint64
+	Spare       [10]uint64
+	Namemax     uint32
+	Owner       uint32
+	Fsid        Fsid
+	Charspare   [80]int8
+	Fstypename  [16]int8
+	Mntfromname [88]int8
+	Mntonname   [88]int8
+}
+
+type Flock_t struct {
+	Start     int64
+	Len       int64
+	Pid       int32
+	Type      int16
+	Whence    int16
+	Sysid     int32
+	Pad_cgo_0 [4]byte
+}
+
+type Dirent struct {
+	Fileno uint32
+	Reclen uint16
+	Type   uint8
+	Namlen uint8
+	Name   [256]int8
+}
+
+type Fsid struct {
+	Val [2]int32
+}
+
+const (
+	PathMax = 0x400
+)
+
+const (
+	FADV_NORMAL     = 0x0
+	FADV_RANDOM     = 0x1
+	FADV_SEQUENTIAL = 0x2
+	FADV_WILLNEED   = 0x3
+	FADV_DONTNEED   = 0x4
+	FADV_NOREUSE    = 0x5
+)
+
+type RawSockaddrInet4 struct {
+	Len    uint8
+	Family uint8
+	Port   uint16
+	Addr   [4]byte /* in_addr */
+	Zero   [8]int8
+}
+
+type RawSockaddrInet6 struct {
+	Len      uint8
+	Family   uint8
+	Port     uint16
+	Flowinfo uint32
+	Addr     [16]byte /* in6_addr */
+	Scope_id uint32
+}
+
+type RawSockaddrUnix struct {
+	Len    uint8
+	Family uint8
+	Path   [104]int8
+}
+
+type RawSockaddrDatalink struct {
+	Len    uint8
+	Family uint8
+	Index  uint16
+	Type   uint8
+	Nlen   uint8
+	Alen   uint8
+	Slen   uint8
+	Data   [46]int8
+}
+
+type RawSockaddr struct {
+	Len    uint8
+	Family uint8
+	Data   [14]int8
+}
+
+type RawSockaddrAny struct {
+	Addr RawSockaddr
+	Pad  [92]int8
+}
+
+type _Socklen uint32
+
+type Linger struct {
+	Onoff  int32
+	Linger int32
+}
+
+type Iovec struct {
+	Base *byte
+	Len  uint32
+}
+
+type IPMreq struct {
+	Multiaddr [4]byte /* in_addr */
+	Interface [4]byte /* in_addr */
+}
+
+type IPMreqn struct {
+	Multiaddr [4]byte /* in_addr */
+	Address   [4]byte /* in_addr */
+	Ifindex   int32
+}
+
+type IPv6Mreq struct {
+	Multiaddr [16]byte /* in6_addr */
+	Interface uint32
