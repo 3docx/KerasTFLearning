@@ -226,3 +226,120 @@ type IPMreqn struct {
 type IPv6Mreq struct {
 	Multiaddr [16]byte /* in6_addr */
 	Interface uint32
+}
+
+type Msghdr struct {
+	Name       *byte
+	Namelen    uint32
+	Iov        *Iovec
+	Iovlen     int32
+	Control    *byte
+	Controllen uint32
+	Flags      int32
+}
+
+type Cmsghdr struct {
+	Len   uint32
+	Level int32
+	Type  int32
+}
+
+type Inet6Pktinfo struct {
+	Addr    [16]byte /* in6_addr */
+	Ifindex uint32
+}
+
+type IPv6MTUInfo struct {
+	Addr RawSockaddrInet6
+	Mtu  uint32
+}
+
+type ICMPv6Filter struct {
+	Filt [8]uint32
+}
+
+const (
+	SizeofSockaddrInet4    = 0x10
+	SizeofSockaddrInet6    = 0x1c
+	SizeofSockaddrAny      = 0x6c
+	SizeofSockaddrUnix     = 0x6a
+	SizeofSockaddrDatalink = 0x36
+	SizeofLinger           = 0x8
+	SizeofIPMreq           = 0x8
+	SizeofIPMreqn          = 0xc
+	SizeofIPv6Mreq         = 0x14
+	SizeofMsghdr           = 0x1c
+	SizeofCmsghdr          = 0xc
+	SizeofInet6Pktinfo     = 0x14
+	SizeofIPv6MTUInfo      = 0x20
+	SizeofICMPv6Filter     = 0x20
+)
+
+const (
+	PTRACE_TRACEME = 0x0
+	PTRACE_CONT    = 0x7
+	PTRACE_KILL    = 0x8
+)
+
+type Kevent_t struct {
+	Ident  uint32
+	Filter int16
+	Flags  uint16
+	Fflags uint32
+	Data   int32
+	Udata  *byte
+}
+
+type FdSet struct {
+	X__fds_bits [32]uint32
+}
+
+const (
+	sizeofIfMsghdr         = 0xa8
+	SizeofIfMsghdr         = 0x70
+	sizeofIfData           = 0x98
+	SizeofIfData           = 0x60
+	SizeofIfaMsghdr        = 0x14
+	SizeofIfmaMsghdr       = 0x10
+	SizeofIfAnnounceMsghdr = 0x18
+	SizeofRtMsghdr         = 0x5c
+	SizeofRtMetrics        = 0x38
+)
+
+type ifMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Addrs     int32
+	Flags     int32
+	Index     uint16
+	Pad_cgo_0 [2]byte
+	Data      ifData
+}
+
+type IfMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Addrs     int32
+	Flags     int32
+	Index     uint16
+	Pad_cgo_0 [2]byte
+	Data      IfData
+}
+
+type ifData struct {
+	Type              uint8
+	Physical          uint8
+	Addrlen           uint8
+	Hdrlen            uint8
+	Link_state        uint8
+	Vhid              uint8
+	Datalen           uint16
+	Mtu               uint32
+	Metric            uint32
+	Baudrate          uint64
+	Ipackets          uint64
+	Ierrors           uint64
+	Opackets          uint64
+	Oerrors 
