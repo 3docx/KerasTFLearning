@@ -38,4 +38,134 @@ type Timex struct {
 	Maxerror  int32
 	Esterror  int32
 	Status    int32
-	Cons
+	Constant  int32
+	Precision int32
+	Tolerance int32
+	Time      Timeval
+	Tick      int32
+	Ppsfreq   int32
+	Jitter    int32
+	Shift     int32
+	Stabil    int32
+	Jitcnt    int32
+	Calcnt    int32
+	Errcnt    int32
+	Stbcnt    int32
+	Tai       int32
+	_         [44]byte
+}
+
+type Time_t int32
+
+type Tms struct {
+	Utime  int32
+	Stime  int32
+	Cutime int32
+	Cstime int32
+}
+
+type Utimbuf struct {
+	Actime  int32
+	Modtime int32
+}
+
+type Rusage struct {
+	Utime    Timeval
+	Stime    Timeval
+	Maxrss   int32
+	Ixrss    int32
+	Idrss    int32
+	Isrss    int32
+	Minflt   int32
+	Majflt   int32
+	Nswap    int32
+	Inblock  int32
+	Oublock  int32
+	Msgsnd   int32
+	Msgrcv   int32
+	Nsignals int32
+	Nvcsw    int32
+	Nivcsw   int32
+}
+
+type Rlimit struct {
+	Cur uint64
+	Max uint64
+}
+
+type _Gid_t uint32
+
+type Stat_t struct {
+	Dev     uint64
+	_       uint16
+	_       [2]byte
+	_       uint32
+	Mode    uint32
+	Nlink   uint32
+	Uid     uint32
+	Gid     uint32
+	Rdev    uint64
+	_       uint16
+	_       [2]byte
+	Size    int64
+	Blksize int32
+	Blocks  int64
+	Atim    Timespec
+	Mtim    Timespec
+	Ctim    Timespec
+	Ino     uint64
+}
+
+type StatxTimestamp struct {
+	Sec  int64
+	Nsec uint32
+	_    int32
+}
+
+type Statx_t struct {
+	Mask            uint32
+	Blksize         uint32
+	Attributes      uint64
+	Nlink           uint32
+	Uid             uint32
+	Gid             uint32
+	Mode            uint16
+	_               [1]uint16
+	Ino             uint64
+	Size            uint64
+	Blocks          uint64
+	Attributes_mask uint64
+	Atime           StatxTimestamp
+	Btime           StatxTimestamp
+	Ctime           StatxTimestamp
+	Mtime           StatxTimestamp
+	Rdev_major      uint32
+	Rdev_minor      uint32
+	Dev_major       uint32
+	Dev_minor       uint32
+	_               [14]uint64
+}
+
+type Dirent struct {
+	Ino    uint64
+	Off    int64
+	Reclen uint16
+	Type   uint8
+	Name   [256]int8
+	_      [1]byte
+}
+
+type Fsid struct {
+	Val [2]int32
+}
+
+type Flock_t struct {
+	Type   int16
+	Whence int16
+	Start  int64
+	Len    int64
+	Pid    int32
+}
+
+type FscryptPolicy struct {
+	Ver
