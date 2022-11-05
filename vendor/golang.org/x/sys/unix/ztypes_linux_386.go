@@ -299,4 +299,112 @@ type IPMreq struct {
 }
 
 type IPMreqn struct {
-	Multiaddr [4]by
+	Multiaddr [4]byte /* in_addr */
+	Address   [4]byte /* in_addr */
+	Ifindex   int32
+}
+
+type IPv6Mreq struct {
+	Multiaddr [16]byte /* in6_addr */
+	Interface uint32
+}
+
+type PacketMreq struct {
+	Ifindex int32
+	Type    uint16
+	Alen    uint16
+	Address [8]uint8
+}
+
+type Msghdr struct {
+	Name       *byte
+	Namelen    uint32
+	Iov        *Iovec
+	Iovlen     uint32
+	Control    *byte
+	Controllen uint32
+	Flags      int32
+}
+
+type Cmsghdr struct {
+	Len   uint32
+	Level int32
+	Type  int32
+}
+
+type Inet4Pktinfo struct {
+	Ifindex  int32
+	Spec_dst [4]byte /* in_addr */
+	Addr     [4]byte /* in_addr */
+}
+
+type Inet6Pktinfo struct {
+	Addr    [16]byte /* in6_addr */
+	Ifindex uint32
+}
+
+type IPv6MTUInfo struct {
+	Addr RawSockaddrInet6
+	Mtu  uint32
+}
+
+type ICMPv6Filter struct {
+	Data [8]uint32
+}
+
+type Ucred struct {
+	Pid int32
+	Uid uint32
+	Gid uint32
+}
+
+type TCPInfo struct {
+	State          uint8
+	Ca_state       uint8
+	Retransmits    uint8
+	Probes         uint8
+	Backoff        uint8
+	Options        uint8
+	_              [2]byte
+	Rto            uint32
+	Ato            uint32
+	Snd_mss        uint32
+	Rcv_mss        uint32
+	Unacked        uint32
+	Sacked         uint32
+	Lost           uint32
+	Retrans        uint32
+	Fackets        uint32
+	Last_data_sent uint32
+	Last_ack_sent  uint32
+	Last_data_recv uint32
+	Last_ack_recv  uint32
+	Pmtu           uint32
+	Rcv_ssthresh   uint32
+	Rtt            uint32
+	Rttvar         uint32
+	Snd_ssthresh   uint32
+	Snd_cwnd       uint32
+	Advmss         uint32
+	Reordering     uint32
+	Rcv_rtt        uint32
+	Rcv_space      uint32
+	Total_retrans  uint32
+}
+
+const (
+	SizeofSockaddrInet4     = 0x10
+	SizeofSockaddrInet6     = 0x1c
+	SizeofSockaddrAny       = 0x70
+	SizeofSockaddrUnix      = 0x6e
+	SizeofSockaddrLinklayer = 0x14
+	SizeofSockaddrNetlink   = 0xc
+	SizeofSockaddrHCI       = 0x6
+	SizeofSockaddrL2        = 0xe
+	SizeofSockaddrCAN       = 0x10
+	SizeofSockaddrALG       = 0x58
+	SizeofSockaddrVM        = 0x10
+	SizeofLinger            = 0x8
+	SizeofIovec             = 0x8
+	SizeofIPMreq            = 0x8
+	SizeofIPMreqn       
