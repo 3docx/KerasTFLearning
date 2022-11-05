@@ -478,4 +478,96 @@ const (
 	IFLA_IF_NETNSID      = 0x2e
 	IFLA_MAX             = 0x31
 	RT_SCOPE_UNIVERSE    = 0x0
-	R
+	RT_SCOPE_SITE        = 0xc8
+	RT_SCOPE_LINK        = 0xfd
+	RT_SCOPE_HOST        = 0xfe
+	RT_SCOPE_NOWHERE     = 0xff
+	RT_TABLE_UNSPEC      = 0x0
+	RT_TABLE_COMPAT      = 0xfc
+	RT_TABLE_DEFAULT     = 0xfd
+	RT_TABLE_MAIN        = 0xfe
+	RT_TABLE_LOCAL       = 0xff
+	RT_TABLE_MAX         = 0xffffffff
+	RTA_UNSPEC           = 0x0
+	RTA_DST              = 0x1
+	RTA_SRC              = 0x2
+	RTA_IIF              = 0x3
+	RTA_OIF              = 0x4
+	RTA_GATEWAY          = 0x5
+	RTA_PRIORITY         = 0x6
+	RTA_PREFSRC          = 0x7
+	RTA_METRICS          = 0x8
+	RTA_MULTIPATH        = 0x9
+	RTA_FLOW             = 0xb
+	RTA_CACHEINFO        = 0xc
+	RTA_TABLE            = 0xf
+	RTN_UNSPEC           = 0x0
+	RTN_UNICAST          = 0x1
+	RTN_LOCAL            = 0x2
+	RTN_BROADCAST        = 0x3
+	RTN_ANYCAST          = 0x4
+	RTN_MULTICAST        = 0x5
+	RTN_BLACKHOLE        = 0x6
+	RTN_UNREACHABLE      = 0x7
+	RTN_PROHIBIT         = 0x8
+	RTN_THROW            = 0x9
+	RTN_NAT              = 0xa
+	RTN_XRESOLVE         = 0xb
+	RTNLGRP_NONE         = 0x0
+	RTNLGRP_LINK         = 0x1
+	RTNLGRP_NOTIFY       = 0x2
+	RTNLGRP_NEIGH        = 0x3
+	RTNLGRP_TC           = 0x4
+	RTNLGRP_IPV4_IFADDR  = 0x5
+	RTNLGRP_IPV4_MROUTE  = 0x6
+	RTNLGRP_IPV4_ROUTE   = 0x7
+	RTNLGRP_IPV4_RULE    = 0x8
+	RTNLGRP_IPV6_IFADDR  = 0x9
+	RTNLGRP_IPV6_MROUTE  = 0xa
+	RTNLGRP_IPV6_ROUTE   = 0xb
+	RTNLGRP_IPV6_IFINFO  = 0xc
+	RTNLGRP_IPV6_PREFIX  = 0x12
+	RTNLGRP_IPV6_RULE    = 0x13
+	RTNLGRP_ND_USEROPT   = 0x14
+	SizeofNlMsghdr       = 0x10
+	SizeofNlMsgerr       = 0x14
+	SizeofRtGenmsg       = 0x1
+	SizeofNlAttr         = 0x4
+	SizeofRtAttr         = 0x4
+	SizeofIfInfomsg      = 0x10
+	SizeofIfAddrmsg      = 0x8
+	SizeofRtMsg          = 0xc
+	SizeofRtNexthop      = 0x8
+)
+
+type NlMsghdr struct {
+	Len   uint32
+	Type  uint16
+	Flags uint16
+	Seq   uint32
+	Pid   uint32
+}
+
+type NlMsgerr struct {
+	Error int32
+	Msg   NlMsghdr
+}
+
+type RtGenmsg struct {
+	Family uint8
+}
+
+type NlAttr struct {
+	Len  uint16
+	Type uint16
+}
+
+type RtAttr struct {
+	Len  uint16
+	Type uint16
+}
+
+type IfInfomsg struct {
+	Family uint8
+	_      uint8
+	Type   uint16
