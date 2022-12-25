@@ -574,3 +574,145 @@ type IfInfomsg struct {
 	Family uint8
 	_      uint8
 	Type   uint16
+	Index  int32
+	Flags  uint32
+	Change uint32
+}
+
+type IfAddrmsg struct {
+	Family    uint8
+	Prefixlen uint8
+	Flags     uint8
+	Scope     uint8
+	Index     uint32
+}
+
+type RtMsg struct {
+	Family   uint8
+	Dst_len  uint8
+	Src_len  uint8
+	Tos      uint8
+	Table    uint8
+	Protocol uint8
+	Scope    uint8
+	Type     uint8
+	Flags    uint32
+}
+
+type RtNexthop struct {
+	Len     uint16
+	Flags   uint8
+	Hops    uint8
+	Ifindex int32
+}
+
+const (
+	SizeofSockFilter = 0x8
+	SizeofSockFprog  = 0x8
+)
+
+type SockFilter struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type SockFprog struct {
+	Len    uint16
+	_      [2]byte
+	Filter *SockFilter
+}
+
+type InotifyEvent struct {
+	Wd     int32
+	Mask   uint32
+	Cookie uint32
+	Len    uint32
+}
+
+const SizeofInotifyEvent = 0x10
+
+type PtraceRegs struct {
+	Uregs [18]uint32
+}
+
+type FdSet struct {
+	Bits [32]int32
+}
+
+type Sysinfo_t struct {
+	Uptime    int32
+	Loads     [3]uint32
+	Totalram  uint32
+	Freeram   uint32
+	Sharedram uint32
+	Bufferram uint32
+	Totalswap uint32
+	Freeswap  uint32
+	Procs     uint16
+	Pad       uint16
+	Totalhigh uint32
+	Freehigh  uint32
+	Unit      uint32
+	_         [8]uint8
+}
+
+type Utsname struct {
+	Sysname    [65]byte
+	Nodename   [65]byte
+	Release    [65]byte
+	Version    [65]byte
+	Machine    [65]byte
+	Domainname [65]byte
+}
+
+type Ustat_t struct {
+	Tfree  int32
+	Tinode uint32
+	Fname  [6]uint8
+	Fpack  [6]uint8
+}
+
+type EpollEvent struct {
+	Events uint32
+	PadFd  int32
+	Fd     int32
+	Pad    int32
+}
+
+const (
+	AT_EMPTY_PATH   = 0x1000
+	AT_FDCWD        = -0x64
+	AT_NO_AUTOMOUNT = 0x800
+	AT_REMOVEDIR    = 0x200
+
+	AT_STATX_SYNC_AS_STAT = 0x0
+	AT_STATX_FORCE_SYNC   = 0x2000
+	AT_STATX_DONT_SYNC    = 0x4000
+
+	AT_SYMLINK_FOLLOW   = 0x400
+	AT_SYMLINK_NOFOLLOW = 0x100
+)
+
+type PollFd struct {
+	Fd      int32
+	Events  int16
+	Revents int16
+}
+
+const (
+	POLLIN    = 0x1
+	POLLPRI   = 0x2
+	POLLOUT   = 0x4
+	POLLRDHUP = 0x2000
+	POLLERR   = 0x8
+	POLLHUP   = 0x10
+	POLLNVAL  = 0x20
+)
+
+type Sigset_t struct {
+	Val [32]uint32
+}
+
+const RNDGETENTCNT = 0x80
