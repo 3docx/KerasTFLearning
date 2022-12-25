@@ -715,4 +715,79 @@ type Sigset_t struct {
 	Val [32]uint32
 }
 
-const RNDGETENTCNT = 0x80
+const RNDGETENTCNT = 0x80045200
+
+const PERF_IOC_FLAG_GROUP = 0x1
+
+type Termios struct {
+	Iflag  uint32
+	Oflag  uint32
+	Cflag  uint32
+	Lflag  uint32
+	Line   uint8
+	Cc     [19]uint8
+	Ispeed uint32
+	Ospeed uint32
+}
+
+type Winsize struct {
+	Row    uint16
+	Col    uint16
+	Xpixel uint16
+	Ypixel uint16
+}
+
+type Taskstats struct {
+	Version                   uint16
+	_                         [2]byte
+	Ac_exitcode               uint32
+	Ac_flag                   uint8
+	Ac_nice                   uint8
+	_                         [6]byte
+	Cpu_count                 uint64
+	Cpu_delay_total           uint64
+	Blkio_count               uint64
+	Blkio_delay_total         uint64
+	Swapin_count              uint64
+	Swapin_delay_total        uint64
+	Cpu_run_real_total        uint64
+	Cpu_run_virtual_total     uint64
+	Ac_comm                   [32]uint8
+	Ac_sched                  uint8
+	Ac_pad                    [3]uint8
+	_                         [4]byte
+	Ac_uid                    uint32
+	Ac_gid                    uint32
+	Ac_pid                    uint32
+	Ac_ppid                   uint32
+	Ac_btime                  uint32
+	_                         [4]byte
+	Ac_etime                  uint64
+	Ac_utime                  uint64
+	Ac_stime                  uint64
+	Ac_minflt                 uint64
+	Ac_majflt                 uint64
+	Coremem                   uint64
+	Virtmem                   uint64
+	Hiwater_rss               uint64
+	Hiwater_vm                uint64
+	Read_char                 uint64
+	Write_char                uint64
+	Read_syscalls             uint64
+	Write_syscalls            uint64
+	Read_bytes                uint64
+	Write_bytes               uint64
+	Cancelled_write_bytes     uint64
+	Nvcsw                     uint64
+	Nivcsw                    uint64
+	Ac_utimescaled            uint64
+	Ac_stimescaled            uint64
+	Cpu_scaled_run_real_total uint64
+	Freepages_count           uint64
+	Freepages_delay_total     uint64
+}
+
+const (
+	TASKSTATS_CMD_UNSPEC                  = 0x0
+	TASKSTATS_CMD_GET                     = 0x1
+	TASKSTATS_CMD_NEW       
