@@ -790,4 +790,83 @@ type Taskstats struct {
 const (
 	TASKSTATS_CMD_UNSPEC                  = 0x0
 	TASKSTATS_CMD_GET                     = 0x1
-	TASKSTATS_CMD_NEW       
+	TASKSTATS_CMD_NEW                     = 0x2
+	TASKSTATS_TYPE_UNSPEC                 = 0x0
+	TASKSTATS_TYPE_PID                    = 0x1
+	TASKSTATS_TYPE_TGID                   = 0x2
+	TASKSTATS_TYPE_STATS                  = 0x3
+	TASKSTATS_TYPE_AGGR_PID               = 0x4
+	TASKSTATS_TYPE_AGGR_TGID              = 0x5
+	TASKSTATS_TYPE_NULL                   = 0x6
+	TASKSTATS_CMD_ATTR_UNSPEC             = 0x0
+	TASKSTATS_CMD_ATTR_PID                = 0x1
+	TASKSTATS_CMD_ATTR_TGID               = 0x2
+	TASKSTATS_CMD_ATTR_REGISTER_CPUMASK   = 0x3
+	TASKSTATS_CMD_ATTR_DEREGISTER_CPUMASK = 0x4
+)
+
+type CGroupStats struct {
+	Sleeping        uint64
+	Running         uint64
+	Stopped         uint64
+	Uninterruptible uint64
+	Io_wait         uint64
+}
+
+const (
+	CGROUPSTATS_CMD_UNSPEC        = 0x3
+	CGROUPSTATS_CMD_GET           = 0x4
+	CGROUPSTATS_CMD_NEW           = 0x5
+	CGROUPSTATS_TYPE_UNSPEC       = 0x0
+	CGROUPSTATS_TYPE_CGROUP_STATS = 0x1
+	CGROUPSTATS_CMD_ATTR_UNSPEC   = 0x0
+	CGROUPSTATS_CMD_ATTR_FD       = 0x1
+)
+
+type Genlmsghdr struct {
+	Cmd      uint8
+	Version  uint8
+	Reserved uint16
+}
+
+const (
+	CTRL_CMD_UNSPEC            = 0x0
+	CTRL_CMD_NEWFAMILY         = 0x1
+	CTRL_CMD_DELFAMILY         = 0x2
+	CTRL_CMD_GETFAMILY         = 0x3
+	CTRL_CMD_NEWOPS            = 0x4
+	CTRL_CMD_DELOPS            = 0x5
+	CTRL_CMD_GETOPS            = 0x6
+	CTRL_CMD_NEWMCAST_GRP      = 0x7
+	CTRL_CMD_DELMCAST_GRP      = 0x8
+	CTRL_CMD_GETMCAST_GRP      = 0x9
+	CTRL_ATTR_UNSPEC           = 0x0
+	CTRL_ATTR_FAMILY_ID        = 0x1
+	CTRL_ATTR_FAMILY_NAME      = 0x2
+	CTRL_ATTR_VERSION          = 0x3
+	CTRL_ATTR_HDRSIZE          = 0x4
+	CTRL_ATTR_MAXATTR          = 0x5
+	CTRL_ATTR_OPS              = 0x6
+	CTRL_ATTR_MCAST_GROUPS     = 0x7
+	CTRL_ATTR_OP_UNSPEC        = 0x0
+	CTRL_ATTR_OP_ID            = 0x1
+	CTRL_ATTR_OP_FLAGS         = 0x2
+	CTRL_ATTR_MCAST_GRP_UNSPEC = 0x0
+	CTRL_ATTR_MCAST_GRP_NAME   = 0x1
+	CTRL_ATTR_MCAST_GRP_ID     = 0x2
+)
+
+type cpuMask uint32
+
+const (
+	_CPU_SETSIZE = 0x400
+	_NCPUBITS    = 0x20
+)
+
+const (
+	BDADDR_BREDR     = 0x0
+	BDADDR_LE_PUBLIC = 0x1
+	BDADDR_LE_RANDOM = 0x2
+)
+
+type PerfEventAttr struct {
