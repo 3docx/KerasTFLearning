@@ -870,3 +870,68 @@ const (
 )
 
 type PerfEventAttr struct {
+	Type               uint32
+	Size               uint32
+	Config             uint64
+	Sample             uint64
+	Sample_type        uint64
+	Read_format        uint64
+	Bits               uint64
+	Wakeup             uint32
+	Bp_type            uint32
+	Ext1               uint64
+	Ext2               uint64
+	Branch_sample_type uint64
+	Sample_regs_user   uint64
+	Sample_stack_user  uint32
+	Clockid            int32
+	Sample_regs_intr   uint64
+	Aux_watermark      uint32
+	_                  uint32
+}
+
+type PerfEventMmapPage struct {
+	Version        uint32
+	Compat_version uint32
+	Lock           uint32
+	Index          uint32
+	Offset         int64
+	Time_enabled   uint64
+	Time_running   uint64
+	Capabilities   uint64
+	Pmc_width      uint16
+	Time_shift     uint16
+	Time_mult      uint32
+	Time_offset    uint64
+	Time_zero      uint64
+	Size           uint32
+	_              [948]uint8
+	Data_head      uint64
+	Data_tail      uint64
+	Data_offset    uint64
+	Data_size      uint64
+	Aux_head       uint64
+	Aux_tail       uint64
+	Aux_offset     uint64
+	Aux_size       uint64
+}
+
+const (
+	PerfBitDisabled               uint64 = CBitFieldMaskBit0
+	PerfBitInherit                       = CBitFieldMaskBit1
+	PerfBitPinned                        = CBitFieldMaskBit2
+	PerfBitExclusive                     = CBitFieldMaskBit3
+	PerfBitExcludeUser                   = CBitFieldMaskBit4
+	PerfBitExcludeKernel                 = CBitFieldMaskBit5
+	PerfBitExcludeHv                     = CBitFieldMaskBit6
+	PerfBitExcludeIdle                   = CBitFieldMaskBit7
+	PerfBitMmap                          = CBitFieldMaskBit8
+	PerfBitComm                          = CBitFieldMaskBit9
+	PerfBitFreq                          = CBitFieldMaskBit10
+	PerfBitInheritStat                   = CBitFieldMaskBit11
+	PerfBitEnableOnExec                  = CBitFieldMaskBit12
+	PerfBitTask                          = CBitFieldMaskBit13
+	PerfBitWatermark                     = CBitFieldMaskBit14
+	PerfBitPreciseIPBit1                 = CBitFieldMaskBit15
+	PerfBitPreciseIPBit2                 = CBitFieldMaskBit16
+	PerfBitMma
