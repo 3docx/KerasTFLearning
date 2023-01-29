@@ -21,4 +21,133 @@ type (
 	_C_long_long int64
 )
 
-type
+type Timespec struct {
+	Sec  int64
+	Nsec int64
+}
+
+type Timeval struct {
+	Sec  int64
+	Usec int64
+}
+
+type Timex struct {
+	Modes     uint32
+	_         [4]byte
+	Offset    int64
+	Freq      int64
+	Maxerror  int64
+	Esterror  int64
+	Status    int32
+	_         [4]byte
+	Constant  int64
+	Precision int64
+	Tolerance int64
+	Time      Timeval
+	Tick      int64
+	Ppsfreq   int64
+	Jitter    int64
+	Shift     int32
+	_         [4]byte
+	Stabil    int64
+	Jitcnt    int64
+	Calcnt    int64
+	Errcnt    int64
+	Stbcnt    int64
+	Tai       int32
+	_         [44]byte
+}
+
+type Time_t int64
+
+type Tms struct {
+	Utime  int64
+	Stime  int64
+	Cutime int64
+	Cstime int64
+}
+
+type Utimbuf struct {
+	Actime  int64
+	Modtime int64
+}
+
+type Rusage struct {
+	Utime    Timeval
+	Stime    Timeval
+	Maxrss   int64
+	Ixrss    int64
+	Idrss    int64
+	Isrss    int64
+	Minflt   int64
+	Majflt   int64
+	Nswap    int64
+	Inblock  int64
+	Oublock  int64
+	Msgsnd   int64
+	Msgrcv   int64
+	Nsignals int64
+	Nvcsw    int64
+	Nivcsw   int64
+}
+
+type Rlimit struct {
+	Cur uint64
+	Max uint64
+}
+
+type _Gid_t uint32
+
+type Stat_t struct {
+	Dev     uint64
+	Ino     uint64
+	Mode    uint32
+	Nlink   uint32
+	Uid     uint32
+	Gid     uint32
+	Rdev    uint64
+	_       uint64
+	Size    int64
+	Blksize int32
+	_       int32
+	Blocks  int64
+	Atim    Timespec
+	Mtim    Timespec
+	Ctim    Timespec
+	_       [2]int32
+}
+
+type StatxTimestamp struct {
+	Sec  int64
+	Nsec uint32
+	_    int32
+}
+
+type Statx_t struct {
+	Mask            uint32
+	Blksize         uint32
+	Attributes      uint64
+	Nlink           uint32
+	Uid             uint32
+	Gid             uint32
+	Mode            uint16
+	_               [1]uint16
+	Ino             uint64
+	Size            uint64
+	Blocks          uint64
+	Attributes_mask uint64
+	Atime           StatxTimestamp
+	Btime           StatxTimestamp
+	Ctime           StatxTimestamp
+	Mtime           StatxTimestamp
+	Rdev_major      uint32
+	Rdev_minor      uint32
+	Dev_major       uint32
+	Dev_minor       uint32
+	_               [14]uint64
+}
+
+type Dirent struct {
+	Ino    uint64
+	Off    int64
+	Recle
