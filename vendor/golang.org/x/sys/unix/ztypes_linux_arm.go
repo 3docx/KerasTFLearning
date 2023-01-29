@@ -1063,4 +1063,86 @@ const (
 	CBitFieldMaskBit19 = 0x80000
 	CBitFieldMaskBit20 = 0x100000
 	CBitFieldMaskBit21 = 0x200000
-	CBitFieldMaskBit22 = 0x40
+	CBitFieldMaskBit22 = 0x400000
+	CBitFieldMaskBit23 = 0x800000
+	CBitFieldMaskBit24 = 0x1000000
+	CBitFieldMaskBit25 = 0x2000000
+	CBitFieldMaskBit26 = 0x4000000
+	CBitFieldMaskBit27 = 0x8000000
+	CBitFieldMaskBit28 = 0x10000000
+	CBitFieldMaskBit29 = 0x20000000
+	CBitFieldMaskBit30 = 0x40000000
+	CBitFieldMaskBit31 = 0x80000000
+	CBitFieldMaskBit32 = 0x100000000
+	CBitFieldMaskBit33 = 0x200000000
+	CBitFieldMaskBit34 = 0x400000000
+	CBitFieldMaskBit35 = 0x800000000
+	CBitFieldMaskBit36 = 0x1000000000
+	CBitFieldMaskBit37 = 0x2000000000
+	CBitFieldMaskBit38 = 0x4000000000
+	CBitFieldMaskBit39 = 0x8000000000
+	CBitFieldMaskBit40 = 0x10000000000
+	CBitFieldMaskBit41 = 0x20000000000
+	CBitFieldMaskBit42 = 0x40000000000
+	CBitFieldMaskBit43 = 0x80000000000
+	CBitFieldMaskBit44 = 0x100000000000
+	CBitFieldMaskBit45 = 0x200000000000
+	CBitFieldMaskBit46 = 0x400000000000
+	CBitFieldMaskBit47 = 0x800000000000
+	CBitFieldMaskBit48 = 0x1000000000000
+	CBitFieldMaskBit49 = 0x2000000000000
+	CBitFieldMaskBit50 = 0x4000000000000
+	CBitFieldMaskBit51 = 0x8000000000000
+	CBitFieldMaskBit52 = 0x10000000000000
+	CBitFieldMaskBit53 = 0x20000000000000
+	CBitFieldMaskBit54 = 0x40000000000000
+	CBitFieldMaskBit55 = 0x80000000000000
+	CBitFieldMaskBit56 = 0x100000000000000
+	CBitFieldMaskBit57 = 0x200000000000000
+	CBitFieldMaskBit58 = 0x400000000000000
+	CBitFieldMaskBit59 = 0x800000000000000
+	CBitFieldMaskBit60 = 0x1000000000000000
+	CBitFieldMaskBit61 = 0x2000000000000000
+	CBitFieldMaskBit62 = 0x4000000000000000
+	CBitFieldMaskBit63 = 0x8000000000000000
+)
+
+type SockaddrStorage struct {
+	Family uint16
+	_      [122]uint8
+	_      uint32
+}
+
+type TCPMD5Sig struct {
+	Addr      SockaddrStorage
+	Flags     uint8
+	Prefixlen uint8
+	Keylen    uint16
+	_         uint32
+	Key       [80]uint8
+}
+
+type HDDriveCmdHdr struct {
+	Command uint8
+	Number  uint8
+	Feature uint8
+	Count   uint8
+}
+
+type HDGeometry struct {
+	Heads     uint8
+	Sectors   uint8
+	Cylinders uint16
+	Start     uint32
+}
+
+type HDDriveID struct {
+	Config         uint16
+	Cyls           uint16
+	Reserved2      uint16
+	Heads          uint16
+	Track_bytes    uint16
+	Sector_bytes   uint16
+	Sectors        uint16
+	Vendor0        uint16
+	Vendor1  
