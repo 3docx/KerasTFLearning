@@ -547,4 +547,154 @@ const (
 
 type NlMsghdr struct {
 	Len   uint32
-	Type
+	Type  uint16
+	Flags uint16
+	Seq   uint32
+	Pid   uint32
+}
+
+type NlMsgerr struct {
+	Error int32
+	Msg   NlMsghdr
+}
+
+type RtGenmsg struct {
+	Family uint8
+}
+
+type NlAttr struct {
+	Len  uint16
+	Type uint16
+}
+
+type RtAttr struct {
+	Len  uint16
+	Type uint16
+}
+
+type IfInfomsg struct {
+	Family uint8
+	_      uint8
+	Type   uint16
+	Index  int32
+	Flags  uint32
+	Change uint32
+}
+
+type IfAddrmsg struct {
+	Family    uint8
+	Prefixlen uint8
+	Flags     uint8
+	Scope     uint8
+	Index     uint32
+}
+
+type RtMsg struct {
+	Family   uint8
+	Dst_len  uint8
+	Src_len  uint8
+	Tos      uint8
+	Table    uint8
+	Protocol uint8
+	Scope    uint8
+	Type     uint8
+	Flags    uint32
+}
+
+type RtNexthop struct {
+	Len     uint16
+	Flags   uint8
+	Hops    uint8
+	Ifindex int32
+}
+
+const (
+	SizeofSockFilter = 0x8
+	SizeofSockFprog  = 0x10
+)
+
+type SockFilter struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type SockFprog struct {
+	Len    uint16
+	_      [6]byte
+	Filter *SockFilter
+}
+
+type InotifyEvent struct {
+	Wd     int32
+	Mask   uint32
+	Cookie uint32
+	Len    uint32
+}
+
+const SizeofInotifyEvent = 0x10
+
+type PtraceRegs struct {
+	Regs   [31]uint64
+	Sp     uint64
+	Pc     uint64
+	Pstate uint64
+}
+
+type FdSet struct {
+	Bits [16]int64
+}
+
+type Sysinfo_t struct {
+	Uptime    int64
+	Loads     [3]uint64
+	Totalram  uint64
+	Freeram   uint64
+	Sharedram uint64
+	Bufferram uint64
+	Totalswap uint64
+	Freeswap  uint64
+	Procs     uint16
+	Pad       uint16
+	_         [4]byte
+	Totalhigh uint64
+	Freehigh  uint64
+	Unit      uint32
+	_         [0]int8
+	_         [4]byte
+}
+
+type Utsname struct {
+	Sysname    [65]byte
+	Nodename   [65]byte
+	Release    [65]byte
+	Version    [65]byte
+	Machine    [65]byte
+	Domainname [65]byte
+}
+
+type Ustat_t struct {
+	Tfree  int32
+	_      [4]byte
+	Tinode uint64
+	Fname  [6]int8
+	Fpack  [6]int8
+	_      [4]byte
+}
+
+type EpollEvent struct {
+	Events uint32
+	PadFd  int32
+	Fd     int32
+	Pad    int32
+}
+
+const (
+	AT_EMPTY_PATH   = 0x1000
+	AT_FDCWD        = -0x64
+	AT_NO_AUTOMOUNT = 0x800
+	AT_REMOVEDIR    = 0x200
+
+	AT_STATX_SYNC_AS_STAT = 0x0
+	AT_STATX_FORCE_S
