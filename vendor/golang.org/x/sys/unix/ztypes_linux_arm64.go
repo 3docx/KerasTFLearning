@@ -854,4 +854,85 @@ const (
 	CTRL_ATTR_FAMILY_NAME      = 0x2
 	CTRL_ATTR_VERSION          = 0x3
 	CTRL_ATTR_HDRSIZE          = 0x4
-	CT
+	CTRL_ATTR_MAXATTR          = 0x5
+	CTRL_ATTR_OPS              = 0x6
+	CTRL_ATTR_MCAST_GROUPS     = 0x7
+	CTRL_ATTR_OP_UNSPEC        = 0x0
+	CTRL_ATTR_OP_ID            = 0x1
+	CTRL_ATTR_OP_FLAGS         = 0x2
+	CTRL_ATTR_MCAST_GRP_UNSPEC = 0x0
+	CTRL_ATTR_MCAST_GRP_NAME   = 0x1
+	CTRL_ATTR_MCAST_GRP_ID     = 0x2
+)
+
+type cpuMask uint64
+
+const (
+	_CPU_SETSIZE = 0x400
+	_NCPUBITS    = 0x40
+)
+
+const (
+	BDADDR_BREDR     = 0x0
+	BDADDR_LE_PUBLIC = 0x1
+	BDADDR_LE_RANDOM = 0x2
+)
+
+type PerfEventAttr struct {
+	Type               uint32
+	Size               uint32
+	Config             uint64
+	Sample             uint64
+	Sample_type        uint64
+	Read_format        uint64
+	Bits               uint64
+	Wakeup             uint32
+	Bp_type            uint32
+	Ext1               uint64
+	Ext2               uint64
+	Branch_sample_type uint64
+	Sample_regs_user   uint64
+	Sample_stack_user  uint32
+	Clockid            int32
+	Sample_regs_intr   uint64
+	Aux_watermark      uint32
+	_                  uint32
+}
+
+type PerfEventMmapPage struct {
+	Version        uint32
+	Compat_version uint32
+	Lock           uint32
+	Index          uint32
+	Offset         int64
+	Time_enabled   uint64
+	Time_running   uint64
+	Capabilities   uint64
+	Pmc_width      uint16
+	Time_shift     uint16
+	Time_mult      uint32
+	Time_offset    uint64
+	Time_zero      uint64
+	Size           uint32
+	_              [948]uint8
+	Data_head      uint64
+	Data_tail      uint64
+	Data_offset    uint64
+	Data_size      uint64
+	Aux_head       uint64
+	Aux_tail       uint64
+	Aux_offset     uint64
+	Aux_size       uint64
+}
+
+const (
+	PerfBitDisabled               uint64 = CBitFieldMaskBit0
+	PerfBitInherit                       = CBitFieldMaskBit1
+	PerfBitPinned                        = CBitFieldMaskBit2
+	PerfBitExclusive                     = CBitFieldMaskBit3
+	PerfBitExcludeUser                   = CBitFieldMaskBit4
+	PerfBitExcludeKernel                 = CBitFieldMaskBit5
+	PerfBitExcludeHv                     = CBitFieldMaskBit6
+	PerfBitExcludeIdle                   = CBitFieldMaskBit7
+	PerfBitMmap                          = CBitFieldMaskBit8
+	Per
