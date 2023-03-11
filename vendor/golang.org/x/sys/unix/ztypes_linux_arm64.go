@@ -935,4 +935,53 @@ const (
 	PerfBitExcludeHv                     = CBitFieldMaskBit6
 	PerfBitExcludeIdle                   = CBitFieldMaskBit7
 	PerfBitMmap                          = CBitFieldMaskBit8
-	Per
+	PerfBitComm                          = CBitFieldMaskBit9
+	PerfBitFreq                          = CBitFieldMaskBit10
+	PerfBitInheritStat                   = CBitFieldMaskBit11
+	PerfBitEnableOnExec                  = CBitFieldMaskBit12
+	PerfBitTask                          = CBitFieldMaskBit13
+	PerfBitWatermark                     = CBitFieldMaskBit14
+	PerfBitPreciseIPBit1                 = CBitFieldMaskBit15
+	PerfBitPreciseIPBit2                 = CBitFieldMaskBit16
+	PerfBitMmapData                      = CBitFieldMaskBit17
+	PerfBitSampleIDAll                   = CBitFieldMaskBit18
+	PerfBitExcludeHost                   = CBitFieldMaskBit19
+	PerfBitExcludeGuest                  = CBitFieldMaskBit20
+	PerfBitExcludeCallchainKernel        = CBitFieldMaskBit21
+	PerfBitExcludeCallchainUser          = CBitFieldMaskBit22
+	PerfBitMmap2                         = CBitFieldMaskBit23
+	PerfBitCommExec                      = CBitFieldMaskBit24
+	PerfBitUseClockID                    = CBitFieldMaskBit25
+	PerfBitContextSwitch                 = CBitFieldMaskBit26
+)
+
+const (
+	PERF_TYPE_HARDWARE   = 0x0
+	PERF_TYPE_SOFTWARE   = 0x1
+	PERF_TYPE_TRACEPOINT = 0x2
+	PERF_TYPE_HW_CACHE   = 0x3
+	PERF_TYPE_RAW        = 0x4
+	PERF_TYPE_BREAKPOINT = 0x5
+
+	PERF_COUNT_HW_CPU_CYCLES              = 0x0
+	PERF_COUNT_HW_INSTRUCTIONS            = 0x1
+	PERF_COUNT_HW_CACHE_REFERENCES        = 0x2
+	PERF_COUNT_HW_CACHE_MISSES            = 0x3
+	PERF_COUNT_HW_BRANCH_INSTRUCTIONS     = 0x4
+	PERF_COUNT_HW_BRANCH_MISSES           = 0x5
+	PERF_COUNT_HW_BUS_CYCLES              = 0x6
+	PERF_COUNT_HW_STALLED_CYCLES_FRONTEND = 0x7
+	PERF_COUNT_HW_STALLED_CYCLES_BACKEND  = 0x8
+	PERF_COUNT_HW_REF_CPU_CYCLES          = 0x9
+
+	PERF_COUNT_HW_CACHE_L1D  = 0x0
+	PERF_COUNT_HW_CACHE_L1I  = 0x1
+	PERF_COUNT_HW_CACHE_LL   = 0x2
+	PERF_COUNT_HW_CACHE_DTLB = 0x3
+	PERF_COUNT_HW_CACHE_ITLB = 0x4
+	PERF_COUNT_HW_CACHE_BPU  = 0x5
+	PERF_COUNT_HW_CACHE_NODE = 0x6
+
+	PERF_COUNT_HW_CACHE_OP_READ     = 0x0
+	PERF_COUNT_HW_CACHE_OP_WRITE    = 0x1
+	PERF_COUNT_HW_CACHE_OP_PREFETCH
