@@ -274,3 +274,181 @@ type IfMsghdr struct {
 type IfData struct {
 	Type       uint8
 	Addrlen    uint8
+	Hdrlen     uint8
+	Pad_cgo_0  [1]byte
+	Link_state int32
+	Mtu        uint64
+	Metric     uint64
+	Baudrate   uint64
+	Ipackets   uint64
+	Ierrors    uint64
+	Opackets   uint64
+	Oerrors    uint64
+	Collisions uint64
+	Ibytes     uint64
+	Obytes     uint64
+	Imcasts    uint64
+	Omcasts    uint64
+	Iqdrops    uint64
+	Noproto    uint64
+	Lastchange Timespec
+}
+
+type IfaMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Addrs     int32
+	Flags     int32
+	Metric    int32
+	Index     uint16
+	Pad_cgo_0 [6]byte
+}
+
+type IfAnnounceMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Index   uint16
+	Name    [16]int8
+	What    uint16
+}
+
+type RtMsghdr struct {
+	Msglen    uint16
+	Version   uint8
+	Type      uint8
+	Index     uint16
+	Pad_cgo_0 [2]byte
+	Flags     int32
+	Addrs     int32
+	Pid       int32
+	Seq       int32
+	Errno     int32
+	Use       int32
+	Inits     int32
+	Pad_cgo_1 [4]byte
+	Rmx       RtMetrics
+}
+
+type RtMetrics struct {
+	Locks    uint64
+	Mtu      uint64
+	Hopcount uint64
+	Recvpipe uint64
+	Sendpipe uint64
+	Ssthresh uint64
+	Rtt      uint64
+	Rttvar   uint64
+	Expire   int64
+	Pksent   int64
+}
+
+type Mclpool [0]byte
+
+const (
+	SizeofBpfVersion = 0x4
+	SizeofBpfStat    = 0x80
+	SizeofBpfProgram = 0x8
+	SizeofBpfInsn    = 0x8
+	SizeofBpfHdr     = 0x14
+)
+
+type BpfVersion struct {
+	Major uint16
+	Minor uint16
+}
+
+type BpfStat struct {
+	Recv    uint64
+	Drop    uint64
+	Capt    uint64
+	Padding [13]uint64
+}
+
+type BpfProgram struct {
+	Len   uint32
+	Insns *BpfInsn
+}
+
+type BpfInsn struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type BpfHdr struct {
+	Tstamp    BpfTimeval
+	Caplen    uint32
+	Datalen   uint32
+	Hdrlen    uint16
+	Pad_cgo_0 [2]byte
+}
+
+type BpfTimeval struct {
+	Sec  int32
+	Usec int32
+}
+
+type Termios struct {
+	Iflag  uint32
+	Oflag  uint32
+	Cflag  uint32
+	Lflag  uint32
+	Cc     [20]uint8
+	Ispeed int32
+	Ospeed int32
+}
+
+type Winsize struct {
+	Row    uint16
+	Col    uint16
+	Xpixel uint16
+	Ypixel uint16
+}
+
+const (
+	AT_FDCWD            = -0x64
+	AT_SYMLINK_NOFOLLOW = 0x200
+)
+
+type PollFd struct {
+	Fd      int32
+	Events  int16
+	Revents int16
+}
+
+const (
+	POLLERR    = 0x8
+	POLLHUP    = 0x10
+	POLLIN     = 0x1
+	POLLNVAL   = 0x20
+	POLLOUT    = 0x4
+	POLLPRI    = 0x2
+	POLLRDBAND = 0x80
+	POLLRDNORM = 0x40
+	POLLWRBAND = 0x100
+	POLLWRNORM = 0x4
+)
+
+type Sysctlnode struct {
+	Flags           uint32
+	Num             int32
+	Name            [32]int8
+	Ver             uint32
+	X__rsvd         uint32
+	Un              [16]byte
+	X_sysctl_size   [8]byte
+	X_sysctl_func   [8]byte
+	X_sysctl_parent [8]byte
+	X_sysctl_desc   [8]byte
+}
+
+type Utsname struct {
+	Sysname  [256]byte
+	Nodename [256]byte
+	Release  [256]byte
+	Version  [256]byte
+	Machine  [256]byte
+}
