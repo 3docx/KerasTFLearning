@@ -251,4 +251,130 @@ const (
 	SizeofIPMreq           = 0x8
 	SizeofIPv6Mreq         = 0x14
 	SizeofMsghdr           = 0x1c
-	SizeofCmsghdr 
+	SizeofCmsghdr          = 0xc
+	SizeofInet6Pktinfo     = 0x14
+	SizeofIPv6MTUInfo      = 0x20
+	SizeofICMPv6Filter     = 0x20
+)
+
+const (
+	PTRACE_TRACEME = 0x0
+	PTRACE_CONT    = 0x7
+	PTRACE_KILL    = 0x8
+)
+
+type Kevent_t struct {
+	Ident  uint32
+	Filter int16
+	Flags  uint16
+	Fflags uint32
+	Data   int64
+	Udata  *byte
+}
+
+type FdSet struct {
+	Bits [32]uint32
+}
+
+const (
+	SizeofIfMsghdr         = 0x98
+	SizeofIfData           = 0x80
+	SizeofIfaMsghdr        = 0x18
+	SizeofIfAnnounceMsghdr = 0x1a
+	SizeofRtMsghdr         = 0x60
+	SizeofRtMetrics        = 0x38
+)
+
+type IfMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Hdrlen  uint16
+	Index   uint16
+	Tableid uint16
+	Pad1    uint8
+	Pad2    uint8
+	Addrs   int32
+	Flags   int32
+	Xflags  int32
+	Data    IfData
+}
+
+type IfData struct {
+	Type         uint8
+	Addrlen      uint8
+	Hdrlen       uint8
+	Link_state   uint8
+	Mtu          uint32
+	Metric       uint32
+	Pad          uint32
+	Baudrate     uint64
+	Ipackets     uint64
+	Ierrors      uint64
+	Opackets     uint64
+	Oerrors      uint64
+	Collisions   uint64
+	Ibytes       uint64
+	Obytes       uint64
+	Imcasts      uint64
+	Omcasts      uint64
+	Iqdrops      uint64
+	Noproto      uint64
+	Capabilities uint32
+	Lastchange   Timeval
+}
+
+type IfaMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Hdrlen  uint16
+	Index   uint16
+	Tableid uint16
+	Pad1    uint8
+	Pad2    uint8
+	Addrs   int32
+	Flags   int32
+	Metric  int32
+}
+
+type IfAnnounceMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Hdrlen  uint16
+	Index   uint16
+	What    uint16
+	Name    [16]uint8
+}
+
+type RtMsghdr struct {
+	Msglen   uint16
+	Version  uint8
+	Type     uint8
+	Hdrlen   uint16
+	Index    uint16
+	Tableid  uint16
+	Priority uint8
+	Mpls     uint8
+	Addrs    int32
+	Flags    int32
+	Fmask    int32
+	Pid      int32
+	Seq      int32
+	Errno    int32
+	Inits    uint32
+	Rmx      RtMetrics
+}
+
+type RtMetrics struct {
+	Pksent   uint64
+	Expire   int64
+	Locks    uint32
+	Mtu      uint32
+	Refcnt   uint32
+	Hopcount uint32
+	Recvpipe uint32
+	Sendpipe uint32
+	Ssthresh uint32
+	
