@@ -49,4 +49,145 @@ type Utimbuf struct {
 	Modtime int64
 }
 
-type Rusage s
+type Rusage struct {
+	Utime    Timeval
+	Stime    Timeval
+	Maxrss   int64
+	Ixrss    int64
+	Idrss    int64
+	Isrss    int64
+	Minflt   int64
+	Majflt   int64
+	Nswap    int64
+	Inblock  int64
+	Oublock  int64
+	Msgsnd   int64
+	Msgrcv   int64
+	Nsignals int64
+	Nvcsw    int64
+	Nivcsw   int64
+}
+
+type Rlimit struct {
+	Cur uint64
+	Max uint64
+}
+
+type _Gid_t uint32
+
+const (
+	S_IFMT   = 0xf000
+	S_IFIFO  = 0x1000
+	S_IFCHR  = 0x2000
+	S_IFDIR  = 0x4000
+	S_IFBLK  = 0x6000
+	S_IFREG  = 0x8000
+	S_IFLNK  = 0xa000
+	S_IFSOCK = 0xc000
+	S_ISUID  = 0x800
+	S_ISGID  = 0x400
+	S_ISVTX  = 0x200
+	S_IRUSR  = 0x100
+	S_IWUSR  = 0x80
+	S_IXUSR  = 0x40
+)
+
+type Stat_t struct {
+	Dev     uint64
+	Ino     uint64
+	Mode    uint32
+	Nlink   uint32
+	Uid     uint32
+	Gid     uint32
+	Rdev    uint64
+	Size    int64
+	Atim    Timespec
+	Mtim    Timespec
+	Ctim    Timespec
+	Blksize int32
+	_       [4]byte
+	Blocks  int64
+	Fstype  [16]int8
+}
+
+type Flock_t struct {
+	Type   int16
+	Whence int16
+	_      [4]byte
+	Start  int64
+	Len    int64
+	Sysid  int32
+	Pid    int32
+	Pad    [4]int64
+}
+
+type Dirent struct {
+	Ino    uint64
+	Off    int64
+	Reclen uint16
+	Name   [1]int8
+	_      [5]byte
+}
+
+type _Fsblkcnt_t uint64
+
+type Statvfs_t struct {
+	Bsize    uint64
+	Frsize   uint64
+	Blocks   uint64
+	Bfree    uint64
+	Bavail   uint64
+	Files    uint64
+	Ffree    uint64
+	Favail   uint64
+	Fsid     uint64
+	Basetype [16]int8
+	Flag     uint64
+	Namemax  uint64
+	Fstr     [32]int8
+}
+
+type RawSockaddrInet4 struct {
+	Family uint16
+	Port   uint16
+	Addr   [4]byte /* in_addr */
+	Zero   [8]int8
+}
+
+type RawSockaddrInet6 struct {
+	Family         uint16
+	Port           uint16
+	Flowinfo       uint32
+	Addr           [16]byte /* in6_addr */
+	Scope_id       uint32
+	X__sin6_src_id uint32
+}
+
+type RawSockaddrUnix struct {
+	Family uint16
+	Path   [108]int8
+}
+
+type RawSockaddrDatalink struct {
+	Family uint16
+	Index  uint16
+	Type   uint8
+	Nlen   uint8
+	Alen   uint8
+	Slen   uint8
+	Data   [244]int8
+}
+
+type RawSockaddr struct {
+	Family uint16
+	Data   [14]int8
+}
+
+type RawSockaddrAny struct {
+	Addr RawSockaddr
+	Pad  [236]int8
+}
+
+type _Socklen uint32
+
+type L
