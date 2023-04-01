@@ -314,4 +314,146 @@ type IfData struct {
 	Metric     uint32
 	Baudrate   uint32
 	Ipackets   uint32
-	Ierrors    ui
+	Ierrors    uint32
+	Opackets   uint32
+	Oerrors    uint32
+	Collisions uint32
+	Ibytes     uint32
+	Obytes     uint32
+	Imcasts    uint32
+	Omcasts    uint32
+	Iqdrops    uint32
+	Noproto    uint32
+	Lastchange Timeval32
+}
+
+type IfaMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Addrs   int32
+	Flags   int32
+	Index   uint16
+	_       [2]byte
+	Metric  int32
+}
+
+type RtMsghdr struct {
+	Msglen  uint16
+	Version uint8
+	Type    uint8
+	Index   uint16
+	_       [2]byte
+	Flags   int32
+	Addrs   int32
+	Pid     int32
+	Seq     int32
+	Errno   int32
+	Use     int32
+	Inits   uint32
+	Rmx     RtMetrics
+}
+
+type RtMetrics struct {
+	Locks    uint32
+	Mtu      uint32
+	Hopcount uint32
+	Expire   uint32
+	Recvpipe uint32
+	Sendpipe uint32
+	Ssthresh uint32
+	Rtt      uint32
+	Rttvar   uint32
+	Pksent   uint32
+}
+
+const (
+	SizeofBpfVersion = 0x4
+	SizeofBpfStat    = 0x80
+	SizeofBpfProgram = 0x10
+	SizeofBpfInsn    = 0x8
+	SizeofBpfHdr     = 0x14
+)
+
+type BpfVersion struct {
+	Major uint16
+	Minor uint16
+}
+
+type BpfStat struct {
+	Recv    uint64
+	Drop    uint64
+	Capt    uint64
+	Padding [13]uint64
+}
+
+type BpfProgram struct {
+	Len   uint32
+	_     [4]byte
+	Insns *BpfInsn
+}
+
+type BpfInsn struct {
+	Code uint16
+	Jt   uint8
+	Jf   uint8
+	K    uint32
+}
+
+type BpfTimeval struct {
+	Sec  int32
+	Usec int32
+}
+
+type BpfHdr struct {
+	Tstamp  BpfTimeval
+	Caplen  uint32
+	Datalen uint32
+	Hdrlen  uint16
+	_       [2]byte
+}
+
+type Termios struct {
+	Iflag uint32
+	Oflag uint32
+	Cflag uint32
+	Lflag uint32
+	Cc    [19]uint8
+	_     [1]byte
+}
+
+type Termio struct {
+	Iflag uint16
+	Oflag uint16
+	Cflag uint16
+	Lflag uint16
+	Line  int8
+	Cc    [8]uint8
+	_     [1]byte
+}
+
+type Winsize struct {
+	Row    uint16
+	Col    uint16
+	Xpixel uint16
+	Ypixel uint16
+}
+
+type PollFd struct {
+	Fd      int32
+	Events  int16
+	Revents int16
+}
+
+const (
+	POLLERR    = 0x8
+	POLLHUP    = 0x10
+	POLLIN     = 0x1
+	POLLNVAL   = 0x20
+	POLLOUT    = 0x4
+	POLLPRI    = 0x2
+	POLLRDBAND = 0x80
+	POLLRDNORM = 0x40
+	POLLWRBAND = 0x100
+	POLLWRNORM = 0x4
+)
